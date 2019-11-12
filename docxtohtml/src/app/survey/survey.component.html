@@ -12,6 +12,6 @@
   <button type="button" class="btn btn-warning btn-survey mt-5" (click)="nextToSelectedSections()">Next</button>
 </div>
 <div class="page hidden" *ngFor="let p of surveyService.selectedSurvey" [class.hidden]="!p.show">
-
+  <app-gsi *ngIf="p.name === 'General Site Information'"></app-gsi>
 </div>
 

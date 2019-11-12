@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DtComponent } from './dt/dt.component';
 import { SurveyComponent } from './survey/survey.component';
+import { GsiComponent } from './gsi/gsi.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DtComponent,
-    SurveyComponent
+    SurveyComponent,
+    GsiComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,

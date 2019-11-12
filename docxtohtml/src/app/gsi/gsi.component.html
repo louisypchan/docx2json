@@ -1,0 +1,37 @@
+<ul class="stepper linear">
+  <li class="step active">
+    <div data-step-label="Answer questions" class="step-title waves-effect waves-dark">Property Info</div>
+    <div class="step-new-content show">
+      <div class="row mt-2">
+        <app-input class="w-100" [label]="'Property Name'"></app-input>
+      </div>
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn btn-sm btn-primary next-step">CONTINUE</button>
+      </div>
+    </div>
+  </li>
+  <li class="step">
+    <div class="step-title waves-effect waves-dark">Step 2</div>
+    <div class="step-new-content">
+      <div class="row">
+        <div class="md-form col-12 ml-auto">
+          <input id="password-linear" type="password" class="form-control validate" required>
+          <label for="password-linear">Your password</label>
+        </div>
+      </div>
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn btn-sm btn-primary next-step">CONTINUE</button>
+        <button class="waves-effect waves-dark btn btn-sm btn-secondary previous-step">BACK</button>
+      </div>
+    </div>
+  </li>
+  <li class="step">
+    <div class="step-title waves-effect waves-dark">Step 3</div>
+    <div class="step-new-content">
+      Finish!
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn btn-sm btn-primary m-0 mt-4" type="button">SUBMIT</button>
+      </div>
+    </div>
+  </li>
+</ul>

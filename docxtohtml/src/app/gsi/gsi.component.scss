@@ -1,0 +1,8 @@
+ul.stepper {
+  margin: 0 !important;
+  padding: 8px !important;
+}
+
+ul.stepper .step.active:before {
+  //background-color: #c3d42f !important;
+}

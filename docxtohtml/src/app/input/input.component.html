@@ -1,4 +1,4 @@
 <div class="md-form col-12 ml-auto">
-  <input [id]="id" type="text" class="form-control validate" required (focus)="onFocus()">
-  <label [for]="id" [class.active]="focus">{{label}}</label>
+  <input [id]="id" type="text" class="form-control validate" required (focus)="onFocus()" [(ngModel)]="value" (input)="onInput()" (blur)="onBlur()">
+  <label [for]="id" [class.active]="value ? true : focus">{{label}}</label>
 </div>

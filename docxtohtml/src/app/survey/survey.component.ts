@@ -28,8 +28,8 @@ export class SurveyComponent implements OnInit {
   }
 
   nextToSelectedSections() {
-    this.showOptions = false;
     if (this.surveyService.selectedSurvey.length > 0) {
+      this.showOptions = false;
       // show first section
       this.surveyService.selectedSurvey[0].show = true;
     }

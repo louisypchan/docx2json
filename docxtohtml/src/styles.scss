@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/fa/fontawesome";
+@import "assets/fa/light";
+@import "assets/fa/brands";
+@import "assets/fa/regular";
+@import "assets/fa/solid";
+@import "assets/fa/v4-shims";
 @import "assets/scss/mdb";
 
 .flex-1 {
@@ -11,4 +17,13 @@
 
 html, body {
   font-size: 14px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.btn-survey {
+  background-color: #c3d42f !important;
+  border-color: #c3d42f !important;
 }

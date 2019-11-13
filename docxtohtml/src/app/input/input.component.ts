@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {utils} from '../_util';
 
 @Component({
   selector: 'app-input',
@@ -8,16 +9,26 @@ import {Component, Input, OnInit} from '@angular/core';
 export class InputComponent implements OnInit {
 
   @Input() label: string;
+  @Output() changed = new EventEmitter<string>();
   id: string;
   focus: boolean;
+  value: string;
 
   constructor() { }
 
   ngOnInit() {
-    this.id = +(new Date()) +  '';
+    this.id = +(new Date()) +  '_' + utils.uniqueIdGenerator();
   }
 
   onFocus() {
     this.focus = true;
+  }
+
+  onBlur() {
+    this.focus = false;
+  }
+
+  onInput() {
+    this.changed.emit(this.value);
   }
 }

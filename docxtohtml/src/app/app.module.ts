@@ -7,6 +7,9 @@ import { DtComponent } from './dt/dt.component';
 import { SurveyComponent } from './survey/survey.component';
 import { GsiComponent } from './gsi/gsi.component';
 import { InputComponent } from './input/input.component';
+import { FormsModule } from '@angular/forms';
+import { FocusDirective } from './_directive/focus.directive';
+import { MselectComponent } from './mselect/mselect.component';
 
 @NgModule({
   declarations: [
@@ -14,10 +17,13 @@ import { InputComponent } from './input/input.component';
     DtComponent,
     SurveyComponent,
     GsiComponent,
-    InputComponent
+    InputComponent,
+    FocusDirective,
+    MselectComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

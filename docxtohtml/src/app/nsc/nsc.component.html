@@ -1,0 +1,58 @@
+<ul class="stepper parallel">
+  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
+    <div class="step-title waves-effect waves-dark" (click)="step = 0">Topography</div>
+    <div class="step-new-content" [class.show]="step === 0">
+      <div class="row">
+        <div class="d-flex align-items-center flex-1 mt-2">
+          <span><strong>Topography:</strong></span>
+          <select class="ml-3 browser-default custom-select">
+            <option value="Lowland">Lowland</option>
+            <option value="Hill">Hill</option>
+            <option value="Flat">Flat</option>
+            <option value="Slope">Slope</option>
+          </select>
+        </div>
+      </div>
+      <div class="row flex-column">
+        <div class="mb-2 flex-1"><strong>Surface Water/Drainage:</strong></div>
+        <div class="d-flex flex-column">
+          <div class="form-check" *ngFor="let ops of swd; index as i;">
+            <input type="checkbox" class="form-check-input" [id]="'swd_' + i">
+            <label class="form-check-label" [for]="'swd_' + i">{{ops}}</label>
+            <app-input *ngIf="selectedSWD.indexOf('Other') > -1" [focus]="true"></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-2 flex-1"><strong>Visible Signs of contamination on or near water sources:</strong></div>
+      </div>
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn btn-sm btn-primary next-step">CONTINUE</button>
+      </div>
+    </div>
+  </li>
+  <li class="step">
+    <div class="step-title waves-effect waves-dark">Step 2</div>
+    <div class="step-new-content">
+      <div class="row">
+        <div class="md-form col-12 ml-auto">
+          <input id="password-parallel" type="password" class="form-control validate" required>
+          <label for="password-parallel">Your password</label>
+        </div>
+      </div>
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn-sm btn btn-primary next-step">CONTINUE</button>
+        <button class="waves-effect waves-dark btn-sm btn btn-secondary previous-step">BACK</button>
+      </div>
+    </div>
+  </li>
+  <li class="step">
+    <div class="step-title waves-effect waves-dark">Step 3</div>
+    <div class="step-new-content">
+      Finish!
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button">SUBMIT</button>
+      </div>
+    </div>
+  </li>
+</ul>

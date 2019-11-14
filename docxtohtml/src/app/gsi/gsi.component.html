@@ -3,19 +3,19 @@
     <div data-step-label="Answer questions" class="step-title waves-effect waves-dark" (click)="step = 0">Property Info</div>
     <div class="step-new-content" [class.show]="step === 0">
       <div class="row mt-2">
-        <app-input class="w-100" [label]="'Property Name'"></app-input>
-        <app-input class="w-100" [label]="'Address'"></app-input>
-        <app-input class="w-100" [label]="'City'"></app-input>
-        <app-input class="w-100" [label]="'Prov/State'"></app-input>
-        <app-input class="w-100" [label]="'Postal/Zip'"></app-input>
-        <app-input class="w-100" [label]="'Legal Description'"></app-input>
-        <app-input class="w-100" [label]="'Parcel ID'"></app-input>
-        <app-input class="w-100" [label]="'Mailing Address'"></app-input>
-        <app-input class="w-100" [label]="'On-site Contact Name'"></app-input>
-        <app-input class="w-100" [label]="'On-site Contact No'"></app-input>
-        <app-input class="w-100" [label]="'Persons Interviewed'"></app-input>
-        <app-input class="w-100" [label]="'Persons Interviewed Contact Info'"></app-input>
-        <app-input class="w-100" [label]="'Date of Site Visit'"></app-input>
+        <app-input class="w-100" [label]="'Property Name'" (changed)="onPIChanged($event, 'pn')"></app-input>
+        <app-input class="w-100" [label]="'Address'" (changed)="onPIChanged($event,'addr')"></app-input>
+        <app-input class="w-100" [label]="'City'" (changed)="onPIChanged($event,'city')"></app-input>
+        <app-input class="w-100" [label]="'Prov/State'" (changed)="onPIChanged($event,'prov')"></app-input>
+        <app-input class="w-100" [label]="'Postal/Zip'" (changed)="onPIChanged($event,'zip')"></app-input>
+        <app-input class="w-100" [label]="'Legal Description'" (changed)="onPIChanged($event,'ld')"></app-input>
+        <app-input class="w-100" [label]="'Parcel ID'" (changed)="onPIChanged($event,'parcel')"></app-input>
+        <app-input class="w-100" [label]="'Mailing Address'" (changed)="onPIChanged($event,'mailAddr')"></app-input>
+        <app-input class="w-100" [label]="'On-site Contact Name'" (changed)="onPIChanged($event,'ocn')"></app-input>
+        <app-input class="w-100" [label]="'On-site Contact No'" (changed)="onPIChanged($event,'ocnum')"></app-input>
+        <app-input class="w-100" [label]="'Persons Interviewed'" (changed)="onPIChanged($event,'pi')"></app-input>
+        <app-input class="w-100" [label]="'Persons Interviewed Contact Info'" (changed)="onPIChanged($event,'pici')"></app-input>
+        <app-input class="w-100" [label]="'Date of Site Visit'" (changed)="onPIChanged($event,'dosv')"></app-input>
       </div>
       <div class="step-actions">
         <button class="waves-effect waves-dark btn btn-sm btn-primary next-step" (click)="nextStep()">CONTINUE</button>
@@ -26,10 +26,10 @@
     <div class="step-title waves-effect waves-dark" (click)="step = 1">Property Owner</div>
     <div class="step-new-content"  [class.show]="step === 1">
       <div class="row">
-        <app-input class="w-100" [label]="'Property Owner Name'"></app-input>
-        <app-input class="w-100" [label]="'Address'"></app-input>
-        <app-input class="w-100" [label]="'Phone'"></app-input>
-        <app-input class="w-100" [label]="'Email'"></app-input>
+        <app-input class="w-100" [label]="'Property Owner Name'" (changed)="onPOChanged($event, 'pon')"></app-input>
+        <app-input class="w-100" [label]="'Address'" (changed)="onPOChanged($event, 'addr')"></app-input>
+        <app-input class="w-100" [label]="'Phone'" (changed)="onPOChanged($event, 'phone')"></app-input>
+        <app-input class="w-100" [label]="'Email'" (changed)="onPOChanged($event, 'email')"></app-input>
       </div>
       <div class="step-actions">
         <button class="waves-effect waves-dark btn btn-sm btn-primary next-step"  (click)="nextStep()">CONTINUE</button>
@@ -46,10 +46,7 @@
           <input type="checkbox" class="form-check-input" [id]="'landuse_' + i" (click)="landUsePick(ops)">
           <label class="form-check-label" [for]="'landuse_' + i">{{ops}}</label>
         </div>
-        <div class="md-form m-0" *ngIf="landUse.indexOf('Other (please specify)') > -1">
-          <input type="text" id="ps1" class="form-control" [appFocus]="true">
-          <label for="ps1">Please specify</label>
-        </div>
+        <app-input [label]="'Please specify'" *ngIf="landUse.indexOf('Other (please specify)') > -1" [focus]="true" (changed)="luDesc($event)"></app-input>
       </div>
       <div class="mt-2 mb-2 flex-1"><strong>Previous Land use:</strong></div>
       <div class="d-flex flex-column">
@@ -57,10 +54,7 @@
           <input type="checkbox" class="form-check-input" [id]="'p_landuse_' + i" (click)="prevLandUsePick(ops)">
           <label class="form-check-label" [for]="'p_landuse_' + i">{{ops}}</label>
         </div>
-        <div class="md-form m-0" *ngIf="preLandUse.indexOf('Other (please specify)') > -1">
-          <input type="text" id="ps2" class="form-control" [appFocus]="true">
-          <label for="ps2">Please specify</label>
-        </div>
+        <app-input [label]="'Please specify'" *ngIf="preLandUse.indexOf('Other (please specify)') > -1" [focus]="true" (changed)="pluDesc($event)"></app-input>
       </div>
       <div class="mt-2 mb-2 flex-1"><strong>Zoning:</strong></div>
       <div class="d-flex flex-column">
@@ -68,10 +62,7 @@
           <input type="checkbox" class="form-check-input" [id]="'zoning_' + i" (click)="zoningPick(ops)">
           <label class="form-check-label" [for]="'zoning_' + i">{{ops}}</label>
         </div>
-        <div class="md-form m-0" *ngIf="zoning.indexOf('Other (please specify)') > -1">
-          <input type="text" id="ps3" class="form-control" [appFocus]="true">
-          <label for="ps3">Please specify</label>
-        </div>
+        <app-input [label]="'Please specify'" *ngIf="zoning.indexOf('Other (please specify)') > -1" [focus]="true" (changed)="zoningDesc($event)"></app-input>
       </div>
       <div class="step-actions">
         <button class="waves-effect waves-dark btn btn-sm btn-primary next-step"  (click)="nextStep()">CONTINUE</button>
@@ -82,22 +73,118 @@
   <li class="step" [class.active]="step === 3" [class.done]="step > 3">
     <div class="step-title waves-effect waves-dark" (click)="step = 3">Adjacent Properties</div>
     <div class="step-new-content"  [class.show]="step === 3">
-      <div class="d-flex align-items-center mt-2">
-        <span><strong>Location:</strong></span>
-        <select class="ml-3 browser-default custom-select">
-          <option value="North">North</option>
-          <option value="South">South</option>
-          <option value="East">East</option>
-          <option value="West">West</option>
-        </select>
+      <div class="row">
+        <div class="d-flex align-items-center flex-1 mt-2">
+          <span><strong>Location:</strong></span>
+          <select class="ml-3 browser-default custom-select" [(ngModel)]="gsi.ap[0].location">
+            <option value="">Please select</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <option value="East">East</option>
+            <option value="West">West</option>
+          </select>
+        </div>
+        <div class="row">
+          <app-input class="w-100" [label]="'Name of occupant'" (changed)="onAPChange($event, 0, 'noo')"></app-input>
+          <app-input class="w-100" [label]="'Details'" (changed)="onAPChange($event, 0, 'details')"></app-input>
+        </div>
       </div>
       <div class="row">
-        <app-input class="w-100" [label]="'Name of occupant'"></app-input>
-        <app-input class="w-100" [label]="'Details'"></app-input>
+        <div class="d-flex align-items-center flex-1 mt-2">
+          <span><strong>Location:</strong></span>
+          <select class="ml-3 browser-default custom-select" [(ngModel)]="gsi.ap[1].location">
+            <option value="">Please select</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <option value="East">East</option>
+            <option value="West">West</option>
+          </select>
+        </div>
+        <div class="row">
+          <app-input class="w-100" [label]="'Name of occupant'" (changed)="onAPChange($event, 1, 'noo')"></app-input>
+          <app-input class="w-100" [label]="'Details'" (changed)="onAPChange($event, 1, 'details')"></app-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="d-flex align-items-center flex-1 mt-2">
+          <span><strong>Location:</strong></span>
+          <select class="ml-3 browser-default custom-select" [(ngModel)]="gsi.ap[2].location">
+            <option value="">Please select</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <option value="East">East</option>
+            <option value="West">West</option>
+          </select>
+        </div>
+        <div class="row">
+          <app-input class="w-100" [label]="'Name of occupant'" (changed)="onAPChange($event, 2, 'noo')"></app-input>
+          <app-input class="w-100" [label]="'Details'" (changed)="onAPChange($event, 2, 'details')"></app-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="d-flex align-items-cente flex-1 mt-2">
+          <span><strong>Location:</strong></span>
+          <select class="ml-3 browser-default custom-select" [(ngModel)]="gsi.ap[3].location">
+            <option value="">Please select</option>
+            <option value="North">North</option>
+            <option value="South">South</option>
+            <option value="East">East</option>
+            <option value="West">West</option>
+          </select>
+        </div>
+        <div class="row">
+          <app-input class="w-100" [label]="'Name of occupant'" (changed)="onAPChange($event, 3, 'noo')"></app-input>
+          <app-input class="w-100" [label]="'Details'" (changed)="onAPChange($event, 3, 'details')"></app-input>
+        </div>
       </div>
       <div class="step-actions">
         <button class="waves-effect waves-dark btn btn-sm btn-primary next-step"  (click)="nextStep()">CONTINUE</button>
         <button class="waves-effect waves-dark btn btn-sm btn-secondary previous-step"  (click)="previousStep()">BACK</button>
+      </div>
+    </div>
+  </li>
+  <li class="step" [class.active]="step === 4" [class.done]="step > 4">
+    <div class="step-title waves-effect waves-dark" (click)="step = 4">Heritage</div>
+    <div class="step-new-content"  [class.show]="step === 4">
+      <div class="row">
+        <div class="mb-2"><strong>Are there any buildings on the property that have received a historical designation?</strong></div>
+        <!-- Material inline 1 -->
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="materialInline1" name="historical" value="Yes"  [(ngModel)]="gsi.heritage.q1">
+          <label class="form-check-label" for="materialInline1">Yes</label>
+        </div>
+        <!-- Material inline 2 -->
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="materialInline2" name="historical" value="No" [(ngModel)]="gsi.heritage.q1">
+          <label class="form-check-label" for="materialInline2">No</label>
+        </div>
+        <!-- Material inline 3 -->
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="materialInline3" name="historical" value="Not Known"  [(ngModel)]="gsi.heritage.q1">
+          <label class="form-check-label" for="materialInline3">Not Known</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-2"><strong>Is there visible evidence of a heritage resource on or adjacent to the property?</strong></div>
+        <!-- Material inline 1 -->
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="v1" name="adjacent" value="Yes"  [(ngModel)]="gsi.heritage.q2">
+          <label class="form-check-label" for="v1">Yes</label>
+        </div>
+        <!-- Material inline 2 -->
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input" id="v2" name="adjacent" value="No"  [(ngModel)]="gsi.heritage.q2" (click)="clearDesc()">
+          <label class="form-check-label" for="v2">No</label>
+        </div>
+        <div class="md-form input-group mt-1 mb-1" *ngIf="gsi.heritage.q2 === 'Yes'">
+          <div class="input-group-prepend">
+            <span class="input-group-text md-addon pl-0">If yes, please describe</span>
+          </div>
+          <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="gsi.heritage.q2_desc" />
+        </div>
+      </div>
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn btn-sm btn-primary next-step"  (click)="handover()">{{last ? 'Submit': 'Next'}}</button>
       </div>
     </div>
   </li>

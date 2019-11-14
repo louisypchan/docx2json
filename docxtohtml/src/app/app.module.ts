@@ -10,6 +10,7 @@ import { InputComponent } from './input/input.component';
 import { FormsModule } from '@angular/forms';
 import { FocusDirective } from './_directive/focus.directive';
 import { MselectComponent } from './mselect/mselect.component';
+import { NscComponent } from './nsc/nsc.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MselectComponent } from './mselect/mselect.component';
     GsiComponent,
     InputComponent,
     FocusDirective,
-    MselectComponent
+    MselectComponent,
+    NscComponent
   ],
   imports: [
     BrowserModule,

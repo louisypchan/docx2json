@@ -9,9 +9,11 @@ import {utils} from '../_util';
 export class InputComponent implements OnInit {
 
   @Input() label: string;
+  @Input() focus: boolean;
+  @Input() invalid: boolean;
   @Output() changed = new EventEmitter<string>();
   id: string;
-  focus: boolean;
+  focused: boolean;
   value: string;
 
   constructor() { }
@@ -21,11 +23,11 @@ export class InputComponent implements OnInit {
   }
 
   onFocus() {
-    this.focus = true;
+    this.focused = true;
   }
 
   onBlur() {
-    this.focus = false;
+    this.focused = false;
   }
 
   onInput() {

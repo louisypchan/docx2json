@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MselectComponent } from './mselect.component';
+import { WastesComponent } from './wastes.component';
 
-describe('MselectComponent', () => {
-  let component: MselectComponent;
-  let fixture: ComponentFixture<MselectComponent>;
+describe('WastesComponent', () => {
+  let component: WastesComponent;
+  let fixture: ComponentFixture<WastesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MselectComponent ]
+      declarations: [ WastesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MselectComponent);
+    fixture = TestBed.createComponent(WastesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

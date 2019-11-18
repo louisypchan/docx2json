@@ -73,11 +73,10 @@
   <li class="step" [class.active]="step === 3" [class.done]="step > 3">
     <div class="step-title waves-effect waves-dark" (click)="step = 3">Adjacent Properties</div>
     <div class="step-new-content"  [class.show]="step === 3">
-      <div class="row">
+      <div class="row" *ngFor="let ap of gsi.ap; index as i;">
         <div class="d-flex align-items-center flex-1 mt-2">
           <span><strong>Location:</strong></span>
-          <select class="ml-3 browser-default custom-select" [(ngModel)]="gsi.ap[0].location">
-            <option value="">Please select</option>
+          <select class="ml-3 browser-default custom-select" [(ngModel)]="ap.location">
             <option value="North">North</option>
             <option value="South">South</option>
             <option value="East">East</option>
@@ -85,56 +84,8 @@
           </select>
         </div>
         <div class="row">
-          <app-input class="w-100" [label]="'Name of occupant'" (changed)="onAPChange($event, 0, 'noo')"></app-input>
-          <app-input class="w-100" [label]="'Details'" (changed)="onAPChange($event, 0, 'details')"></app-input>
-        </div>
-      </div>
-      <div class="row">
-        <div class="d-flex align-items-center flex-1 mt-2">
-          <span><strong>Location:</strong></span>
-          <select class="ml-3 browser-default custom-select" [(ngModel)]="gsi.ap[1].location">
-            <option value="">Please select</option>
-            <option value="North">North</option>
-            <option value="South">South</option>
-            <option value="East">East</option>
-            <option value="West">West</option>
-          </select>
-        </div>
-        <div class="row">
-          <app-input class="w-100" [label]="'Name of occupant'" (changed)="onAPChange($event, 1, 'noo')"></app-input>
-          <app-input class="w-100" [label]="'Details'" (changed)="onAPChange($event, 1, 'details')"></app-input>
-        </div>
-      </div>
-      <div class="row">
-        <div class="d-flex align-items-center flex-1 mt-2">
-          <span><strong>Location:</strong></span>
-          <select class="ml-3 browser-default custom-select" [(ngModel)]="gsi.ap[2].location">
-            <option value="">Please select</option>
-            <option value="North">North</option>
-            <option value="South">South</option>
-            <option value="East">East</option>
-            <option value="West">West</option>
-          </select>
-        </div>
-        <div class="row">
-          <app-input class="w-100" [label]="'Name of occupant'" (changed)="onAPChange($event, 2, 'noo')"></app-input>
-          <app-input class="w-100" [label]="'Details'" (changed)="onAPChange($event, 2, 'details')"></app-input>
-        </div>
-      </div>
-      <div class="row">
-        <div class="d-flex align-items-cente flex-1 mt-2">
-          <span><strong>Location:</strong></span>
-          <select class="ml-3 browser-default custom-select" [(ngModel)]="gsi.ap[3].location">
-            <option value="">Please select</option>
-            <option value="North">North</option>
-            <option value="South">South</option>
-            <option value="East">East</option>
-            <option value="West">West</option>
-          </select>
-        </div>
-        <div class="row">
-          <app-input class="w-100" [label]="'Name of occupant'" (changed)="onAPChange($event, 3, 'noo')"></app-input>
-          <app-input class="w-100" [label]="'Details'" (changed)="onAPChange($event, 3, 'details')"></app-input>
+          <app-input class="w-100" [label]="'Name of occupant'" (changed)="onAPChange($event, i, 'noo')"></app-input>
+          <app-input class="w-100" [label]="'Details'" (changed)="onAPChange($event, i, 'details')"></app-input>
         </div>
       </div>
       <div class="step-actions">

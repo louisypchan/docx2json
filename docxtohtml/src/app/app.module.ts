@@ -9,8 +9,13 @@ import { GsiComponent } from './gsi/gsi.component';
 import { InputComponent } from './input/input.component';
 import { FormsModule } from '@angular/forms';
 import { FocusDirective } from './_directive/focus.directive';
-import { MselectComponent } from './mselect/mselect.component';
 import { NscComponent } from './nsc/nsc.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { SotpComponent } from './sotp/sotp.component';
+import { SsComponent } from './ss/ss.component';
+import { MaasComponent } from './maas/maas.component';
+import { WastesComponent } from './wastes/wastes.component';
+import { OosaComponent } from './oosa/oosa.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +25,13 @@ import { NscComponent } from './nsc/nsc.component';
     GsiComponent,
     InputComponent,
     FocusDirective,
-    MselectComponent,
-    NscComponent
+    NscComponent,
+    DropdownComponent,
+    SotpComponent,
+    SsComponent,
+    MaasComponent,
+    WastesComponent,
+    OosaComponent
   ],
   imports: [
     BrowserModule,

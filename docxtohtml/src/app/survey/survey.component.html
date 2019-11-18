@@ -11,8 +11,25 @@
   </ul>
   <button type="button" class="btn btn-warning btn-survey mt-5" (click)="nextToSelectedSections()">Next</button>
 </div>
-<div class="page hidden" *ngFor="let p of surveyService.selectedSurvey; index as i" [class.hidden]="!p.show">
-  <app-gsi *ngIf="p.name === 'General Site Information'" [section]="p" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-gsi>
-  <app-nsc *ngIf="p.name === 'Natural Site Characteristics'" [last]="i === surveyService.selectedSurvey.length - 1"></app-nsc>
+
+<div class="position-absolute w-100 h-100" *ngIf="!showOptions" style="overflow: hidden;">
+  <ul class="nav md-pills nav-justified pills-info flex-nowrap h-ps" style="height: 50px;">
+    <li class="nav-item" *ngFor="let p of surveyService.selectedSurvey;">
+      <a class="nav-link" [class.active]="p.show" href="javascript:void(0);" style="white-space: nowrap;">{{p.name}}</a>
+    </li>
+  </ul>
+  <!--<div class="p-1">-->
+    <!--&lt;!&ndash;<div class="wrapper-progressBar">&ndash;&gt;-->
+    <!--&lt;!&ndash;<ul class="progressBar">&ndash;&gt;-->
+    <!--&lt;!&ndash;<li [class.active]="p.show" *ngFor="let p of surveyService.selectedSurvey;">{{p.name}}</li>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<hr style="margin-top: 2px; margin-bottom: 2px;"/>&ndash;&gt;-->
+  <!--</div>-->
+  <div class="page hidden" *ngFor="let p of surveyService.selectedSurvey; index as i" [class.hidden]="!p.show" style="height: calc(100% - 50px)">
+    <app-gsi *ngIf="p.name === 'General Site Information'" [section]="p" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-gsi>
+    <app-nsc *ngIf="p.name === 'Natural Site Characteristics'" [last]="i === surveyService.selectedSurvey.length - 1"></app-nsc>
+    <app-sotp *ngIf="p.name === 'Structures on the Property'" [last]="i === surveyService.selectedSurvey.length - 1"></app-sotp>
+  </div>
 </div>
 

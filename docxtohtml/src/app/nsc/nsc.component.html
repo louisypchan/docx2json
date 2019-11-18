@@ -2,15 +2,13 @@
   <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
     <div class="step-title waves-effect waves-dark" (click)="step = 0">Topography</div>
     <div class="step-new-content" [class.show]="step === 0">
-      <div class="row">
-        <div class="d-flex align-items-center flex-1 mt-2">
-          <span><strong>Topography:</strong></span>
-          <select class="ml-3 browser-default custom-select" [(ngModel)]="topography">
-            <option value="Lowland">Lowland</option>
-            <option value="Hill">Hill</option>
-            <option value="Flat">Flat</option>
-            <option value="Slope">Slope</option>
-          </select>
+      <div class="row flex-column">
+        <div class="mb-2 flex-1"><strong>Topography:</strong></div>
+        <div class="d-flex flex-column">
+          <div class="form-check" *ngFor="let ops of topography; index as i;">
+            <input type="checkbox" class="form-check-input" [id]="'topography_' + i" (click)="pickTopography(ops)">
+            <label class="form-check-label" [for]="'topography_' + i">{{ops}}</label>
+          </div>
         </div>
       </div>
       <div class="row flex-column">
@@ -35,15 +33,13 @@
         </div>
       </div>
       <div class="row" *ngIf="vs === 'Yes'">
-        <div class="d-flex align-items-center flex-1">
+        <div class="d-flex flex-column">
           <div class="mr-2">If yes, check those that apply</div>
-          <div class="flex-1">
-            <select class="browser-default custom-select custom-select-sm">
-              <option value="Oily Films">Oily Films</option>
-              <option value="Sheen">Sheen</option>
-              <option value="Staining/Discoloration">Staining/Discoloration</option>
-              <option value="Odours">Odours</option>
-            </select>
+          <div class="d-flex flex-column">
+            <div class="form-check" *ngFor="let ops of vsPicks; index as i;">
+              <input type="checkbox" class="form-check-input" [id]="'vs_' + i" (click)="pickVS(ops)">
+              <label class="form-check-label" [for]="'vs_' + i">{{ops}}</label>
+            </div>
           </div>
         </div>
       </div>
@@ -60,23 +56,20 @@
           <div class="flex-1"><strong>Is there vegetation on the site?</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox">
+              <input type="checkbox" [checked]="isVegetationOnSite" (click)="onClickVegetation()">
               <span class="lever"></span>
             </label>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="d-flex align-items-center flex-1">
+      <div class="row" *ngIf="isVegetationOnSite">
+        <div class="d-flex flex-column">
           <div class="mr-2">If yes, check those that apply</div>
-          <div class="flex-1">
-            <select class="browser-default custom-select custom-select-sm">
-              <option value="Crops">Crops</option>
-              <option value="Grass">Grass</option>
-              <option value="Landscaping">Landscaping</option>
-              <option value="Tress">Tress</option>
-              <option value="Shrubs">Shrubs</option>
-            </select>
+          <div class="d-flex flex-column">
+            <div class="form-check" *ngFor="let ops of vegetation; index as i;">
+              <input type="checkbox" class="form-check-input" [id]="'vegetation_' + i" (click)="pickVegetation(ops)">
+              <label class="form-check-label" [for]="'vegetation_' + i">{{ops}}</label>
+            </div>
           </div>
         </div>
       </div>
@@ -85,13 +78,13 @@
           <div class="flex-1"><strong>Is there any sign of stressed vegetation?</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox">
+              <input type="checkbox" [checked]="sv" (click)="onClickSV()">
               <span class="lever"></span>
             </label>
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="sv">
         <div class="d-flex align-items-center flex-1">
           <div>If yes,</div>
           <div class="flex-1">
@@ -99,33 +92,27 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" style="background-color: transparent; border: none;">describe</span>
               </div>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" [appFocus]="sv">
             </div>
           </div>
         </div>
       </div>
       <div class="step-actions">
         <button class="waves-effect waves-dark btn-sm btn btn-primary next-step" (click)="nextStep()">CONTINUE</button>
-        <button class="waves-effect waves-dark btn-sm btn btn-secondary previous-step">BACK</button>
+        <button class="waves-effect waves-dark btn-sm btn btn-secondary previous-step" (click)="previousStep()">BACK</button>
       </div>
     </div>
   </li>
   <li class="step" [class.active]="step === 2" [class.done]="step > 2">
     <div class="step-title waves-effect waves-dark" (click)="step = 2">Soils/Geology</div>
     <div class="step-new-content" [class.show]="step === 2">
-      <div class="row">
-        <div class="d-flex align-items-center flex-1 mt-2">
-          <div><strong>Soils/Geology:</strong></div>
-          <select class="ml-3 browser-default custom-select">
-            <option value="Fill">Fill</option>
-            <option value="Clay">Clay</option>
-            <option value="Rocky outcrops">Rocky outcrops</option>
-            <option value="Sand">Sand</option>
-            <option value="Gravel">Gravel</option>
-            <option value="Other">Other</option>
-            <option value="Not Known">Not Known</option>
-            <option value="Silt">Silt</option>
-          </select>
+      <div class="row flex-column">
+        <div class="mb-2 flex-1"><strong>Soils/Geology:</strong></div>
+        <div class="d-flex flex-column">
+          <div class="form-check" *ngFor="let ops of geology; index as i;">
+            <input type="checkbox" class="form-check-input" [id]="'geology_' + i" (click)="pickGeology(ops)">
+            <label class="form-check-label" [for]="'geology_' + i">{{ops}}</label>
+          </div>
         </div>
       </div>
       <div class="row mt-2">
@@ -133,24 +120,35 @@
           <div class="flex-1"><strong>Is there any sign of contamination on the ground?</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox">
+              <input type="checkbox" [checked]="socotg" (click)="onClicksocotg()" />
               <span class="lever"></span>
             </label>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="d-flex align-items-center flex-1">
+      <div class="row" *ngIf="socotg">
+        <div class="d-flex flex-column">
           <div class="mr-2">If yes, check those that apply</div>
-          <div class="flex-1">
-            <select class="browser-default custom-select custom-select-sm">
-              <option value="Staining/Discoloration">Staining/Discoloration</option>
-              <option value="Odors">Odors</option>
-              <option value="Oily Films">Oily Films</option>
-            </select>
+          <div class="d-flex flex-column">
+            <div class="form-check" *ngFor="let ops of socotgs; index as i;">
+              <input type="checkbox" class="form-check-input" [id]="'socotg_' + i" (click)="picksocotg(ops)">
+              <label class="form-check-label" [for]="'socotg_' + i">{{ops}}</label>
+            </div>
           </div>
         </div>
       </div>
+      <!--<div class="row" *ngIf="socotg">-->
+        <!--<div class="d-flex align-items-center flex-1">-->
+          <!--<div class="mr-2">If yes, check those that apply</div>-->
+          <!--<div class="flex-1">-->
+            <!--<select class="browser-default custom-select custom-select-sm">-->
+              <!--<option value="Staining/Discoloration">Staining/Discoloration</option>-->
+              <!--<option value="Odors">Odors</option>-->
+              <!--<option value="Oily Films">Oily Films</option>-->
+            <!--</select>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
       <div class="step-actions">
         <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button">{{last ? 'Submit': 'Next'}}</button>
       </div>

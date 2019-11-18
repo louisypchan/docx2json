@@ -58,19 +58,7 @@ export class GsiComponent implements OnInit {
         zoning_desc: ''
       },
       ap: [{
-        location: '',
-        noo: '',
-        details: ''
-      }, {
-        location: '',
-        noo: '',
-        details: ''
-      }, {
-        location: '',
-        noo: '',
-        details: ''
-      }, {
-        location: '',
+        location: 'North',
         noo: '',
         details: ''
       }],

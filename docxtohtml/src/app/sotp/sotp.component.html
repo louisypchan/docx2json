@@ -228,23 +228,23 @@
               <div>If yes, which type:</div>
               <div class="d-flex flex-column">
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" id="tt1" name="tt" value="Pole top">
+                  <input type="radio" class="form-check-input" id="tt1" name="tt" value="Pole top" [(ngModel)]="sotp.pcb.transformType" (click)="clearOtherTransform()">
                   <label class="form-check-label" for="tt1">Pole top</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" id="tt2" name="tt" value="Ground">
+                  <input type="radio" class="form-check-input" id="tt2" name="tt" value="Ground" [(ngModel)]="sotp.pcb.transformType" (click)="clearOtherTransform()">
                   <label class="form-check-label" for="tt2">Ground</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" id="tt3" name="tt" value="Wall-mounted">
+                  <input type="radio" class="form-check-input" id="tt3" name="tt" value="Wall-mounted" [(ngModel)]="sotp.pcb.transformType" (click)="clearOtherTransform()">
                   <label class="form-check-label" for="tt3">Wall-mounted</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" id="tt4" name="tt" value="Other">
+                  <input type="radio" class="form-check-input" id="tt4" name="tt" value="Other" [(ngModel)]="sotp.pcb.transformType">
                   <label class="form-check-label" for="tt4">Other</label>
                 </div>
-                <div class="md-form m-0">
-                  <input type="text" class="form-control" >
+                <div class="md-form m-0" *ngIf="sotp.pcb.transformType === 'Other'">
+                  <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="sotp.pcb.otherTransform">
                 </div>
               </div>
             </div>
@@ -253,7 +253,7 @@
             <div class="flex-1"><strong>Are there sampling results?</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" />
+                <input type="checkbox" [checked]="sotp.pcb.sampling" (click)="handleSwitch('pcb', 'sampling')" />
                 <span class="lever"></span>
               </label>
             </div>
@@ -262,18 +262,74 @@
             <div class="flex-1"><strong>Fluorescent light fixtures(pre 1980)</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" />
+                <input type="checkbox" [checked]="sotp.pcb.flf" (click)="handleSwitch('pcb', 'flf')"  />
                 <span class="lever"></span>
               </label>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1" *ngIf="sotp.pcb.flf">
+            <div>If yes, how many:</div>
+            <div class="d-flex flex-row">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="flf1" name="flf" value="1-10" [(ngModel)]="sotp.pcb.flfAmount">
+                <label class="form-check-label" for="flf1">1-10</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="flf2" name="flf" value="More than 10" [(ngModel)]="sotp.pcb.flfAmount" >
+                <label class="form-check-label" for="flf2">More than 10</label>
+              </div>
             </div>
           </div>
           <div class="d-flex flex-1 align-items-center">
             <div class="flex-1"><strong>Other old electrical equipment</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" />
+                <input type="checkbox" [checked]="sotp.pcb.ooee" (click)="handleSwitch('pcb', 'ooee')"  />
                 <span class="lever"></span>
               </label>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1" *ngIf="sotp.pcb.ooee">
+            <div>If yes, describe</div>
+            <div class="md-form m-0">
+              <input type="text" class="form-control" [(ngModel)]="sotp.pcb.ooee_desc" [appFocus]="true" />
+            </div>
+          </div>
+          <div class="d-flex flex-1 align-items-center">
+            <div class="flex-1"><strong>High intensity lamps</strong></div>
+            <div class="switch">
+              <label>
+                <input type="checkbox" [checked]="sotp.pcb.lamps" (click)="handleSwitch('pcb', 'lamps')"  />
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1" *ngIf="sotp.pcb.lamps">
+            <div>If yes, how many:</div>
+            <div class="d-flex flex-row">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="lamps1" name="lamps2" value="1-10" [(ngModel)]="sotp.pcb.lampsAmount">
+                <label class="form-check-label" for="lamps1">1-10</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="lamps2" name="lamps2" value="More than 10" [(ngModel)]="sotp.pcb.lampsAmount" >
+                <label class="form-check-label" for="lamps2">More than 10</label>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-1 align-items-center">
+            <div class="flex-1"><strong>PCB storage sites</strong></div>
+            <div class="switch">
+              <label>
+                <input type="checkbox" [checked]="sotp.pcb.pss" (click)="handleSwitch('pcb', 'pss')"  />
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1" *ngIf="sotp.pcb.pss">
+            <div>If yes, describe</div>
+            <div class="md-form m-0">
+              <input type="text" class="form-control" [(ngModel)]="sotp.pcb.pss_desc" [appFocus]="true" />
             </div>
           </div>
         </div>

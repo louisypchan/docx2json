@@ -56,7 +56,8 @@ export class SotpComponent implements OnInit {
         lamps: false,
         lampsAmount: '',
         pss: false,
-        pss_desc: ''
+        pss_desc: '',
+        otherTransform: ''
       }
     };
     this.heatingTypes = ['Natural Gas', 'Oil', 'Steam', 'Propane', 'Electric', 'Not Known', 'Wood', 'Coal'];
@@ -117,8 +118,13 @@ export class SotpComponent implements OnInit {
       lamps: false,
       lampsAmount: '',
       pss: false,
+      otherTransform: '',
       pss_desc: ''
     };
+  }
+
+  clearOtherTransform() {
+    this.sotp.pcb.otherTransform = '';
   }
 
   clearAsbestos() {

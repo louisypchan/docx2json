@@ -2,6 +2,7 @@ export interface PCBs {
   pcbs: string;
   transforms: boolean;
   transformType: string;
+  otherTransform: string;
   sampling: boolean;
   flf: boolean;
   flfAmount: string;

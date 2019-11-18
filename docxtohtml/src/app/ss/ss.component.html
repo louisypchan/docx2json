@@ -2,6 +2,20 @@
   <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
     <div class="step-title waves-effect waves-dark" (click)="step = 0">Public or Private Services</div>
     <div class="step-new-content" [class.show]="step === 0">
+      <div class="row">
+        <div class="d-flex flex-column flex-1">
+          <div class="mb-2 flex-1"><strong>Are any of the following on the site?</strong></div>
+          <div class="d-flex flex-column">
+            <div class="form-check" *ngFor="let ops of ppsOptions; index as i;">
+              <input type="checkbox" class="form-check-input" [id]="'ppsOptions_' + i" (click)="pickPPS(ops)">
+              <label class="form-check-label" [for]="'ppsOptions_' + i">{{ops}}</label>
+            </div>
+            <div class="md-form m-0" *ngIf="ss.pps.options.indexOf('Other') > -1">
+              <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="ss.pps.otherOption">
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="step-actions">
         <button class="waves-effect waves-dark btn btn-sm btn-primary next-step" (click)="nextStep()">CONTINUE</button>
       </div>
@@ -10,6 +24,95 @@
   <li class="step" [class.active]="step === 1" [class.done]="step > 1">
     <div class="step-title waves-effect waves-dark" (click)="step = 1">Wells</div>
     <div class="step-new-content" [class.show]="step === 1">
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Are there water wells on or adjacent to the property?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="wwp1" name="wwp" value="Yes" [(ngModel)]="ss.well.wwp">
+              <label class="form-check-label" for="wwp1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="wwp2" name="wwp" value="No"  [(ngModel)]="ss.well.wwp">
+              <label class="form-check-label" for="wwp2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="wwp3" name="wwp" value="Not Known"  [(ngModel)]="ss.well.wwp">
+              <label class="form-check-label" for="wwp3">Not Known</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Status:</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="status1" name="status" value="Active" [(ngModel)]="ss.well.status">
+              <label class="form-check-label" for="status1">Active</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="status2" name="status" value="Abandoned"  [(ngModel)]="ss.well.status">
+              <label class="form-check-label" for="status2">Abandoned</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="status3" name="status" value="Not Known"  [(ngModel)]="ss.well.status">
+              <label class="form-check-label" for="status3">Not Known</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Material:</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="material1" name="material" value="Concrete Tile" [(ngModel)]="ss.well.material">
+              <label class="form-check-label" for="material1">Concrete Tile</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="material2" name="material" value="Steel Casing"  [(ngModel)]="ss.well.material">
+              <label class="form-check-label" for="material2">Steel Casing</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Have there been any problems with the well or water quality?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="waterQuality1" name="waterQuality" value="Yes" [(ngModel)]="ss.well.waterQuality">
+              <label class="form-check-label" for="waterQuality1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="waterQuality2" name="waterQuality" value="No"  [(ngModel)]="ss.well.waterQuality" (click)="clearWaterQualityDesc()">
+              <label class="form-check-label" for="waterQuality2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="waterQuality3" name="waterQuality" value="Not Known"  [(ngModel)]="ss.well.waterQuality" (click)="clearWaterQualityDesc()">
+              <label class="form-check-label" for="waterQuality3">Not Known</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column flex-1" *ngIf="ss.well.waterQuality === 'Yes'">
+        <div>If yes, describe</div>
+        <div class="md-form m-0">
+          <input type="text" class="form-control" [(ngModel)]="ss.well.waterQuality_desc" [appFocus]="true" />
+        </div>
+      </div>
       <div class="step-actions">
         <button class="waves-effect waves-dark btn-sm btn btn-primary next-step" (click)="nextStep()">CONTINUE</button>
         <button class="waves-effect waves-dark btn-sm btn btn-secondary previous-step" (click)="previousStep()">BACK</button>
@@ -19,6 +122,70 @@
   <li class="step" [class.active]="step === 2" [class.done]="step > 2">
     <div class="step-title waves-effect waves-dark" (click)="step = 2">Septic System</div>
     <div class="step-new-content" [class.show]="step === 2">
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Is there a septic system?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="spetic1" name="spetic" value="Yes" [(ngModel)]="ss.spetic.spetic">
+              <label class="form-check-label" for="spetic1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="spetic2" name="spetic" value="No"  [(ngModel)]="ss.spetic.spetic">
+              <label class="form-check-label" for="spetic2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="spetic3" name="spetic" value="Not Known"  [(ngModel)]="ss.spetic.spetic">
+              <label class="form-check-label" for="spetic3">Not Known</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Have there been any problems with the septic system?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="speticProblem1" name="speticProblem1" value="Yes" [(ngModel)]="ss.spetic.speticProblem">
+              <label class="form-check-label" for="speticProblem1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="speticProblem2" name="speticProblem1" value="No"  [(ngModel)]="ss.spetic.speticProblem" (click)="clearSpeticDesc()">
+              <label class="form-check-label" for="speticProblem2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="speticProblem3" name="speticProblem1" value="Not Known"  [(ngModel)]="ss.spetic.speticProblem" (click)="clearSpeticDesc()">
+              <label class="form-check-label" for="speticProblem3">Not Known</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column flex-1" *ngIf="ss.spetic.speticProblem === 'Yes'">
+        <div>If yes, describe</div>
+        <div class="md-form m-0">
+          <input type="text" class="form-control" [(ngModel)]="ss.spetic.speticProblem_desc" [appFocus]="true" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="d-flex flex-column flex-1">
+          <div class="mb-2 flex-1"><strong>Any visible indications of system failure?</strong></div>
+          <div class="d-flex flex-column">
+            <div class="form-check" *ngFor="let ops of indicates; index as i;">
+              <input type="checkbox" class="form-check-input" [id]="'indicates_' + i" (click)="pickIndicate(ops)">
+              <label class="form-check-label" [for]="'indicates_' + i">{{ops}}</label>
+            </div>
+            <div class="md-form m-0" *ngIf="ss.spetic.iosf.indexOf('Other (please specify)') > -1">
+              <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="ss.spetic.otherIOSF">
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="step-actions">
         <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button">{{last ? 'Submit': 'Next'}}</button>
       </div>

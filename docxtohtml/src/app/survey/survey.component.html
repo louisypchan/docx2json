@@ -30,6 +30,7 @@
     <app-gsi *ngIf="p.name === 'General Site Information'" [section]="p" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-gsi>
     <app-nsc *ngIf="p.name === 'Natural Site Characteristics'" [last]="i === surveyService.selectedSurvey.length - 1"></app-nsc>
     <app-sotp *ngIf="p.name === 'Structures on the Property'" [last]="i === surveyService.selectedSurvey.length - 1"></app-sotp>
+    <app-ss *ngIf="p.name === 'Site Services'" [last]="i === surveyService.selectedSurvey.length - 1"></app-ss>
   </div>
 </div>
 

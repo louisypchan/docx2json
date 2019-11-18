@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-ss',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SsComponent implements OnInit {
 
+  step: number;
+  @Input() last: boolean;
   constructor() { }
 
   ngOnInit() {
+    this.step = 0;
   }
 
+  nextStep() {
+    this.step++;
+  }
+
+  previousStep() {
+    this.step--;
+  }
 }

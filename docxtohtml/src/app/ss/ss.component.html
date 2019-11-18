@@ -1,1 +1,27 @@
-<p>ss works!</p>
+<ul class="stepper parallel">
+  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
+    <div class="step-title waves-effect waves-dark" (click)="step = 0">Public or Private Services</div>
+    <div class="step-new-content" [class.show]="step === 0">
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn btn-sm btn-primary next-step" (click)="nextStep()">CONTINUE</button>
+      </div>
+    </div>
+  </li>
+  <li class="step" [class.active]="step === 1" [class.done]="step > 1">
+    <div class="step-title waves-effect waves-dark" (click)="step = 1">Wells</div>
+    <div class="step-new-content" [class.show]="step === 1">
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn-sm btn btn-primary next-step" (click)="nextStep()">CONTINUE</button>
+        <button class="waves-effect waves-dark btn-sm btn btn-secondary previous-step" (click)="previousStep()">BACK</button>
+      </div>
+    </div>
+  </li>
+  <li class="step" [class.active]="step === 2" [class.done]="step > 2">
+    <div class="step-title waves-effect waves-dark" (click)="step = 2">Septic System</div>
+    <div class="step-new-content" [class.show]="step === 2">
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button">{{last ? 'Submit': 'Next'}}</button>
+      </div>
+    </div>
+  </li>
+</ul>

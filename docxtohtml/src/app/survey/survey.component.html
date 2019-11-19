@@ -26,6 +26,9 @@
     <app-maas *ngIf="p.name === 'Materials Used and Stored'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-maas>
     <app-wastes *ngIf="p.name === 'Wastes'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-wastes>
     <app-oosa *ngIf="p.name === 'Other On-site Activities'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-oosa>
+    <div class="t-save">
+      <a type="button" class="btn-floating btn-sm btn-slack waves-effect waves-light"><i class="far fa-save" style="font-size: 1.25rem !important;"></i></a>
+    </div>
   </div>
 </div>
 

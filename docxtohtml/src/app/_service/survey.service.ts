@@ -17,13 +17,13 @@ export class SurveyService {
 
   constructor(private http: HttpClient) {
     this.options = [
-      {name: 'General Site Information', checked: false, show: false, order: 1},
-      {name: 'Natural Site Characteristics', checked: false, show: false, order: 2},
-      {name: 'Structures on the Property', checked: false, show: false, order: 3},
-      {name: 'Site Services', checked: false, show: false, order: 4},
-      {name: 'Materials Used and Stored', checked: false, show: false, order: 5},
-      {name: 'Wastes', checked: false, show: false, order: 6},
-      {name: 'Other On-site Activities', checked: false, show: false, order: 7},
+      {name: 'General Site Information', checked: true, show: false, order: 1},
+      {name: 'Natural Site Characteristics', checked: true, show: false, order: 2},
+      {name: 'Structures on the Property', checked: true, show: false, order: 3},
+      {name: 'Site Services', checked: true, show: false, order: 4},
+      {name: 'Materials Used and Stored', checked: true, show: false, order: 5},
+      {name: 'Wastes', checked: true, show: false, order: 6},
+      {name: 'Other On-site Activities', checked: true, show: false, order: 7},
     ];
     this.selectedSurvey = [];
   }

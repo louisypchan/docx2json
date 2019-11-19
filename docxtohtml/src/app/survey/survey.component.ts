@@ -16,6 +16,7 @@ export class SurveyComponent implements OnInit {
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
+    this.surveyService.selectedSurvey = [...this.surveyService.options];
   }
 
   pickUpSurvey(index: number) {
@@ -45,6 +46,9 @@ export class SurveyComponent implements OnInit {
     this.surveyService.selectedSurvey[index] = section;
     if (this.surveyService.selectedSurvey[index + 1]) {
       this.surveyService.selectedSurvey[index + 1].show = true;
+    } else {
+      // #TODO:
+      this.showOptions = true;
     }
   }
 

@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Section} from '../_model/Section';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Resp} from '../_model/Resp';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,9 @@ export class SurveyService {
 
   public selectedSurvey: Section[];
 
-  constructor() {
+  public resp: Resp;
+
+  constructor(private http: HttpClient) {
     this.options = [
       {name: 'General Site Information', checked: false, show: false, order: 1},
       {name: 'Natural Site Characteristics', checked: false, show: false, order: 2},
@@ -21,5 +26,13 @@ export class SurveyService {
       {name: 'Other On-site Activities', checked: false, show: false, order: 7},
     ];
     this.selectedSurvey = [];
+  }
+
+  getData(): Observable<Resp> {
+    return this.http.post<Resp>(`/ErisExt/emobile_test/MobileService.svc/callOra`, {PROCEDURE: 'getmobilesurveyinfo',
+      ORDER_NUM: '20181031078', SESSION_ID: 'ZaGiXjJoOHbNuAbrQGEaEzSyMweVUDkLEdeALcKZXKRbYqSFZk'}, {
+      headers: new HttpHeaders({'Content-Type':  'application/json'}),
+      responseType: 'json'
+    });
   }
 }

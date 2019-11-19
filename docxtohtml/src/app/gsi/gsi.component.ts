@@ -1,17 +1,20 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {utils} from '../_util';
 import {Section} from '../_model/Section';
 import {GSI} from '../_model/GSI';
+import {Resp} from '../_model/Resp';
+import {SurveyService} from '../_service/survey.service';
 
 @Component({
   selector: 'app-gsi',
   templateUrl: './gsi.component.html',
   styleUrls: ['./gsi.component.scss']
 })
-export class GsiComponent implements OnInit {
+export class GsiComponent implements OnInit, OnChanges {
 
   @Input() section: Section;
   @Input() last: boolean;
+  @Input() resp: Resp;
   step: number;
   options: string[];
   landUse: string[];
@@ -20,13 +23,15 @@ export class GsiComponent implements OnInit {
   gsi: GSI;
   @Output() done = new EventEmitter<GSI>();
 
-  constructor() { }
+  constructor(private surveyService: SurveyService) {
+  }
 
   ngOnInit() {
     this.landUse = [];
     this.preLandUse = [];
     this.zoning = [];
     this.step = 0;
+    const d = new Date();
     this.gsi = {
       pi: {
         pn: '',
@@ -41,7 +46,7 @@ export class GsiComponent implements OnInit {
         ocnum: '',
         pi: '',
         pici: '',
-        dosv: ''
+        dosv: `${d.getDate()}/${d.getMonth() + 1} ${d.getFullYear()}`
       },
       po: {
         pon: '',
@@ -70,6 +75,16 @@ export class GsiComponent implements OnInit {
     };
     this.options = ['Industrial', 'Residential', 'Federal Land', 'Commercial',
       'Transportation', 'Vacant', 'Agricultural', 'Park/Conservation Area', 'Other (please specify)'];
+
+    // just for testing
+    this.surveyService.getData().subscribe(resp => {
+      this.surveyService.resp = resp;
+      this.gsi.pi.pn = resp.SITE_NAME;
+      this.gsi.pi.city = resp.CITY;
+      this.gsi.pi.addr = resp.FULL_ADDRESS;
+      this.gsi.pi.prov = resp.PROVSTATE;
+      this.gsi.pi.zip = resp.POSTAL_CODE;
+    });
   }
   generateUID() {
     return utils.uniqueIdGenerator();
@@ -148,5 +163,17 @@ export class GsiComponent implements OnInit {
   }
   handover() {
     this.done.emit(this.gsi);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ('resp' in changes) {
+      if (changes.resp.currentValue && this.gsi) {
+        this.gsi.pi.pn = this.resp.SITE_NAME;
+        this.gsi.pi.city = this.resp.CITY;
+        this.gsi.pi.addr = this.resp.FULL_ADDRESS;
+        this.gsi.pi.prov = this.resp.PROVSTATE;
+        this.gsi.pi.zip = this.resp.POSTAL_CODE;
+      }
+    }
   }
 }

@@ -16,7 +16,6 @@ export class SurveyComponent implements OnInit {
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    console.log(this.surveyService);
   }
 
   pickUpSurvey(index: number) {

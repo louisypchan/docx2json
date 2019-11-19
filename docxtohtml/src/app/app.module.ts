@@ -16,6 +16,7 @@ import { SsComponent } from './ss/ss.component';
 import { MaasComponent } from './maas/maas.component';
 import { WastesComponent } from './wastes/wastes.component';
 import { OosaComponent } from './oosa/oosa.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { OosaComponent } from './oosa/oosa.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

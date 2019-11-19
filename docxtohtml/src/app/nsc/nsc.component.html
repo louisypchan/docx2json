@@ -17,7 +17,7 @@
           <div class="form-check" *ngFor="let ops of swd; index as i;">
             <input type="checkbox" class="form-check-input" [id]="'swd_' + i" [checked]="selectedSWD.indexOf(ops) > -1" (click)="pickSWD(ops)">
             <label class="form-check-label" [for]="'swd_' + i">{{ops}}</label>
-            <app-input *ngIf="selectedSWD.indexOf('Other') > -1 && ops === 'Other'" [focus]="true"></app-input>
+            <app-input *ngIf="selectedSWD.indexOf('Other') > -1 && ops === 'Other'" [focus]="true" (changed)="onDrainage($event)"></app-input>
           </div>
         </div>
       </div>
@@ -92,7 +92,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" style="background-color: transparent; border: none;">describe</span>
               </div>
-              <input type="text" class="form-control" [appFocus]="sv">
+              <input type="text" class="form-control" [appFocus]="sv" [(ngModel)]="stressedVegetationDesc">
             </div>
           </div>
         </div>
@@ -131,7 +131,7 @@
           <div class="mr-2">If yes, check those that apply</div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of socotgs; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'socotg_' + i" [checked]="socotgs.indexOf(ops) > -1" (click)="picksocotg(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'socotg_' + i" [checked]="selectedsocotg.indexOf(ops) > -1" (click)="picksocotg(ops)">
               <label class="form-check-label" [for]="'socotg_' + i">{{ops}}</label>
             </div>
           </div>
@@ -150,7 +150,7 @@
         <!--</div>-->
       <!--</div>-->
       <div class="step-actions">
-        <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button">{{last ? 'Submit': 'Next'}}</button>
+        <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button" (click)="handover()">{{last ? 'Submit': 'Next'}}</button>
       </div>
     </div>
   </li>

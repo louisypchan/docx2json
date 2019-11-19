@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OOSA} from '../_model/OOSA';
 
 @Component({
@@ -10,6 +10,7 @@ export class OosaComponent implements OnInit {
   step: number;
   @Input() last: boolean;
   oosa: OOSA;
+  @Output() done = new EventEmitter<OOSA>();
 
   constructor() { }
 
@@ -53,5 +54,9 @@ export class OosaComponent implements OnInit {
 
   onTypeChange(val: string) {
     this.oosa.mine.type = val;
+  }
+
+  handover() {
+    this.done.emit(this.oosa);
   }
 }

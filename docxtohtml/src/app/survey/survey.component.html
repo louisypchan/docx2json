@@ -13,27 +13,19 @@
 </div>
 
 <div class="position-absolute w-100 h-100" *ngIf="!showOptions" style="overflow: hidden;">
-  <ul class="nav md-pills nav-justified pills-info flex-nowrap h-ps" style="height: 50px;">
+  <ul class="nav md-pills nav-justified pills-info flex-nowrap h-ps" style="height: 50px;" #nav>
     <li class="nav-item" *ngFor="let p of surveyService.selectedSurvey;" (click)="switchPage(p)">
       <a class="nav-link" [class.active]="p.show" href="javascript:void(0);" style="white-space: nowrap;">{{p.name}}</a>
     </li>
   </ul>
-  <!--<div class="p-1">-->
-    <!--&lt;!&ndash;<div class="wrapper-progressBar">&ndash;&gt;-->
-    <!--&lt;!&ndash;<ul class="progressBar">&ndash;&gt;-->
-    <!--&lt;!&ndash;<li [class.active]="p.show" *ngFor="let p of surveyService.selectedSurvey;">{{p.name}}</li>&ndash;&gt;-->
-    <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--&lt;!&ndash;<hr style="margin-top: 2px; margin-bottom: 2px;"/>&ndash;&gt;-->
-  <!--</div>-->
   <div class="page hidden" *ngFor="let p of surveyService.selectedSurvey; index as i" [class.hidden]="!p.show" style="height: calc(100% - 50px)">
     <app-gsi *ngIf="p.name === 'General Site Information'" [section]="p" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-gsi>
-    <app-nsc *ngIf="p.name === 'Natural Site Characteristics'" [last]="i === surveyService.selectedSurvey.length - 1"></app-nsc>
-    <app-sotp *ngIf="p.name === 'Structures on the Property'" [last]="i === surveyService.selectedSurvey.length - 1"></app-sotp>
-    <app-ss *ngIf="p.name === 'Site Services'" [last]="i === surveyService.selectedSurvey.length - 1"></app-ss>
-    <app-maas *ngIf="p.name === 'Materials Used and Stored'" [last]="i === surveyService.selectedSurvey.length - 1"></app-maas>
-    <app-wastes *ngIf="p.name === 'Wastes'" [last]="i === surveyService.selectedSurvey.length - 1"></app-wastes>
-    <app-oosa *ngIf="p.name === 'Other On-site Activities'" [last]="i === surveyService.selectedSurvey.length - 1"></app-oosa>
+    <app-nsc *ngIf="p.name === 'Natural Site Characteristics'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-nsc>
+    <app-sotp *ngIf="p.name === 'Structures on the Property'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-sotp>
+    <app-ss *ngIf="p.name === 'Site Services'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-ss>
+    <app-maas *ngIf="p.name === 'Materials Used and Stored'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-maas>
+    <app-wastes *ngIf="p.name === 'Wastes'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-wastes>
+    <app-oosa *ngIf="p.name === 'Other On-site Activities'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-oosa>
   </div>
 </div>
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {WASTE} from '../_model/WASTE';
 
 @Component({
@@ -15,6 +15,8 @@ export class WastesComponent implements OnInit {
   treatTypes: string[];
   materials: string[];
   natureWastes: string[];
+  @Output() done = new EventEmitter<WASTE>();
+
 
   constructor() { }
 
@@ -216,5 +218,9 @@ export class WastesComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  handover() {
+    this.done.emit(this.waste);
   }
 }

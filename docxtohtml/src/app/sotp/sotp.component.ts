@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SOTP} from '../_model/SOTP';
 
 @Component({
@@ -13,6 +13,8 @@ export class SotpComponent implements OnInit {
   sotp: SOTP;
   heatingTypes: string[];
   asbestosProperties: string[];
+  @Output() done = new EventEmitter<SOTP>();
+
 
   constructor() { }
 
@@ -129,5 +131,9 @@ export class SotpComponent implements OnInit {
 
   clearAsbestos() {
     this.sotp.asbestos.properties = [];
+  }
+
+  handover() {
+    this.done.emit(this.sotp);
   }
 }

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {SurveyService} from '../_service/survey.service';
-import {GSI} from '../_model/GSI';
 import {Section} from '../_model/Section';
 
 @Component({
@@ -11,6 +10,8 @@ import {Section} from '../_model/Section';
 export class SurveyComponent implements OnInit {
 
   showOptions = true;
+
+  @ViewChild('nav') nav: ElementRef;
 
   constructor(public surveyService: SurveyService) { }
 
@@ -38,8 +39,8 @@ export class SurveyComponent implements OnInit {
     }
   }
 
-  handover(gis: GSI, section: Section) {
-    section.data = JSON.stringify(gis);
+  handover(data: any, section: Section) {
+    section.data = JSON.stringify(data);
     section.show = false;
     const index = this.surveyService.selectedSurvey.findIndex(s => s.name === section.name);
     this.surveyService.selectedSurvey[index] = section;
@@ -54,5 +55,6 @@ export class SurveyComponent implements OnInit {
       s.show = false;
     });
     this.surveyService.selectedSurvey[index].show = true;
+    // scroll to #TODO:
   }
 }

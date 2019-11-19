@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {GSI} from '../_model/GSI';
 
 @Component({
   selector: 'app-nsc',
@@ -11,6 +12,7 @@ export class NscComponent implements OnInit {
   topography: string[];
   swd: string[];
   selectedSWD: string[];
+  otherDrainage: string;
   selectedTopography: string[];
   vs: string;
   vsPicks: string[];
@@ -24,7 +26,9 @@ export class NscComponent implements OnInit {
   socotg: boolean;
   socotgs: string[];
   selectedsocotg: string[];
+  stressedVegetationDesc: string;
   @Input() last: boolean;
+  @Output() done = new EventEmitter<any>();
 
   constructor() { }
 
@@ -65,6 +69,9 @@ export class NscComponent implements OnInit {
 
   onClickSV() {
     this.sv = !this.sv;
+    if (!this.sv) {
+      this.stressedVegetationDesc = '';
+    }
   }
 
   onClicksocotg() {
@@ -74,9 +81,9 @@ export class NscComponent implements OnInit {
   picksocotg(p: string) {
     const index = this.socotgs.indexOf(p);
     if (index > -1) {
-      this.socotgs.splice(index, 1);
+      this.selectedsocotg.splice(index, 1);
     } else {
-      this.socotgs.push(p);
+      this.selectedsocotg.push(p);
     }
   }
 
@@ -122,5 +129,28 @@ export class NscComponent implements OnInit {
     } else {
       this.selectedSWD.push(p);
     }
+    if (this.selectedSWD.indexOf('Other') === -1) {
+      this.otherDrainage  = '';
+    }
+  }
+  onDrainage(val: string) {
+    this.otherDrainage = val;
+  }
+
+  handover() {
+    this.done.emit({
+      topography: this.selectedTopography,
+      drainage: this.selectedSWD,
+      otherDrainage: this.otherDrainage,
+      contamination: this.vs,
+      visibleSigns : this.vsPicked,
+      isVegetationOnSite: this.isVegetationOnSite,
+      vegetation: this.selectedVegetation,
+      stressedVegetation: this.sv,
+      stressedVegetationDesc: this.stressedVegetationDesc,
+      geology: this.selectedGeology,
+      socotg: this.socotg,
+      socotgs: this.socotgs
+    });
   }
 }

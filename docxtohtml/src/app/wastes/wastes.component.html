@@ -366,9 +366,7 @@
         </div>
       </div>
       <div class="step-actions">
-        <button class="waves-effect waves-dark btn-sm btn btn-primary next-step" (click)="nextStep()">CONTINUE</button>
-        <button class="waves-effect waves-dark btn-sm btn btn-secondary previous-step" (click)="previousStep()">BACK</button>
-        <!--        <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button">{{last ? 'Submit': 'Next'}}</button>-->
+        <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button" (click)="handover()">{{last ? 'Submit': 'Next'}}</button>
       </div>
     </div>
   </li>

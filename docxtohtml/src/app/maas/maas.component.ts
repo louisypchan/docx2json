@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MUAS} from '../_model/MUAS';
 
 @Component({
@@ -16,6 +16,9 @@ export class MaasComponent implements OnInit {
   msapOps: string[];
   waysToStore: string[];
   stockpiled: string[];
+  @Output() done = new EventEmitter<MUAS>();
+
+
   constructor() { }
 
   ngOnInit() {
@@ -149,5 +152,9 @@ export class MaasComponent implements OnInit {
       case 'tank':
         break;
     }
+  }
+
+  handover() {
+    this.done.emit(this.muas);
   }
 }

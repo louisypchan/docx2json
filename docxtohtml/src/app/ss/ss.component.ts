@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SS} from '../_model/SS';
 
 @Component({
@@ -13,6 +13,9 @@ export class SsComponent implements OnInit {
   indicates: string[];
   @Input() last: boolean;
   ss: SS;
+  @Output() done = new EventEmitter<SS>();
+
+
   constructor() { }
 
   ngOnInit() {
@@ -77,5 +80,9 @@ export class SsComponent implements OnInit {
 
   clearSpeticDesc() {
     this.ss.spetic.speticProblem_desc = '';
+  }
+
+  handover() {
+    this.done.emit(this.ss);
   }
 }

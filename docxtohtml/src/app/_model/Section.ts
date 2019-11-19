@@ -3,4 +3,5 @@ export interface Section {
   checked: boolean;
   show: boolean;
   data?: string;
+  order?: number;
 }

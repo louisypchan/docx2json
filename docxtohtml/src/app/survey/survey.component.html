@@ -14,7 +14,7 @@
 
 <div class="position-absolute w-100 h-100" *ngIf="!showOptions" style="overflow: hidden;">
   <ul class="nav md-pills nav-justified pills-info flex-nowrap h-ps" style="height: 50px;">
-    <li class="nav-item" *ngFor="let p of surveyService.selectedSurvey;">
+    <li class="nav-item" *ngFor="let p of surveyService.selectedSurvey;" (click)="switchPage(p)">
       <a class="nav-link" [class.active]="p.show" href="javascript:void(0);" style="white-space: nowrap;">{{p.name}}</a>
     </li>
   </ul>

@@ -27,6 +27,7 @@ export class SurveyComponent implements OnInit {
       this.surveyService.options[index].checked = true;
       this.surveyService.selectedSurvey.push(this.surveyService.options[index]);
     }
+    this.surveyService.selectedSurvey.sort((a, b) => a.order - b.order);
   }
 
   nextToSelectedSections() {
@@ -45,5 +46,13 @@ export class SurveyComponent implements OnInit {
     if (this.surveyService.selectedSurvey[index + 1]) {
       this.surveyService.selectedSurvey[index + 1].show = true;
     }
+  }
+
+  switchPage(section: Section) {
+    const index = this.surveyService.selectedSurvey.findIndex(s => s.name === section.name);
+    this.surveyService.selectedSurvey.forEach(s => {
+      s.show = false;
+    });
+    this.surveyService.selectedSurvey[index].show = true;
   }
 }

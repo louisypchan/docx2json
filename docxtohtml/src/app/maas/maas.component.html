@@ -1,1 +1,389 @@
-<p>maas works!</p>
+<ul class="stepper parallel">
+  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
+    <div class="step-title waves-effect waves-dark" (click)="step = 0">Tanks</div>
+    <div class="step-new-content" [class.show]="step === 0">
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Underground Storage Tanks on or near the property?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="utank1" name="utank" value="Yes" [(ngModel)]="muas.tank.utank">
+              <label class="form-check-label" for="utank1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="utank2" name="utank" value="No"  [(ngModel)]="muas.tank.utank" (click)="clearUA()">
+              <label class="form-check-label" for="utank2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="utank3" name="utank" value="Not Known"  [(ngModel)]="muas.tank.utank" (click)="clearUA()">
+              <label class="form-check-label" for="utank3">Not Known</label>
+            </div>
+          </div>
+          <div class="d-flex flex-1" *ngIf="muas.tank.utank === 'Yes'" style="align-items: baseline;">
+            <div>If yes, how many?</div>
+            <div class="md-form m-0 ml-2 flex-1">
+              <input type="text" class="form-control" [(ngModel)]="muas.tank.utankAmount" [appFocus]="true" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="d-flex flex-column flex-1">
+          <div class="mb-2 flex-1"><strong>Is there evidence of the following:</strong></div>
+          <div class="d-flex flex-column">
+            <div class="form-check" *ngFor="let ops of evidence; index as i;">
+              <input type="checkbox" class="form-check-input" [id]="'evidence_' + i" (click)="pickEvidence(ops)">
+              <label class="form-check-label" [for]="'evidence_' + i">{{ops}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Are the tanks in use?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="tankInUse1" name="tankInUse" value="Yes" [(ngModel)]="muas.tank.tankInUse">
+              <label class="form-check-label" for="tankInUse1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="tankInUse2" name="tankInUse" value="No"  [(ngModel)]="muas.tank.tankInUse">
+              <label class="form-check-label" for="tankInUse2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="tankInUse3" name="tankInUse" value="Not Known"  [(ngModel)]="muas.tank.tankInUse">
+              <label class="form-check-label" for="tankInUse3">Not Known</label>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1 mt-2">
+            <div>If tanks are not in use, how long have they been out of service?</div>
+            <div class="md-form m-0">
+              <input type="text" class="form-control" [(ngModel)]="muas.tank.ageOfTankOutOfService">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Were the tank(s) emptied when taken out of service?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="emptied1" name="emptied" value="Yes" [(ngModel)]="muas.tank.emptied">
+              <label class="form-check-label" for="emptied1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="emptied2" name="emptied" value="No"  [(ngModel)]="muas.tank.emptied">
+              <label class="form-check-label" for="emptied2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="emptied3" name="emptied" value="Not Known"  [(ngModel)]="muas.tank.emptied">
+              <label class="form-check-label" for="emptied3">Not Known</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Aboveground tanks on or near the property?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="atank1" name="atank" value="Yes" [(ngModel)]="muas.tank.atank">
+              <label class="form-check-label" for="atank1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="atank2" name="atank" value="No"  [(ngModel)]="muas.tank.atank" (click)="muas.tank.atankAmount = ''">
+              <label class="form-check-label" for="atank2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="atank3" name="atank" value="Not Known"  [(ngModel)]="muas.tank.atank" (click)="muas.tank.atankAmount = ''">
+              <label class="form-check-label" for="atank3">Not Known</label>
+            </div>
+          </div>
+          <div class="d-flex flex-1" *ngIf="muas.tank.atank === 'Yes'" style="align-items: baseline;">
+            <div>If yes, how many?</div>
+            <div class="md-form m-0 ml-2 flex-1">
+              <input type="text" class="form-control" [(ngModel)]="muas.tank.atankAmount" [appFocus]="true" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="d-flex flex-column flex-1">
+          <div class="mb-2 flex-1"><strong>Note conditions of tank:</strong></div>
+          <div class="d-flex flex-column">
+            <div class="form-check" *ngFor="let ops of conditions; index as i;">
+              <input type="checkbox" class="form-check-input" [id]="'conditions_' + i" (click)="pickCondition(ops)">
+              <label class="form-check-label" [for]="'conditions_' + i">{{ops}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div class="d-flex flex-1 align-items-center">
+            <div class="flex-1"><strong>Is there spill containment?</strong></div>
+            <div class="switch">
+              <label>
+                <input type="checkbox" [checked]="muas.tank.spill" (click)="handleSwitch('tank', 'spill')"  />
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+          <div class="d-flex flex-1" style="align-items: baseline;">
+            <div>Provide details:</div>
+            <div class="md-form m-0 flex-1 ml-1">
+              <input type="text" class="form-control" [(ngModel)]="muas.tank.spillDetail">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Have there been any spills?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="spills1" name="spills" value="Yes" [(ngModel)]="muas.tank.spills">
+              <label class="form-check-label" for="spills1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="spills2" name="spills" value="No"  [(ngModel)]="muas.tank.spills" (click)="muas.tank.spills_desc = ''">
+              <label class="form-check-label" for="spills2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="spills3" name="spills" value="Not Known"  [(ngModel)]="muas.tank.spills" (click)="muas.tank.spills_desc = ''">
+              <label class="form-check-label" for="spills3">Not Known</label>
+            </div>
+          </div>
+          <div class="d-flex flex-1" *ngIf="muas.tank.spills === 'Yes'" style="align-items: baseline;">
+            <div>If yes, describe</div>
+            <div class="md-form m-0 ml-2 flex-1">
+              <input type="text" class="form-control" [(ngModel)]="muas.tank.spills_desc" [appFocus]="true" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn btn-sm btn-primary next-step" (click)="nextStep()">CONTINUE</button>
+      </div>
+    </div>
+  </li>
+  <li class="step" [class.active]="step === 1" [class.done]="step > 1">
+    <div class="step-title waves-effect waves-dark" (click)="step = 1">Other Storage Areas</div>
+    <div class="step-new-content" [class.show]="step === 1">
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div class="d-flex flex-1 align-items-center">
+            <div class="flex-1"><strong>Are there materials stockpiled on property?</strong></div>
+            <div class="switch">
+              <label>
+                <input type="checkbox" [checked]="muas.osa.msop" (click)="handleSwitch('osa', 'msop')"  />
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div class="d-flex flex-1 align-items-center">
+            <div class="flex-1"><strong>Are there materials stockpiled on the adjacent property?</strong></div>
+            <div class="switch">
+              <label>
+                <input type="checkbox" [checked]="muas.osa.msap" (click)="handleSwitch('osa', 'msap')"  />
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1" *ngIf="muas.osa.msap">
+            <div>If yes, select all that apply:</div>
+            <div class="d-flex flex-column">
+              <div class="form-check" *ngFor="let ops of msapOps; index as i;">
+                <input type="checkbox" class="form-check-input" [id]="'msapOps_' + i" [checked]="muas.osa.msapOps.indexOf(ops) > -1"  (click)="pickMsap(ops)">
+                <label class="form-check-label" [for]="'msapOps_' + i">{{ops}}</label>
+              </div>
+              <div class="md-form m-0" *ngIf="muas.osa.msapOps.indexOf('Other') > -1">
+                <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="muas.osa.otherMsap">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="d-flex flex-column flex-1">
+          <div class="mb-2 flex-1"><strong>How are these materials stored:</strong></div>
+          <div class="d-flex flex-column">
+            <div class="form-check" *ngFor="let ops of waysToStore; index as i;">
+              <input type="checkbox" class="form-check-input" [id]="'waysToStore_' + i" [checked]="muas.osa.waysToStore.indexOf(ops) > -1" (click)="pickWay(ops)">
+              <label class="form-check-label" [for]="'waysToStore_' + i">{{ops}}</label>
+            </div>
+            <div class="md-form m-0" *ngIf="muas.osa.waysToStore.indexOf('Other') > -1">
+              <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="muas.osa.otherWayToStore">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Estimate the quantity of materials observed:</strong></div>
+          <div class="d-flex flex-column flex-1">
+            <div><strong>Containers smaller than 20 L</strong></div>
+            <div class="d-flex flex-row">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="cst21" name="cst2" value="1-5" [(ngModel)]="muas.osa.cst2">
+                <label class="form-check-label" for="cst21">1-5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="cst22" name="cst2" value="6-10" [(ngModel)]="muas.osa.cst2">
+                <label class="form-check-label" for="cst22">6-10</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="cst23" name="cst2" value="More than 10" [(ngModel)]="muas.osa.cst2">
+                <label class="form-check-label" for="cst23">More than 10</label>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1">
+            <div><strong>Containers 20 L or larger</strong></div>
+            <div class="d-flex flex-row">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="c2l1" name="c2l" value="1-5" [(ngModel)]="muas.osa.c2l">
+                <label class="form-check-label" for="c2l1">1-5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="c2l2" name="c2l" value="6-10" [(ngModel)]="muas.osa.c2l">
+                <label class="form-check-label" for="c2l2">6-10</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="c2l3" name="c2l" value="More than 10" [(ngModel)]="muas.osa.c2l">
+                <label class="form-check-label" for="c2l3">More than 10</label>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1">
+            <div><strong>Drums</strong></div>
+            <div class="d-flex flex-row">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="drums1" name="drums" value="1-5" [(ngModel)]="muas.osa.drums">
+                <label class="form-check-label" for="drums1">1-5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="drums2" name="drums" value="6-10" [(ngModel)]="muas.osa.drums">
+                <label class="form-check-label" for="drums2">6-10</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="drums3" name="drums" value="More than 10" [(ngModel)]="muas.osa.drums">
+                <label class="form-check-label" for="drums3">More than 10</label>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1">
+            <div><strong>Tanks</strong></div>
+            <div class="d-flex flex-row">
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="tanks1" name="tanks" value="1-5" [(ngModel)]="muas.osa.tanks">
+                <label class="form-check-label" for="tanks1">1-5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="tanks2" name="tanks" value="6-10" [(ngModel)]="muas.osa.tanks">
+                <label class="form-check-label" for="tanks2">6-10</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" id="tanks3" name="tanks" value="More than 10" [(ngModel)]="muas.osa.tanks">
+                <label class="form-check-label" for="tanks3">More than 10</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="d-flex flex-column flex-1">
+          <div class="mb-2 flex-1"><strong>Select the following materials stockpiled on or adjacent to the property:</strong></div>
+          <div class="d-flex flex-column">
+            <div class="form-check" *ngFor="let ops of stockpiled; index as i;">
+              <input type="checkbox" class="form-check-input" [id]="'stockpiled_' + i" [checked]="muas.osa.stockpiled.indexOf(ops) > -1" (click)="pickMaterial(ops)">
+              <label class="form-check-label" [for]="'stockpiled_' + i">{{ops}}</label>
+            </div>
+            <div class="md-form m-0" *ngIf="muas.osa.stockpiled.indexOf('Other') > -1">
+              <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="muas.osa.otherMaterial">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div class="d-flex flex-1 align-items-center">
+            <div class="flex-1"><strong>Are these materials securely stored?</strong></div>
+            <div class="switch">
+              <label>
+                <input type="checkbox" [checked]="muas.osa.secure" (click)="handleSwitch('osa', 'secure')"  />
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+          <div class="d-flex flex-1" style="align-items: baseline;" *ngIf="!muas.osa.secure">
+            <div>If no, describe</div>
+            <div class="md-form m-0 ml-2 flex-1">
+              <input type="text" class="form-control" [(ngModel)]="muas.osa.insecure_desc" [appFocus]="true" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div class="d-flex flex-1 align-items-center">
+            <div class="flex-1"><strong>Is there evidence of spillage or staining in storage areas?</strong></div>
+            <div class="switch">
+              <label>
+                <input type="checkbox" [checked]="muas.osa.ssa" (click)="handleSwitch('osa', 'ssa')"  />
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+          <div class="d-flex flex-1" style="align-items: baseline;" *ngIf="!muas.osa.ssa">
+            <div>If no, describe</div>
+            <div class="md-form m-0 ml-2 flex-1">
+              <input type="text" class="form-control" [(ngModel)]="muas.osa.ssa_desc" [appFocus]="true" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div class="d-flex flex-1 align-items-center">
+            <div class="flex-1"><strong>Does the owner keep records of handling practices?</strong></div>
+            <div class="switch">
+              <label>
+                <input type="checkbox" [checked]="muas.osa.krhp" (click)="handleSwitch('osa', 'krhp')"  />
+                <span class="lever"></span>
+              </label>
+            </div>
+          </div>
+          <div class="d-flex flex-1" style="align-items: baseline;">
+            <div>Provide details:</div>
+            <div class="md-form m-0 flex-1 ml-1">
+              <input type="text" class="form-control" [(ngModel)]="muas.osa.krhpDetail">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button">{{last ? 'Submit': 'Next'}}</button>
+      </div>
+    </div>
+  </li>
+</ul>

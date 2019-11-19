@@ -43,7 +43,7 @@
       <div class="mb-2 flex-1"><strong>Land use:</strong></div>
       <div class="d-flex flex-column">
         <div class="form-check" *ngFor="let ops of options; index as i;">
-          <input type="checkbox" class="form-check-input" [id]="'landuse_' + i" (click)="landUsePick(ops)">
+          <input type="checkbox" class="form-check-input" [id]="'landuse_' + i" [checked]="gsi.lu.lu.indexOf(ops) > -1" (click)="landUsePick(ops)">
           <label class="form-check-label" [for]="'landuse_' + i">{{ops}}</label>
         </div>
         <app-input [label]="'Please specify'" *ngIf="landUse.indexOf('Other (please specify)') > -1" [focus]="true" (changed)="luDesc($event)"></app-input>
@@ -51,7 +51,7 @@
       <div class="mt-2 mb-2 flex-1"><strong>Previous Land use:</strong></div>
       <div class="d-flex flex-column">
         <div class="form-check" *ngFor="let ops of options; index as i;">
-          <input type="checkbox" class="form-check-input" [id]="'p_landuse_' + i" (click)="prevLandUsePick(ops)">
+          <input type="checkbox" class="form-check-input" [id]="'p_landuse_' + i" [checked]="gsi.lu.plu.indexOf(ops) > -1" (click)="prevLandUsePick(ops)">
           <label class="form-check-label" [for]="'p_landuse_' + i">{{ops}}</label>
         </div>
         <app-input [label]="'Please specify'" *ngIf="preLandUse.indexOf('Other (please specify)') > -1" [focus]="true" (changed)="pluDesc($event)"></app-input>
@@ -59,7 +59,7 @@
       <div class="mt-2 mb-2 flex-1"><strong>Zoning:</strong></div>
       <div class="d-flex flex-column">
         <div class="form-check" *ngFor="let ops of options; index as i;">
-          <input type="checkbox" class="form-check-input" [id]="'zoning_' + i" (click)="zoningPick(ops)">
+          <input type="checkbox" class="form-check-input" [id]="'zoning_' + i" [checked]="gsi.lu.zoning.indexOf(ops) > -1" (click)="zoningPick(ops)">
           <label class="form-check-label" [for]="'zoning_' + i">{{ops}}</label>
         </div>
         <app-input [label]="'Please specify'" *ngIf="zoning.indexOf('Other (please specify)') > -1" [focus]="true" (changed)="zoningDesc($event)"></app-input>

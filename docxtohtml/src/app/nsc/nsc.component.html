@@ -6,7 +6,7 @@
         <div class="mb-2 flex-1"><strong>Topography:</strong></div>
         <div class="d-flex flex-column">
           <div class="form-check" *ngFor="let ops of topography; index as i;">
-            <input type="checkbox" class="form-check-input" [id]="'topography_' + i" (click)="pickTopography(ops)">
+            <input type="checkbox" class="form-check-input" [id]="'topography_' + i" [checked]="selectedTopography.indexOf(ops) > -1" (click)="pickTopography(ops)">
             <label class="form-check-label" [for]="'topography_' + i">{{ops}}</label>
           </div>
         </div>
@@ -15,7 +15,7 @@
         <div class="mb-2 flex-1"><strong>Surface Water/Drainage:</strong></div>
         <div class="d-flex flex-column">
           <div class="form-check" *ngFor="let ops of swd; index as i;">
-            <input type="checkbox" class="form-check-input" [id]="'swd_' + i" (click)="pickSWD(ops)">
+            <input type="checkbox" class="form-check-input" [id]="'swd_' + i" [checked]="selectedSWD.indexOf(ops) > -1" (click)="pickSWD(ops)">
             <label class="form-check-label" [for]="'swd_' + i">{{ops}}</label>
             <app-input *ngIf="selectedSWD.indexOf('Other') > -1 && ops === 'Other'" [focus]="true"></app-input>
           </div>
@@ -37,7 +37,7 @@
           <div class="mr-2">If yes, check those that apply</div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of vsPicks; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'vs_' + i" (click)="pickVS(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'vs_' + i" [checked]="vsPicked.indexOf(ops) > -1" (click)="pickVS(ops)">
               <label class="form-check-label" [for]="'vs_' + i">{{ops}}</label>
             </div>
           </div>
@@ -67,7 +67,7 @@
           <div class="mr-2">If yes, check those that apply</div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of vegetation; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'vegetation_' + i" (click)="pickVegetation(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'vegetation_' + i" [checked]="selectedVegetation.indexOf(ops) > -1" (click)="pickVegetation(ops)">
               <label class="form-check-label" [for]="'vegetation_' + i">{{ops}}</label>
             </div>
           </div>
@@ -110,7 +110,7 @@
         <div class="mb-2 flex-1"><strong>Soils/Geology:</strong></div>
         <div class="d-flex flex-column">
           <div class="form-check" *ngFor="let ops of geology; index as i;">
-            <input type="checkbox" class="form-check-input" [id]="'geology_' + i" (click)="pickGeology(ops)">
+            <input type="checkbox" class="form-check-input" [id]="'geology_' + i" [checked]="selectedGeology.indexOf(ops) > -1" (click)="pickGeology(ops)">
             <label class="form-check-label" [for]="'geology_' + i">{{ops}}</label>
           </div>
         </div>
@@ -131,7 +131,7 @@
           <div class="mr-2">If yes, check those that apply</div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of socotgs; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'socotg_' + i" (click)="picksocotg(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'socotg_' + i" [checked]="socotgs.indexOf(ops) > -1" (click)="picksocotg(ops)">
               <label class="form-check-label" [for]="'socotg_' + i">{{ops}}</label>
             </div>
           </div>

@@ -1,1 +1,133 @@
-<p>oosa works!</p>
+<ul class="stepper parallel">
+  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
+    <div class="step-title waves-effect waves-dark" (click)="step = 0">Mines, Pits, Quarries</div>
+    <div class="step-new-content" [class.show]="step === 0">
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Mining activity currently on the site?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="activity1" name="activity" value="Yes" [(ngModel)]="oosa.mine.activity">
+              <label class="form-check-label" for="activity1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="activity2" name="activity" value="No"  [(ngModel)]="oosa.mine.activity" (click)="oosa.mine.activity_desc = ''">
+              <label class="form-check-label" for="activity2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="activity3" name="activity" value="Not Known"  [(ngModel)]="oosa.mine.activity" (click)="oosa.mine.activity_desc = ''">
+              <label class="form-check-label" for="activity3">Not Known</label>
+            </div>
+          </div>
+          <div *ngIf="oosa.mine.activity === 'Yes'">
+            <div class="md-form m-0">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="oosa.mine.activity_desc">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Do you know of any previous mining activity (i.e. drill holes, abandoned shafts, etc.) on the property?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="abandonedActivity1" name="abandonedActivity" value="Yes" [(ngModel)]="oosa.mine.abandonedActivity">
+              <label class="form-check-label" for="abandonedActivity1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="abandonedActivity2" name="abandonedActivity" value="No"  [(ngModel)]="oosa.mine.abandonedActivity" (click)="clearAbandonActivity()">
+              <label class="form-check-label" for="abandonedActivity2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="abandonedActivity3" name="abandonedActivity" value="Not Known"  [(ngModel)]="oosa.mine.abandonedActivity" (click)="clearAbandonActivity()">
+              <label class="form-check-label" for="abandonedActivity3">Not Known</label>
+            </div>
+          </div>
+          <div *ngIf="oosa.mine.abandonedActivity === 'Yes'">
+            <div class="md-form m-0">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="oosa.mine.abandonedActivity_desc">
+            </div>
+          </div>
+          <div class="d-flex flex-column flex-1" *ngIf="oosa.mine.abandonedActivity === 'Yes'">
+            <div>If there are abandoned shafts or drill holes, fill in the following information.</div>
+            <div class="md-form m-0">
+              <app-input [label]="'Number'" (changed)="onNumberChange($event);"></app-input>
+              <app-input [label]="'Type'" (changed)="onTypeChange($event);"></app-input>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn btn-sm btn-primary next-step" (click)="nextStep()">CONTINUE</button>
+      </div>
+    </div>
+  </li>
+  <li class="step" [class.active]="step === 1" [class.done]="step > 1">
+    <div class="step-title waves-effect waves-dark" (click)="step = 1">Oil and Gas Wells</div>
+    <div class="step-new-content" [class.show]="step === 1">
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Are there active or abandoned oil or gas wells on the property?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="oil1" name="oil" value="Yes" [(ngModel)]="oosa.gas.oil">
+              <label class="form-check-label" for="oil1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="oil2" name="oil" value="No"  [(ngModel)]="oosa.gas.oil" (click)="oosa.gas.oil_desc = ''">
+              <label class="form-check-label" for="oil2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="oil3" name="oil" value="Not Known"  [(ngModel)]="oosa.gas.oil" (click)="oosa.gas.oil_desc = ''">
+              <label class="form-check-label" for="oil3">Not Known</label>
+            </div>
+          </div>
+          <div *ngIf="oosa.gas.oil === 'Yes'">
+            <div class="md-form m-0">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="oosa.gas.oil_desc">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="d-flex flex-column flex-1">
+          <div><strong>Are there pipelines on or near the property?</strong></div>
+          <div class="d-flex flex-row">
+            <!-- Material inline 1 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="pipelines1" name="pipelines" value="Yes" [(ngModel)]="oosa.gas.pipelines">
+              <label class="form-check-label" for="pipelines1">Yes</label>
+            </div>
+            <!-- Material inline 2 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="pipelines2" name="pipelines" value="No"  [(ngModel)]="oosa.gas.pipelines" (click)="oosa.gas.pipelines_desc = ''">
+              <label class="form-check-label" for="pipelines2">No</label>
+            </div>
+            <!-- Material inline 3 -->
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="pipelines3" name="pipelines" value="Not Known"  [(ngModel)]="oosa.gas.pipelines" (click)="oosa.gas.pipelines_desc = ''">
+              <label class="form-check-label" for="pipelines3">Not Known</label>
+            </div>
+          </div>
+          <div *ngIf="oosa.gas.pipelines === 'Yes'">
+            <div class="md-form m-0">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="oosa.gas.pipelines_desc">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-actions">
+        <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button">{{last ? 'Submit': 'Next'}}</button>
+      </div>
+    </div>
+  </li>
+</ul>

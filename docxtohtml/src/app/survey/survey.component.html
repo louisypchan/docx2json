@@ -31,6 +31,9 @@
     <app-nsc *ngIf="p.name === 'Natural Site Characteristics'" [last]="i === surveyService.selectedSurvey.length - 1"></app-nsc>
     <app-sotp *ngIf="p.name === 'Structures on the Property'" [last]="i === surveyService.selectedSurvey.length - 1"></app-sotp>
     <app-ss *ngIf="p.name === 'Site Services'" [last]="i === surveyService.selectedSurvey.length - 1"></app-ss>
+    <app-maas *ngIf="p.name === 'Materials Used and Stored'" [last]="i === surveyService.selectedSurvey.length - 1"></app-maas>
+    <app-wastes *ngIf="p.name === 'Wastes'" [last]="i === surveyService.selectedSurvey.length - 1"></app-wastes>
+    <app-oosa *ngIf="p.name === 'Other On-site Activities'" [last]="i === surveyService.selectedSurvey.length - 1"></app-oosa>
   </div>
 </div>
 

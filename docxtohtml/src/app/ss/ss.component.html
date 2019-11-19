@@ -7,7 +7,7 @@
           <div class="mb-2 flex-1"><strong>Are any of the following on the site?</strong></div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of ppsOptions; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'ppsOptions_' + i" (click)="pickPPS(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'ppsOptions_' + i"  [checked]="ss.pps.options.indexOf(ops) > -1" (click)="pickPPS(ops)">
               <label class="form-check-label" [for]="'ppsOptions_' + i">{{ops}}</label>
             </div>
             <div class="md-form m-0" *ngIf="ss.pps.options.indexOf('Other') > -1">
@@ -177,7 +177,7 @@
           <div class="mb-2 flex-1"><strong>Any visible indications of system failure?</strong></div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of indicates; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'indicates_' + i" (click)="pickIndicate(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'indicates_' + i" [checked]="ss.spetic.iosf.indexOf(ops) > -1" (click)="pickIndicate(ops)">
               <label class="form-check-label" [for]="'indicates_' + i">{{ops}}</label>
             </div>
             <div class="md-form m-0" *ngIf="ss.spetic.iosf.indexOf('Other (please specify)') > -1">

@@ -7,6 +7,9 @@
     </label>
   </div>
 </div>
+<div class="pl-3 pr-3" *ngIf="!waste.generate">
+  <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button" (click)="handover()">{{last ? 'Submit': 'Next'}}</button>
+</div>
 <ul class="stepper parallel" *ngIf="waste.generate">
   <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
     <div class="step-title waves-effect waves-dark" (click)="step = 0">Air Emissions</div>

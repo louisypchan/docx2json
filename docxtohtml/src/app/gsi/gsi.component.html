@@ -8,13 +8,13 @@
         <app-input class="w-100" [label]="'City'" [placeholder]="gsi.pi.city" (changed)="onPIChanged($event,'city')"></app-input>
         <app-input class="w-100" [label]="'Prov/State'" [placeholder]="gsi.pi.prov" (changed)="onPIChanged($event,'prov')"></app-input>
         <app-input class="w-100" [label]="'Postal/Zip'" [placeholder]="gsi.pi.zip" (changed)="onPIChanged($event,'zip')"></app-input>
-        <app-input class="w-100" [label]="'Legal Description'" (changed)="onPIChanged($event,'ld')"></app-input>
-        <app-input class="w-100" [label]="'Parcel ID'" (changed)="onPIChanged($event,'parcel')"></app-input>
-        <app-input class="w-100" [label]="'Mailing Address'" (changed)="onPIChanged($event,'mailAddr')"></app-input>
-        <app-input class="w-100" [label]="'On-site Contact Name'" (changed)="onPIChanged($event,'ocn')"></app-input>
-        <app-input class="w-100" [label]="'On-site Contact No'" (changed)="onPIChanged($event,'ocnum')"></app-input>
-        <app-input class="w-100" [label]="'Persons Interviewed'" (changed)="onPIChanged($event,'pi')"></app-input>
-        <app-input class="w-100" [label]="'Persons Interviewed Contact Info'" (changed)="onPIChanged($event,'pici')"></app-input>
+        <app-input class="w-100" [label]="'Legal Description'" [placeholder]="gsi.pi.ld" (changed)="onPIChanged($event,'ld')"></app-input>
+        <app-input class="w-100" [label]="'Parcel ID'" [placeholder]="gsi.pi.parcel" (changed)="onPIChanged($event,'parcel')"></app-input>
+        <app-input class="w-100" [label]="'Mailing Address'" [placeholder]="gsi.pi.mailAddr" (changed)="onPIChanged($event,'mailAddr')"></app-input>
+        <app-input class="w-100" [label]="'On-site Contact Name'" [placeholder]="gsi.pi.ocn" (changed)="onPIChanged($event,'ocn')"></app-input>
+        <app-input class="w-100" [label]="'On-site Contact No'" [placeholder]="gsi.pi.ocnum" (changed)="onPIChanged($event,'ocnum')"></app-input>
+        <app-input class="w-100" [label]="'Persons Interviewed'" [placeholder]="gsi.pi.pi" (changed)="onPIChanged($event,'pi')"></app-input>
+        <app-input class="w-100" [label]="'Persons Interviewed Contact Info'" [placeholder]="gsi.pi.pici" (changed)="onPIChanged($event,'pici')"></app-input>
         <app-input class="w-100" [label]="'Date of Site Visit'" [placeholder]="gsi.pi.dosv" (changed)="onPIChanged($event,'dosv')"></app-input>
       </div>
       <div class="step-actions">

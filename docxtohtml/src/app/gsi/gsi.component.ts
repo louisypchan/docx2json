@@ -81,7 +81,8 @@ export class GsiComponent implements OnInit, OnChanges {
       this.surveyService.resp = resp;
       this.gsi.pi.pn = resp.SITE_NAME;
       this.gsi.pi.city = resp.CITY;
-      this.gsi.pi.addr = resp.FULL_ADDRESS;
+      this.gsi.pi.addr = resp.ADDRESS;
+      this.gsi.pi.mailAddr = resp.FULL_ADDRESS;
       this.gsi.pi.prov = resp.PROVSTATE;
       this.gsi.pi.zip = resp.POSTAL_CODE;
     });

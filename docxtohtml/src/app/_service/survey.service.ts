@@ -3,6 +3,7 @@ import {Section} from '../_model/Section';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Resp} from '../_model/Resp';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class SurveyService {
   }
 
   getData(): Observable<Resp> {
-    return this.http.post<Resp>(`/ErisExt/emobile_test/MobileService.svc/callOra`, {PROCEDURE: 'getmobilesurveyinfo',
+    return this.http.post<Resp>(environment.api.callOra, {PROCEDURE: 'getmobilesurveyinfo',
       ORDER_NUM: '20181031078', SESSION_ID: 'dMgFDEQnOLOlgxtlSPffBLjtLJUbkZHrGmQPkoWIrdJiPiKrxS'}, {
       headers: new HttpHeaders({'Content-Type':  'application/json'}),
       responseType: 'json'

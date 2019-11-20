@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  api: {
+    callOra : 'http://erisservice7.ecologeris.com/ErisExt/emobile_test/MobileService.svc/callOra'
+  }
 };

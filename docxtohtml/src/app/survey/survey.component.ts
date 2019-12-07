@@ -1,6 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ChangeDetectorRef, NgZone} from '@angular/core';
 import {SurveyService} from '../_service/survey.service';
 import {Section} from '../_model/Section';
+import {ActivatedRoute} from '@angular/router';
+import {Resp} from '../_model/Resp';
 
 @Component({
   selector: 'app-survey',
@@ -10,12 +12,32 @@ import {Section} from '../_model/Section';
 export class SurveyComponent implements OnInit {
 
   showOptions = true;
+  resp: Resp;
 
   @ViewChild('nav') nav: ElementRef;
 
-  constructor(public surveyService: SurveyService) { }
+  constructor(public surveyService: SurveyService, private zone: NgZone, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
+    (window as any).backToSelection = this.backToSelection.bind(this);
+    //
+    if (this.route.snapshot.queryParams.d) {
+      const initData = JSON.parse(atob(this.route.snapshot.queryParams.d));
+      this.resp = {
+        ORDER_NUM: initData.ORDER_NUM,
+        ADDRESS: initData.ADDRESS,
+        CITY: initData.CITY,
+        PROVSTATE: initData.PROVSTATE,
+        POSTAL_CODE: initData.POSTAL_CODE,
+        PROJECT_NUM: initData.PROJECT_NUM,
+        FULL_ADDRESS: initData.FULL_ADDRESS,
+        SITE_NAME: initData.SITE_NAME,
+        SESSION_ID: initData.SESSION_ID,
+        RESPONSE_MSG: initData.RESPONSE_MSG,
+        ERRORCODE: initData.ERRORCODE
+      };
+    }
     this.surveyService.selectedSurvey = [...this.surveyService.options];
   }
 
@@ -31,11 +53,23 @@ export class SurveyComponent implements OnInit {
     this.surveyService.selectedSurvey.sort((a, b) => a.order - b.order);
   }
 
+  backToSelection() {
+    this.zone.run(() => {
+      this.surveyService.selectedSurvey.forEach(it => {
+        it.show = false;
+      });
+      this.showOptions = true;
+    });
+  }
+
   nextToSelectedSections() {
     if (this.surveyService.selectedSurvey.length > 0) {
       this.showOptions = false;
       // show first section
       this.surveyService.selectedSurvey[0].show = true;
+      if (window['eris']) {
+        window['eris'].showMenu();
+      }
     }
   }
 

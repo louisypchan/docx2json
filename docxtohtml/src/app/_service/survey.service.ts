@@ -28,12 +28,12 @@ export class SurveyService {
     ];
     this.selectedSurvey = [];
   }
-
-  getData(): Observable<Resp> {
-    return this.http.post<Resp>(environment.api.callOra, {PROCEDURE: 'getmobilesurveyinfo',
-      ORDER_NUM: '20181031078', SESSION_ID: 'dMgFDEQnOLOlgxtlSPffBLjtLJUbkZHrGmQPkoWIrdJiPiKrxS'}, {
-      headers: new HttpHeaders({'Content-Type':  'application/json'}),
-      responseType: 'json'
-    });
-  }
+  //
+  // getData(): Observable<Resp> {
+  //   return this.http.post<Resp>(environment.api.callOra, {PROCEDURE: 'getmobilesurveyinfo',
+  //     ORDER_NUM: '20181031078', SESSION_ID: 'LFQxUqXiHddIekpKEntsFKXEQotDHjJVWPpZPNDBZafGVxXZuE'}, {
+  //     headers: new HttpHeaders({'Content-Type':  'application/json'}),
+  //     responseType: 'json'
+  //   });
+  // }
 }

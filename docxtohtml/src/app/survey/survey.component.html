@@ -12,14 +12,14 @@
   <button type="button" class="btn btn-warning btn-survey mt-5" (click)="nextToSelectedSections()">Next</button>
 </div>
 
-<div class="position-absolute w-100 h-100" *ngIf="!showOptions" style="overflow: hidden;">
-  <ul class="nav md-pills nav-justified pills-info flex-nowrap h-ps" style="height: 50px;" #nav>
+<div class="position-absolute w-100 h-100" *ngIf="!showOptions">
+  <ul class="nav md-pills nav-justified pills-info flex-nowrap h-ps" style="height: 50px; position: fixed; z-index: 100; background: #fff;width: 100%;" #nav>
     <li class="nav-item" *ngFor="let p of surveyService.selectedSurvey;" (click)="switchPage(p)">
       <a class="nav-link" [class.active]="p.show" href="javascript:void(0);" style="white-space: nowrap;">{{p.name}}</a>
     </li>
   </ul>
-  <div class="page hidden" *ngFor="let p of surveyService.selectedSurvey; index as i" [class.hidden]="!p.show" style="height: calc(100% - 50px)">
-    <app-gsi *ngIf="p.name === 'General Site Information'" [section]="p" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-gsi>
+  <div class="page hidden" *ngFor="let p of surveyService.selectedSurvey; index as i" [class.hidden]="!p.show" style="margin-top: 50px;">
+    <app-gsi *ngIf="p.name === 'General Site Information'" [section]="p" [resp]="resp" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-gsi>
     <app-nsc *ngIf="p.name === 'Natural Site Characteristics'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-nsc>
     <app-sotp *ngIf="p.name === 'Structures on the Property'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-sotp>
     <app-ss *ngIf="p.name === 'Site Services'" [last]="i === surveyService.selectedSurvey.length - 1" (done)="handover($event, p)"></app-ss>

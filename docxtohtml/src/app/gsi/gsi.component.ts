@@ -76,16 +76,17 @@ export class GsiComponent implements OnInit, OnChanges {
     this.options = ['Industrial', 'Residential', 'Federal Land', 'Commercial',
       'Transportation', 'Vacant', 'Agricultural', 'Park/Conservation Area', 'Other (please specify)'];
 
+    this.reset();
     // just for testing
-    this.surveyService.getData().subscribe(resp => {
-      this.surveyService.resp = resp;
-      this.gsi.pi.pn = resp.SITE_NAME;
-      this.gsi.pi.city = resp.CITY;
-      this.gsi.pi.addr = resp.ADDRESS;
-      this.gsi.pi.mailAddr = resp.FULL_ADDRESS;
-      this.gsi.pi.prov = resp.PROVSTATE;
-      this.gsi.pi.zip = resp.POSTAL_CODE;
-    });
+    // this.surveyService.getData().subscribe(resp => {
+    //   this.surveyService.resp = resp;
+    //   this.gsi.pi.pn = resp.SITE_NAME;
+    //   this.gsi.pi.city = resp.CITY;
+    //   this.gsi.pi.addr = resp.ADDRESS;
+    //   this.gsi.pi.mailAddr = resp.FULL_ADDRESS;
+    //   this.gsi.pi.prov = resp.PROVSTATE;
+    //   this.gsi.pi.zip = resp.POSTAL_CODE;
+    // });
   }
   generateUID() {
     return utils.uniqueIdGenerator();
@@ -166,14 +167,19 @@ export class GsiComponent implements OnInit, OnChanges {
     this.done.emit(this.gsi);
   }
 
+  reset() {
+    this.gsi.pi.pn = this.resp.SITE_NAME;
+    this.gsi.pi.city = this.resp.CITY;
+    this.gsi.pi.addr = this.resp.ADDRESS;
+    this.gsi.pi.prov = this.resp.PROVSTATE;
+    this.gsi.pi.zip = this.resp.POSTAL_CODE;
+    this.gsi.pi.mailAddr = this.resp.FULL_ADDRESS;
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if ('resp' in changes) {
       if (changes.resp.currentValue && this.gsi) {
-        this.gsi.pi.pn = this.resp.SITE_NAME;
-        this.gsi.pi.city = this.resp.CITY;
-        this.gsi.pi.addr = this.resp.FULL_ADDRESS;
-        this.gsi.pi.prov = this.resp.PROVSTATE;
-        this.gsi.pi.zip = this.resp.POSTAL_CODE;
+        this.reset()
       }
     }
   }

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GSI} from '../_model/GSI';
+import {SurveyService} from '../_service/survey.service';
 
 @Component({
   selector: 'app-nsc',
@@ -30,10 +31,25 @@ export class NscComponent implements OnInit {
   @Input() last: boolean;
   @Output() done = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(public surveyService: SurveyService) {
+  }
 
   ngOnInit() {
     this.step = 0;
+    this.surveyService.nsc = {
+      topography: [],
+      drainage: [],
+      otherDrainage: '',
+      contamination: '',
+      visibleSigns : [],
+      isVegetationOnSite: false,
+      vegetation: [],
+      stressedVegetation: false,
+      stressedVegetationDesc: '',
+      geology: [],
+      socotg: false,
+      socotgs: []
+    };
     this.selectedSWD = [];
     this.selectedTopography = [];
     this.vsPicked = [];

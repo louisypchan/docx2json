@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Resp} from '../_model/Resp';
 import {environment} from '../../environments/environment';
+import {GSI} from '../_model/GSI';
+import {NSC} from '../_model/NSC';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,8 @@ export class SurveyService {
   public selectedSurvey: Section[];
 
   public resp: Resp;
+  public gsi: GSI;
+  public nsc: NSC;
 
   constructor(private http: HttpClient) {
     this.options = [

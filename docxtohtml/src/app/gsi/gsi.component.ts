@@ -20,10 +20,9 @@ export class GsiComponent implements OnInit, OnChanges {
   landUse: string[];
   preLandUse: string[];
   zoning: string[];
-  gsi: GSI;
   @Output() done = new EventEmitter<GSI>();
 
-  constructor(private surveyService: SurveyService) {
+  constructor(public surveyService: SurveyService) {
   }
 
   ngOnInit() {
@@ -32,7 +31,7 @@ export class GsiComponent implements OnInit, OnChanges {
     this.zoning = [];
     this.step = 0;
     const d = new Date();
-    this.gsi = {
+    this.surveyService.gsi = {
       pi: {
         pn: '',
         addr: '',
@@ -101,7 +100,7 @@ export class GsiComponent implements OnInit, OnChanges {
   }
 
   test() {
-    console.log(this.gsi);
+    console.log(this.surveyService.gsi);
   }
 
   landUsePick(p: string) {
@@ -112,9 +111,9 @@ export class GsiComponent implements OnInit, OnChanges {
       this.landUse.push(p);
     }
     if (this.landUse.indexOf('Other (please specify)') === -1) {
-      this.gsi.lu.lu_desc = '';
+      this.surveyService.gsi.lu.lu_desc = '';
     }
-    this.gsi.lu.lu = this.landUse;
+    this.surveyService.gsi.lu.lu = this.landUse;
   }
   prevLandUsePick(p: string) {
     const index = this.preLandUse.indexOf(p);
@@ -124,9 +123,9 @@ export class GsiComponent implements OnInit, OnChanges {
       this.preLandUse.push(p);
     }
     if (this.preLandUse.indexOf('Other (please specify)') === -1) {
-      this.gsi.lu.plu_desc = '';
+      this.surveyService.gsi.lu.plu_desc = '';
     }
-    this.gsi.lu.plu = this.preLandUse;
+    this.surveyService.gsi.lu.plu = this.preLandUse;
   }
 
   zoningPick(p: string) {
@@ -137,49 +136,49 @@ export class GsiComponent implements OnInit, OnChanges {
       this.zoning.push(p);
     }
     if (this.zoning.indexOf('Other (please specify)') === -1) {
-      this.gsi.lu.zoning_desc = '';
+      this.surveyService.gsi.lu.zoning_desc = '';
     }
-    this.gsi.lu.zoning = this.zoning;
+    this.surveyService.gsi.lu.zoning = this.zoning;
   }
 
   onPIChanged(val: string, prop: string) {
-    this.gsi.pi[prop] = val;
+    this.surveyService.gsi.pi[prop] = val;
   }
   onPOChanged(val: string, prop: string) {
-    this.gsi.po[prop] = val;
+    this.surveyService.gsi.po[prop] = val;
   }
   onAPChange(val: string, index: number, prop: string) {
-    this.gsi.ap[index][prop] = val;
+    this.surveyService.gsi.ap[index][prop] = val;
   }
   luDesc(val: string) {
-    this.gsi.lu.lu_desc = val;
+    this.surveyService.gsi.lu.lu_desc = val;
   }
   pluDesc(val: string) {
-    this.gsi.lu.plu_desc = val;
+    this.surveyService.gsi.lu.plu_desc = val;
   }
   zoningDesc(val: string) {
-    this.gsi.lu.zoning_desc = val;
+    this.surveyService.gsi.lu.zoning_desc = val;
   }
   clearDesc() {
-    this.gsi.heritage.q2_desc = '';
+    this.surveyService.gsi.heritage.q2_desc = '';
   }
   handover() {
-    this.done.emit(this.gsi);
+    this.done.emit(this.surveyService.gsi);
   }
 
   reset() {
-    this.gsi.pi.pn = this.resp.SITE_NAME;
-    this.gsi.pi.city = this.resp.CITY;
-    this.gsi.pi.addr = this.resp.ADDRESS;
-    this.gsi.pi.prov = this.resp.PROVSTATE;
-    this.gsi.pi.zip = this.resp.POSTAL_CODE;
-    this.gsi.pi.mailAddr = this.resp.FULL_ADDRESS;
+    this.surveyService.gsi.pi.pn = this.resp.SITE_NAME;
+    this.surveyService.gsi.pi.city = this.resp.CITY;
+    this.surveyService.gsi.pi.addr = this.resp.ADDRESS;
+    this.surveyService.gsi.pi.prov = this.resp.PROVSTATE;
+    this.surveyService.gsi.pi.zip = this.resp.POSTAL_CODE;
+    this.surveyService.gsi.pi.mailAddr = this.resp.FULL_ADDRESS;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('resp' in changes) {
-      if (changes.resp.currentValue && this.gsi) {
-        this.reset()
+      if (changes.resp.currentValue && this.surveyService.gsi) {
+        this.reset();
       }
     }
   }

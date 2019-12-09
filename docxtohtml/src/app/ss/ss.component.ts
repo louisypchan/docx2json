@@ -9,7 +9,6 @@ import {SurveyService} from '../_service/survey.service';
 })
 export class SsComponent implements OnInit {
 
-  step: number;
   ppsOptions: string[];
   indicates: string[];
   @Input() last: boolean;
@@ -19,8 +18,8 @@ export class SsComponent implements OnInit {
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    this.step = 0;
     this.surveyService.ss = {
+      step: 0,
       pps: {
         options: [],
         otherOption: ''
@@ -46,11 +45,11 @@ export class SsComponent implements OnInit {
   }
 
   nextStep() {
-    this.step++;
+    this.surveyService.ss.step++;
   }
 
   previousStep() {
-    this.step--;
+    this.surveyService.ss.step--;
   }
 
   pickPPS(p: string) {

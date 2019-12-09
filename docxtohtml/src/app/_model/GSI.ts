@@ -5,6 +5,7 @@ import {AP} from './gsi/AP';
 import {RO} from './RO';
 
 export interface GSI {
+  step: number;
   pi: PI;
   po: PO;
   lu: LU;

@@ -1,7 +1,7 @@
 <ul class="stepper linear focused">
-  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
-    <div data-step-label="Answer questions" class="step-title waves-effect waves-dark" (click)="step = 0">Property Info</div>
-    <div class="step-new-content" [class.show]="step === 0">
+  <li class="step" [class.active]="surveyService.gsi.step === 0" [class.done]="surveyService.gsi.step > 0" >
+    <div data-step-label="Answer questions" class="step-title waves-effect waves-dark" (click)="surveyService.gsi.step = 0">Property Info</div>
+    <div class="step-new-content" [class.show]="surveyService.gsi.step === 0">
       <div class="row mt-2">
         <app-input class="w-100" [label]="'Property Name'" [placeholder]="surveyService.gsi.pi.pn" (changed)="onPIChanged($event, 'pn')"></app-input>
         <app-input class="w-100" [label]="'Address'" [placeholder]="surveyService.gsi.pi.addr" (changed)="onPIChanged($event,'addr')"></app-input>
@@ -22,9 +22,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 1" [class.done]="step > 1">
-    <div class="step-title waves-effect waves-dark" (click)="step = 1">Property Owner</div>
-    <div class="step-new-content"  [class.show]="step === 1">
+  <li class="step" [class.active]="surveyService.gsi.step === 1" [class.done]="surveyService.gsi.step > 1">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.gsi.step = 1">Property Owner</div>
+    <div class="step-new-content"  [class.show]="surveyService.gsi.step === 1">
       <div class="row">
         <app-input class="w-100" [label]="'Property Owner Name'" (changed)="onPOChanged($event, 'pon')"></app-input>
         <app-input class="w-100" [label]="'Address'" (changed)="onPOChanged($event, 'addr')"></app-input>
@@ -37,9 +37,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 2" [class.done]="step > 2">
-    <div class="step-title waves-effect waves-dark" (click)="step = 2">Land use</div>
-    <div class="step-new-content" [class.show]="step === 2">
+  <li class="step" [class.active]="surveyService.gsi.step === 2" [class.done]="surveyService.gsi.step > 2">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.gsi.step = 2">Land use</div>
+    <div class="step-new-content" [class.show]="surveyService.gsi.step === 2">
       <div class="mb-2 flex-1"><strong>Land use:</strong></div>
       <div class="d-flex flex-column">
         <div class="form-check" *ngFor="let ops of options; index as i;">
@@ -70,9 +70,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 3" [class.done]="step > 3">
-    <div class="step-title waves-effect waves-dark" (click)="step = 3">Adjacent Properties</div>
-    <div class="step-new-content"  [class.show]="step === 3">
+  <li class="step" [class.active]="surveyService.gsi.step === 3" [class.done]="surveyService.gsi.step > 3">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.gsi.step = 3">Adjacent Properties</div>
+    <div class="step-new-content"  [class.show]="surveyService.gsi.step === 3">
       <div class="row" *ngFor="let ap of surveyService.gsi.ap; index as i;">
         <div class="d-flex align-items-center flex-1 mt-2">
           <span><strong>Location:</strong></span>
@@ -94,9 +94,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 4" [class.done]="step > 4">
-    <div class="step-title waves-effect waves-dark" (click)="step = 4">Heritage</div>
-    <div class="step-new-content"  [class.show]="step === 4">
+  <li class="step" [class.active]="surveyService.gsi.step === 4" [class.done]="surveyService.gsi.step > 4">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.gsi.step = 4">Heritage</div>
+    <div class="step-new-content"  [class.show]="surveyService.gsi.step === 4">
       <div class="row">
         <div class="mb-2"><strong>Are there any buildings on the property that have received a historical designation?</strong></div>
         <!-- Material inline 1 -->

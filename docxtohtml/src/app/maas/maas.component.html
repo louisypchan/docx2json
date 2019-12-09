@@ -1,7 +1,7 @@
 <ul class="stepper parallel">
-  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
-    <div class="step-title waves-effect waves-dark" (click)="step = 0">Tanks</div>
-    <div class="step-new-content" [class.show]="step === 0">
+  <li class="step" [class.active]="surveyService.muas.step === 0" [class.done]="surveyService.muas.step > 0" >
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.muas.step = 0">Tanks</div>
+    <div class="step-new-content" [class.show]="surveyService.muas.step === 0">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div><strong>Underground Storage Tanks on or near the property?</strong></div>
@@ -182,9 +182,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 1" [class.done]="step > 1">
-    <div class="step-title waves-effect waves-dark" (click)="step = 1">Other Storage Areas</div>
-    <div class="step-new-content" [class.show]="step === 1">
+  <li class="step" [class.active]="surveyService.muas.step === 1" [class.done]="surveyService.muas.step > 1">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.muas.step = 1">Other Storage Areas</div>
+    <div class="step-new-content" [class.show]="surveyService.muas.step === 1">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div class="d-flex flex-1 align-items-center">

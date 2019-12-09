@@ -1,7 +1,7 @@
 <ul class="stepper parallel">
-  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
-    <div class="step-title waves-effect waves-dark" (click)="step = 0">Mines, Pits, Quarries</div>
-    <div class="step-new-content" [class.show]="step === 0">
+  <li class="step" [class.active]="surveyService.oosa.step === 0" [class.done]="surveyService.oosa.step > 0" >
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.oosa.step = 0">Mines, Pits, Quarries</div>
+    <div class="step-new-content" [class.show]="surveyService.oosa.step === 0">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div><strong>Mining activity currently on the site?</strong></div>
@@ -68,9 +68,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 1" [class.done]="step > 1">
-    <div class="step-title waves-effect waves-dark" (click)="step = 1">Oil and Gas Wells</div>
-    <div class="step-new-content" [class.show]="step === 1">
+  <li class="step" [class.active]="surveyService.oosa.step === 1" [class.done]="surveyService.oosa.step > 1">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.oosa.step = 1">Oil and Gas Wells</div>
+    <div class="step-new-content" [class.show]="surveyService.oosa.step === 1">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div><strong>Are there active or abandoned oil or gas wells on the property?</strong></div>

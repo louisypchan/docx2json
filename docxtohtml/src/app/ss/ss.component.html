@@ -1,7 +1,7 @@
 <ul class="stepper parallel">
-  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
-    <div class="step-title waves-effect waves-dark" (click)="step = 0">Public or Private Services</div>
-    <div class="step-new-content" [class.show]="step === 0">
+  <li class="step" [class.active]="surveyService.ss.step === 0" [class.done]="surveyService.ss.step > 0" >
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.ss.step = 0">Public or Private Services</div>
+    <div class="step-new-content" [class.show]="surveyService.ss.step === 0">
       <div class="row">
         <div class="d-flex flex-column flex-1">
           <div class="mb-2 flex-1"><strong>Are any of the following on the site?</strong></div>
@@ -21,9 +21,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 1" [class.done]="step > 1">
-    <div class="step-title waves-effect waves-dark" (click)="step = 1">Wells</div>
-    <div class="step-new-content" [class.show]="step === 1">
+  <li class="step" [class.active]="surveyService.ss.step === 1" [class.done]="surveyService.ss.step > 1">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.ss.step = 1">Wells</div>
+    <div class="step-new-content" [class.show]="surveyService.ss.step === 1">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div><strong>Are there water wells on or adjacent to the property?</strong></div>
@@ -119,9 +119,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 2" [class.done]="step > 2">
-    <div class="step-title waves-effect waves-dark" (click)="step = 2">Septic System</div>
-    <div class="step-new-content" [class.show]="step === 2">
+  <li class="step" [class.active]="surveyService.ss.step === 2" [class.done]="surveyService.ss.step > 2">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.ss.step = 2">Septic System</div>
+    <div class="step-new-content" [class.show]="surveyService.ss.step === 2">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div><strong>Is there a septic system?</strong></div>

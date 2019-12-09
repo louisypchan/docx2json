@@ -4,6 +4,7 @@ import {Solid} from './waste/Solid';
 import {Chemical} from './waste/Chemical';
 
 export interface WASTE {
+  step: number;
   generate: boolean;
   emission: Emission;
   liquid: Liquid;

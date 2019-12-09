@@ -3,6 +3,13 @@ import {SurveyService} from '../_service/survey.service';
 import {Section} from '../_model/Section';
 import {ActivatedRoute} from '@angular/router';
 import {Resp} from '../_model/Resp';
+import {GSI} from '../_model/GSI';
+import {NSC} from '../_model/NSC';
+import {SOTP} from '../_model/SOTP';
+import {SS} from '../_model/SS';
+import {MUAS} from '../_model/MUAS';
+import {WASTE} from '../_model/WASTE';
+import {OOSA} from '../_model/OOSA';
 
 @Component({
   selector: 'app-survey',
@@ -21,6 +28,7 @@ export class SurveyComponent implements OnInit {
 
   ngOnInit() {
     (window as any).backToSelection = this.backToSelection.bind(this);
+    (window as any).storeSurveyData = this.storeSurveyData.bind(this);
     //
     if (this.route.snapshot.queryParams.d) {
       const initData = JSON.parse(atob(this.route.snapshot.queryParams.d));
@@ -51,6 +59,20 @@ export class SurveyComponent implements OnInit {
       this.surveyService.selectedSurvey.push(this.surveyService.options[index]);
     }
     this.surveyService.selectedSurvey.sort((a, b) => a.order - b.order);
+  }
+
+  storeSurveyData(): string {
+    const result = {
+      selectedItems: this.surveyService.selectedSurvey,
+      gsi: this.surveyService.gsi,
+      nsc: this.surveyService.nsc,
+      sotp: this.surveyService.sotp,
+      ss: this.surveyService.ss,
+      muas: this.surveyService.muas,
+      waste: this.surveyService.waste,
+      oosa: this.surveyService.oosa
+    };
+    return JSON.stringify(result);
   }
 
   backToSelection() {

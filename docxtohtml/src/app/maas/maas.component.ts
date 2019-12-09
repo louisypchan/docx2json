@@ -9,7 +9,6 @@ import {SurveyService} from '../_service/survey.service';
 })
 export class MaasComponent implements OnInit {
 
-  step: number;
   @Input() last: boolean;
   evidence: string[];
   conditions: string[];
@@ -22,8 +21,8 @@ export class MaasComponent implements OnInit {
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    this.step = 0;
     this.surveyService.muas = {
+      step: 0,
       tank: {
         utank: '',
         utankAmount: '',
@@ -71,11 +70,11 @@ export class MaasComponent implements OnInit {
   }
 
   nextStep() {
-    this.step++;
+    this.surveyService.muas.step++;
   }
 
   previousStep() {
-    this.step--;
+    this.surveyService.muas.step--;
   }
 
   clearUA() {

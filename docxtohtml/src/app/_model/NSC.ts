@@ -1,4 +1,5 @@
 export interface NSC {
+  step: number;
   topography: string[];
   drainage: string[];
   otherDrainage: string;

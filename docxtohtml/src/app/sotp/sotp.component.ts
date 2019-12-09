@@ -8,8 +8,6 @@ import {SurveyService} from '../_service/survey.service';
   styleUrls: ['./sotp.component.scss']
 })
 export class SotpComponent implements OnInit {
-
-  step: number;
   @Input() last: boolean;
   heatingTypes: string[];
   asbestosProperties: string[];
@@ -20,6 +18,7 @@ export class SotpComponent implements OnInit {
 
   ngOnInit() {
     this.surveyService.sotp = {
+      step: 0,
       bi: {
         nob: '',
         toc: '',
@@ -66,15 +65,14 @@ export class SotpComponent implements OnInit {
     this.asbestosProperties = ['Sprayed-on fire proofing (walls, ceiling)', 'Acoustical plaster', 'Insulation on furnace or boiler',
     'Roof shingles', 'Pipe insulation (other than pink fiberglass)', 'Vinyl floor tiles', 'Acoustic ceiling tiles',
       'Sheeting (interior or exterior)', 'Other'];
-    this.step = 0;
   }
 
   nextStep() {
-    this.step++;
+    this.surveyService.sotp.step++;
   }
 
   previousStep() {
-    this.step--;
+    this.surveyService.sotp.step--;
   }
 
   handleSwitch(obj: string, prop: string) {

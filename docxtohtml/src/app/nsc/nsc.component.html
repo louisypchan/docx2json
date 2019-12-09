@@ -1,7 +1,7 @@
 <ul class="stepper parallel">
-  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
-    <div class="step-title waves-effect waves-dark" (click)="step = 0">Topography</div>
-    <div class="step-new-content" [class.show]="step === 0">
+  <li class="step" [class.active]="surveyService.nsc.step === 0" [class.done]="surveyService.nsc.step > 0" >
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.nsc.step = 0">Topography</div>
+    <div class="step-new-content" [class.show]="surveyService.nsc.step === 0">
       <div class="row flex-column">
         <div class="mb-2 flex-1"><strong>Topography:</strong></div>
         <div class="d-flex flex-column">
@@ -48,9 +48,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 1" [class.done]="step > 1">
-    <div class="step-title waves-effect waves-dark" (click)="step = 1">Vegetation</div>
-    <div class="step-new-content" [class.show]="step === 1">
+  <li class="step" [class.active]="surveyService.nsc.step === 1" [class.done]="surveyService.nsc.step > 1">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.nsc.step = 1">Vegetation</div>
+    <div class="step-new-content" [class.show]="surveyService.nsc.step === 1">
       <div class="row mt-2">
         <div class="d-flex align-items-center flex-1">
           <div class="flex-1"><strong>Is there vegetation on the site?</strong></div>
@@ -103,9 +103,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 2" [class.done]="step > 2">
-    <div class="step-title waves-effect waves-dark" (click)="step = 2">Soils/Geology</div>
-    <div class="step-new-content" [class.show]="step === 2">
+  <li class="step" [class.active]="surveyService.nsc.step === 2" [class.done]="surveyService.nsc.step > 2">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.nsc.step = 2">Soils/Geology</div>
+    <div class="step-new-content" [class.show]="surveyService.nsc.step === 2">
       <div class="row flex-column">
         <div class="mb-2 flex-1"><strong>Soils/Geology:</strong></div>
         <div class="d-flex flex-column">
@@ -126,7 +126,7 @@
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="socotg">
+      <div class="row" *ngIf="surveyService.nsc.socotg">
         <div class="d-flex flex-column">
           <div class="mr-2">If yes, check those that apply</div>
           <div class="d-flex flex-column">

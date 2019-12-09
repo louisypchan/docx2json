@@ -9,7 +9,6 @@ import {SurveyService} from '../_service/survey.service';
 })
 export class NscComponent implements OnInit {
 
-  step: number;
   topography: string[];
   swd: string[];
   vsPicks: string[];
@@ -23,8 +22,8 @@ export class NscComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.step = 0;
     this.surveyService.nsc = {
+      step: 0,
       topography: [],
       drainage: [],
       otherDrainage: '',
@@ -47,10 +46,10 @@ export class NscComponent implements OnInit {
   }
 
   nextStep() {
-    this.step++;
+    this.surveyService.nsc.step++;
   }
   previousStep() {
-    this.step--;
+    this.surveyService.nsc.step--;
   }
 
   onClickVS() {

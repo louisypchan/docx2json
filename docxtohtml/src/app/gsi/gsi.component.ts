@@ -15,7 +15,6 @@ export class GsiComponent implements OnInit, OnChanges {
   @Input() section: Section;
   @Input() last: boolean;
   @Input() resp: Resp;
-  step: number;
   options: string[];
   landUse: string[];
   preLandUse: string[];
@@ -29,9 +28,9 @@ export class GsiComponent implements OnInit, OnChanges {
     this.landUse = [];
     this.preLandUse = [];
     this.zoning = [];
-    this.step = 0;
     const d = new Date();
     this.surveyService.gsi = {
+      step: 0,
       pi: {
         pn: '',
         addr: '',
@@ -92,11 +91,11 @@ export class GsiComponent implements OnInit, OnChanges {
   }
 
   nextStep() {
-    this.step++;
+    this.surveyService.gsi.step++;
   }
 
   previousStep() {
-    this.step--;
+    this.surveyService.gsi.step--;
   }
 
   test() {
@@ -167,6 +166,9 @@ export class GsiComponent implements OnInit, OnChanges {
   }
 
   reset() {
+    if (!this.resp) {
+      return;
+    }
     this.surveyService.gsi.pi.pn = this.resp.SITE_NAME;
     this.surveyService.gsi.pi.city = this.resp.CITY;
     this.surveyService.gsi.pi.addr = this.resp.ADDRESS;

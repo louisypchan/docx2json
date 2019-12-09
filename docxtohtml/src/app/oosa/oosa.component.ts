@@ -8,15 +8,15 @@ import {SurveyService} from '../_service/survey.service';
   styleUrls: ['./oosa.component.scss']
 })
 export class OosaComponent implements OnInit {
-  step: number;
+
   @Input() last: boolean;
   @Output() done = new EventEmitter<OOSA>();
 
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    this.step = 0;
     this.surveyService.oosa = {
+      step: 0,
       gas: {
         oil: '',
         oil_desc: '',
@@ -35,11 +35,11 @@ export class OosaComponent implements OnInit {
   }
 
   nextStep() {
-    this.step++;
+    this.surveyService.oosa.step++;
   }
 
   previousStep() {
-    this.step--;
+    this.surveyService.oosa.step--;
   }
 
   clearAbandonActivity() {

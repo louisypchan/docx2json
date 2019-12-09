@@ -8,23 +8,23 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="activity1" name="activity" value="Yes" [(ngModel)]="oosa.mine.activity">
+              <input type="radio" class="form-check-input" id="activity1" name="activity" value="Yes" [(ngModel)]="surveyService.oosa.mine.activity">
               <label class="form-check-label" for="activity1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="activity2" name="activity" value="No"  [(ngModel)]="oosa.mine.activity" (click)="oosa.mine.activity_desc = ''">
+              <input type="radio" class="form-check-input" id="activity2" name="activity" value="No"  [(ngModel)]="surveyService.oosa.mine.activity" (click)="surveyService.oosa.mine.activity_desc = ''">
               <label class="form-check-label" for="activity2">No</label>
             </div>
             <!-- Material inline 3 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="activity3" name="activity" value="Not Known"  [(ngModel)]="oosa.mine.activity" (click)="oosa.mine.activity_desc = ''">
+              <input type="radio" class="form-check-input" id="activity3" name="activity" value="Not Known"  [(ngModel)]="surveyService.oosa.mine.activity" (click)="surveyService.oosa.mine.activity_desc = ''">
               <label class="form-check-label" for="activity3">Not Known</label>
             </div>
           </div>
-          <div *ngIf="oosa.mine.activity === 'Yes'">
+          <div *ngIf="surveyService.oosa.mine.activity === 'Yes'">
             <div class="md-form m-0">
-              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="oosa.mine.activity_desc">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="surveyService.oosa.mine.activity_desc">
             </div>
           </div>
         </div>
@@ -35,26 +35,26 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="abandonedActivity1" name="abandonedActivity" value="Yes" [(ngModel)]="oosa.mine.abandonedActivity">
+              <input type="radio" class="form-check-input" id="abandonedActivity1" name="abandonedActivity" value="Yes" [(ngModel)]="surveyService.oosa.mine.abandonedActivity">
               <label class="form-check-label" for="abandonedActivity1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="abandonedActivity2" name="abandonedActivity" value="No"  [(ngModel)]="oosa.mine.abandonedActivity" (click)="clearAbandonActivity()">
+              <input type="radio" class="form-check-input" id="abandonedActivity2" name="abandonedActivity" value="No"  [(ngModel)]="surveyService.oosa.mine.abandonedActivity" (click)="clearAbandonActivity()">
               <label class="form-check-label" for="abandonedActivity2">No</label>
             </div>
             <!-- Material inline 3 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="abandonedActivity3" name="abandonedActivity" value="Not Known"  [(ngModel)]="oosa.mine.abandonedActivity" (click)="clearAbandonActivity()">
+              <input type="radio" class="form-check-input" id="abandonedActivity3" name="abandonedActivity" value="Not Known"  [(ngModel)]="surveyService.oosa.mine.abandonedActivity" (click)="clearAbandonActivity()">
               <label class="form-check-label" for="abandonedActivity3">Not Known</label>
             </div>
           </div>
-          <div *ngIf="oosa.mine.abandonedActivity === 'Yes'">
+          <div *ngIf="surveyService.oosa.mine.abandonedActivity === 'Yes'">
             <div class="md-form m-0">
-              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="oosa.mine.abandonedActivity_desc">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="surveyService.oosa.mine.abandonedActivity_desc">
             </div>
           </div>
-          <div class="d-flex flex-column flex-1" *ngIf="oosa.mine.abandonedActivity === 'Yes'">
+          <div class="d-flex flex-column flex-1" *ngIf="surveyService.oosa.mine.abandonedActivity === 'Yes'">
             <div>If there are abandoned shafts or drill holes, fill in the following information.</div>
             <div class="md-form m-0">
               <app-input [label]="'Number'" (changed)="onNumberChange($event);"></app-input>
@@ -77,23 +77,23 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="oil1" name="oil" value="Yes" [(ngModel)]="oosa.gas.oil">
+              <input type="radio" class="form-check-input" id="oil1" name="oil" value="Yes" [(ngModel)]="surveyService.oosa.gas.oil">
               <label class="form-check-label" for="oil1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="oil2" name="oil" value="No"  [(ngModel)]="oosa.gas.oil" (click)="oosa.gas.oil_desc = ''">
+              <input type="radio" class="form-check-input" id="oil2" name="oil" value="No"  [(ngModel)]="surveyService.oosa.gas.oil" (click)="surveyService.oosa.gas.oil_desc = ''">
               <label class="form-check-label" for="oil2">No</label>
             </div>
             <!-- Material inline 3 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="oil3" name="oil" value="Not Known"  [(ngModel)]="oosa.gas.oil" (click)="oosa.gas.oil_desc = ''">
+              <input type="radio" class="form-check-input" id="oil3" name="oil" value="Not Known"  [(ngModel)]="surveyService.oosa.gas.oil" (click)="surveyService.oosa.gas.oil_desc = ''">
               <label class="form-check-label" for="oil3">Not Known</label>
             </div>
           </div>
-          <div *ngIf="oosa.gas.oil === 'Yes'">
+          <div *ngIf="surveyService.oosa.gas.oil === 'Yes'">
             <div class="md-form m-0">
-              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="oosa.gas.oil_desc">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="surveyService.oosa.gas.oil_desc">
             </div>
           </div>
         </div>
@@ -104,23 +104,23 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="pipelines1" name="pipelines" value="Yes" [(ngModel)]="oosa.gas.pipelines">
+              <input type="radio" class="form-check-input" id="pipelines1" name="pipelines" value="Yes" [(ngModel)]="surveyService.oosa.gas.pipelines">
               <label class="form-check-label" for="pipelines1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="pipelines2" name="pipelines" value="No"  [(ngModel)]="oosa.gas.pipelines" (click)="oosa.gas.pipelines_desc = ''">
+              <input type="radio" class="form-check-input" id="pipelines2" name="pipelines" value="No"  [(ngModel)]="surveyService.oosa.gas.pipelines" (click)="surveyService.oosa.gas.pipelines_desc = ''">
               <label class="form-check-label" for="pipelines2">No</label>
             </div>
             <!-- Material inline 3 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="pipelines3" name="pipelines" value="Not Known"  [(ngModel)]="oosa.gas.pipelines" (click)="oosa.gas.pipelines_desc = ''">
+              <input type="radio" class="form-check-input" id="pipelines3" name="pipelines" value="Not Known"  [(ngModel)]="surveyService.oosa.gas.pipelines" (click)="surveyService.oosa.gas.pipelines_desc = ''">
               <label class="form-check-label" for="pipelines3">Not Known</label>
             </div>
           </div>
-          <div *ngIf="oosa.gas.pipelines === 'Yes'">
+          <div *ngIf="surveyService.oosa.gas.pipelines === 'Yes'">
             <div class="md-form m-0">
-              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="oosa.gas.pipelines_desc">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="surveyService.oosa.gas.pipelines_desc">
             </div>
           </div>
         </div>

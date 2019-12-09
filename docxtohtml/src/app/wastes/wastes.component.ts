@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {WASTE} from '../_model/WASTE';
+import {SurveyService} from '../_service/survey.service';
 
 @Component({
   selector: 'app-wastes',
@@ -9,7 +10,6 @@ import {WASTE} from '../_model/WASTE';
 export class WastesComponent implements OnInit {
   step: number;
   @Input() last: boolean;
-  waste: WASTE;
 
   airEmissionTypes: string[];
   treatTypes: string[];
@@ -18,11 +18,11 @@ export class WastesComponent implements OnInit {
   @Output() done = new EventEmitter<WASTE>();
 
 
-  constructor() { }
+  constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
     this.step = 0;
-    this.waste = {
+    this.surveyService.waste = {
       generate: false,
       emission: {
         airEmission: '',
@@ -79,10 +79,10 @@ export class WastesComponent implements OnInit {
   }
 
   handleWaste() {
-    this.waste.generate = !this.waste.generate;
-    if (!this.waste.generate) {
+    this.surveyService.waste.generate = !this.surveyService.waste.generate;
+    if (!this.surveyService.waste.generate) {
       this.step = 0;
-      this.waste = {
+      this.surveyService.waste = {
         generate: false,
         emission: {
           airEmission: '',
@@ -127,91 +127,91 @@ export class WastesComponent implements OnInit {
   }
 
   pickAirEmissionType(p: string) {
-    const index = this.waste.emission.airEmissionTypes.indexOf(p);
+    const index = this.surveyService.waste.emission.airEmissionTypes.indexOf(p);
     if (index > -1) {
-      this.waste.emission.airEmissionTypes.splice(index, 1);
+      this.surveyService.waste.emission.airEmissionTypes.splice(index, 1);
     } else {
-      this.waste.emission.airEmissionTypes.push(p);
+      this.surveyService.waste.emission.airEmissionTypes.push(p);
     }
-    if (this.waste.emission.airEmissionTypes.indexOf('Vent stacks (on roof)') === -1) {
-      this.waste.emission.explainVS = '';
+    if (this.surveyService.waste.emission.airEmissionTypes.indexOf('Vent stacks (on roof)') === -1) {
+      this.surveyService.waste.emission.explainVS = '';
     }
-    if (this.waste.emission.airEmissionTypes.indexOf('Odors') === -1) {
-      this.waste.emission.odors_desc = '';
+    if (this.surveyService.waste.emission.airEmissionTypes.indexOf('Odors') === -1) {
+      this.surveyService.waste.emission.odors_desc = '';
     }
   }
 
   pickMaterial(p: string) {
-    const index = this.waste.solid.materials.indexOf(p);
+    const index = this.surveyService.waste.solid.materials.indexOf(p);
     if (index > -1) {
-      this.waste.solid.materials.splice(index, 1);
+      this.surveyService.waste.solid.materials.splice(index, 1);
     } else {
-      this.waste.solid.materials.push(p);
+      this.surveyService.waste.solid.materials.push(p);
     }
-    if (this.waste.solid.materials.indexOf('Other') === -1) {
-      this.waste.solid.otherMaterial = '';
+    if (this.surveyService.waste.solid.materials.indexOf('Other') === -1) {
+      this.surveyService.waste.solid.otherMaterial = '';
     }
   }
 
   pickNatureWaste(p: string) {
-    const index = this.waste.chemical.natureWastes.indexOf(p);
+    const index = this.surveyService.waste.chemical.natureWastes.indexOf(p);
     if (index > -1) {
-      this.waste.chemical.natureWastes.splice(index, 1);
+      this.surveyService.waste.chemical.natureWastes.splice(index, 1);
     } else {
-      this.waste.chemical.natureWastes.push(p);
+      this.surveyService.waste.chemical.natureWastes.push(p);
     }
-    if (this.waste.chemical.natureWastes.indexOf('Other') === -1) {
-      this.waste.solid.otherMaterial = '';
+    if (this.surveyService.waste.chemical.natureWastes.indexOf('Other') === -1) {
+      this.surveyService.waste.solid.otherMaterial = '';
     }
   }
 
   pickTreatType(p: string) {
-    const index = this.waste.liquid.treatTypes.indexOf(p);
+    const index = this.surveyService.waste.liquid.treatTypes.indexOf(p);
     if (index > -1) {
-      this.waste.liquid.treatTypes.splice(index, 1);
+      this.surveyService.waste.liquid.treatTypes.splice(index, 1);
     } else {
-      this.waste.liquid.treatTypes.push(p);
+      this.surveyService.waste.liquid.treatTypes.push(p);
     }
   }
 
   aveQuaWaste(val: string) {
-    this.waste.solid.avgQuaWaste = val;
+    this.surveyService.waste.solid.avgQuaWaste = val;
   }
 
   disposeWaste(val: string) {
-    this.waste.solid.disposed = val;
+    this.surveyService.waste.solid.disposed = val;
   }
   disposeFuelWaste(val: string) {
-    this.waste.chemical.disposed = val;
+    this.surveyService.waste.chemical.disposed = val;
   }
 
   descTreatmentSystem(val: string) {
-    this.waste.liquid.treatment_desc = val;
+    this.surveyService.waste.liquid.treatment_desc = val;
   }
 
   handleSwitch(obj: string, prop: string) {
-    this.waste[obj][prop] = !this.waste[obj][prop];
+    this.surveyService.waste[obj][prop] = !this.surveyService.waste[obj][prop];
     switch (obj) {
       case 'emission':
         if (prop === 'treatment') {
-          if (!this.waste[obj][prop]) {
-            this.waste.emission.treatment_desc = '';
+          if (!this.surveyService.waste[obj][prop]) {
+            this.surveyService.waste.emission.treatment_desc = '';
           }
         }
         break;
       case 'liquid':
         if (prop === 'wotds') {
-          if (!this.waste[obj][prop]) {
-            this.waste.liquid.whereToTreat = '';
-            this.waste.liquid.treatTypes = [];
-            this.waste.liquid.treatment_desc = '';
+          if (!this.surveyService.waste[obj][prop]) {
+            this.surveyService.waste.liquid.whereToTreat = '';
+            this.surveyService.waste.liquid.treatTypes = [];
+            this.surveyService.waste.liquid.treatment_desc = '';
           }
         }
         break;
       case 'solid':
         if (prop === 'uncontrolled') {
-          if (!this.waste[obj][prop]) {
-            this.waste.solid.uncontrolled_desc = '';
+          if (!this.surveyService.waste[obj][prop]) {
+            this.surveyService.waste.solid.uncontrolled_desc = '';
           }
         }
         break;
@@ -221,6 +221,6 @@ export class WastesComponent implements OnInit {
   }
 
   handover() {
-    this.done.emit(this.waste);
+    this.done.emit(this.surveyService.waste);
   }
 }

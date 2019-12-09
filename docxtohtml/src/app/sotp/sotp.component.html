@@ -15,7 +15,7 @@
            <div class="flex-1"><strong>Basement</strong></div>
            <div class="switch">
              <label>
-               <input type="checkbox" [checked]="sotp.bi.basement" (click)="handleSwitch('bi', 'basement')" />
+               <input type="checkbox" [checked]="surveyService.sotp.bi.basement" (click)="handleSwitch('bi', 'basement')" />
                <span class="lever"></span>
              </label>
            </div>
@@ -26,16 +26,16 @@
           <div class="flex-1"><strong>Additions/Renovations</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox" [checked]="sotp.bi.renovations" (click)="handleSwitch('bi', 'renovations')" />
+              <input type="checkbox" [checked]="surveyService.sotp.bi.renovations" (click)="handleSwitch('bi', 'renovations')" />
               <span class="lever"></span>
             </label>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="sotp.bi.renovations">
+      <div class="row" *ngIf="surveyService.sotp.bi.renovations">
         <div class="d-flex flex-column md-form m-0 flex-1">
           <div class="flex-1">If yes, please describe</div>
-          <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="sotp.bi.renovations_desc" >
+          <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="surveyService.sotp.bi.renovations_desc" >
         </div>
       </div>
       <div class="row">
@@ -43,7 +43,7 @@
           <div class="flex-1"><strong>Is there any staining on any of the floors, walls, ceilings, sumps or drains of any of the buildings?</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox" [checked]="sotp.bi.staining" (click)="handleSwitch('bi', 'staining')" />
+              <input type="checkbox" [checked]="surveyService.sotp.bi.staining" (click)="handleSwitch('bi', 'staining')" />
               <span class="lever"></span>
             </label>
           </div>
@@ -54,18 +54,18 @@
           <div class="flex-1"><strong>Is there heating?</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox" [checked]="sotp.bi.heating" (click)="handleSwitch('bi', 'heating')" />
+              <input type="checkbox" [checked]="surveyService.sotp.bi.heating" (click)="handleSwitch('bi', 'heating')" />
               <span class="lever"></span>
             </label>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="sotp.bi.heating">
+      <div class="row" *ngIf="surveyService.sotp.bi.heating">
         <div class="d-flex flex-column flex-1">
           <div class="flex-1">If yes, check the type:</div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of heatingTypes; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'heating_' + i" [checked]="sotp.bi.heatingTypes.indexOf(ops) > -1" (click)="pickHeatingType(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'heating_' + i" [checked]="surveyService.sotp.bi.heatingTypes.indexOf(ops) > -1" (click)="pickHeatingType(ops)">
               <label class="form-check-label" [for]="'heating_' + i">{{ops}}</label>
             </div>
           </div>
@@ -78,7 +78,7 @@
           <div class="flex-1"><strong>Is there a cooling system?</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox" [checked]="sotp.bi.cooling" (click)="handleSwitch('bi', 'cooling')" />
+              <input type="checkbox" [checked]="surveyService.sotp.bi.cooling" (click)="handleSwitch('bi', 'cooling')" />
               <span class="lever"></span>
             </label>
           </div>
@@ -97,28 +97,28 @@
         <div class="d-flex flex-row">
           <!-- Material inline 1 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="m1" name="asbestos_property" value="Yes" [(ngModel)]="sotp.asbestos.hasAsbestos">
+            <input type="radio" class="form-check-input" id="m1" name="asbestos_property" value="Yes" [(ngModel)]="surveyService.sotp.asbestos.hasAsbestos">
             <label class="form-check-label" for="m1">Yes</label>
           </div>
           <!-- Material inline 2 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="m2" name="asbestos_property" value="No" [(ngModel)]="sotp.asbestos.hasAsbestos" (click)="clearAsbestos()">
+            <input type="radio" class="form-check-input" id="m2" name="asbestos_property" value="No" [(ngModel)]="surveyService.sotp.asbestos.hasAsbestos" (click)="clearAsbestos()">
             <label class="form-check-label" for="m2">No</label>
           </div>
           <!-- Material inline 3 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="m3" name="asbestos_property" value="Not Known" [(ngModel)]="sotp.asbestos.hasAsbestos" (click)="clearAsbestos()">
+            <input type="radio" class="form-check-input" id="m3" name="asbestos_property" value="Not Known" [(ngModel)]="surveyService.sotp.asbestos.hasAsbestos" (click)="clearAsbestos()">
             <label class="form-check-label" for="m3">Not Known</label>
           </div>
         </div>
-        <div class="d-flex flex-column flex-1 mt-2" *ngIf="sotp.asbestos.hasAsbestos === 'Yes'">
+        <div class="d-flex flex-column flex-1 mt-2" *ngIf="surveyService.sotp.asbestos.hasAsbestos === 'Yes'">
           <div class="flex-1">If yes, check those that apply:</div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of asbestosProperties; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'asbestosProperties_' + i"  [checked]="sotp.asbestos.properties.indexOf(ops) > -1" (click)="pickProperties(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'asbestosProperties_' + i"  [checked]="surveyService.sotp.asbestos.properties.indexOf(ops) > -1" (click)="pickProperties(ops)">
               <label class="form-check-label" [for]="'asbestosProperties_' + i">{{ops}}</label>
             </div>
-            <div class="md-form m-0" *ngIf="sotp.asbestos.properties.indexOf('Other') > -1">
+            <div class="md-form m-0" *ngIf="surveyService.sotp.asbestos.properties.indexOf('Other') > -1">
               <input type="text" class="form-control" [appFocus]="true">
             </div>
           </div>
@@ -130,17 +130,17 @@
         <div class="d-flex flex-row">
           <!-- Material inline 1 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="uff1" name="UFFI" value="Yes" [(ngModel)]="sotp.asbestos.uffi">
+            <input type="radio" class="form-check-input" id="uff1" name="UFFI" value="Yes" [(ngModel)]="surveyService.sotp.asbestos.uffi">
             <label class="form-check-label" for="uff1">Yes</label>
           </div>
           <!-- Material inline 2 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="uff2" name="UFFI" value="No" [(ngModel)]="sotp.asbestos.uffi">
+            <input type="radio" class="form-check-input" id="uff2" name="UFFI" value="No" [(ngModel)]="surveyService.sotp.asbestos.uffi">
             <label class="form-check-label" for="uff2">No</label>
           </div>
           <!-- Material inline 3 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="uff3" name="UFFI" value="Not Known" [(ngModel)]="sotp.asbestos.uffi">
+            <input type="radio" class="form-check-input" id="uff3" name="UFFI" value="Not Known" [(ngModel)]="surveyService.sotp.asbestos.uffi">
             <label class="form-check-label" for="uff3">Not Known</label>
           </div>
         </div>
@@ -159,26 +159,26 @@
         <div class="d-flex flex-row">
           <!-- Material inline 1 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="lead1" name="lead" value="Yes" [(ngModel)]="sotp.lead.hasLeadPaint">
+            <input type="radio" class="form-check-input" id="lead1" name="lead" value="Yes" [(ngModel)]="surveyService.sotp.lead.hasLeadPaint">
             <label class="form-check-label" for="lead1">Yes</label>
           </div>
           <!-- Material inline 2 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="lead2" name="lead" value="No" [(ngModel)]="sotp.lead.hasLeadPaint" (click)="clearLead()">
+            <input type="radio" class="form-check-input" id="lead2" name="lead" value="No" [(ngModel)]="surveyService.sotp.lead.hasLeadPaint" (click)="clearLead()">
             <label class="form-check-label" for="lead2">No</label>
           </div>
           <!-- Material inline 3 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="lead3" name="lead" value="Not Known" [(ngModel)]="sotp.lead.hasLeadPaint" (click)="clearLead()">
+            <input type="radio" class="form-check-input" id="lead3" name="lead" value="Not Known" [(ngModel)]="surveyService.sotp.lead.hasLeadPaint" (click)="clearLead()">
             <label class="form-check-label" for="lead3">Not Known</label>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="sotp.lead.hasLeadPaint === 'Yes'">
+      <div class="row" *ngIf="surveyService.sotp.lead.hasLeadPaint === 'Yes'">
         <div class="d-flex flex-column flex-1">
           <div>If yes, please describe</div>
           <div class="md-form m-0">
-            <input type="text" class="form-control" [appFocus]="true">
+            <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="surveyService.sotp.lead.desc">
           </div>
         </div>
       </div>
@@ -196,22 +196,22 @@
         <div class="d-flex flex-row">
           <!-- Material inline 1 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="pcbs1" name="pcb" value="Yes" [(ngModel)]="sotp.pcb.pcbs">
+            <input type="radio" class="form-check-input" id="pcbs1" name="pcb" value="Yes" [(ngModel)]="surveyService.sotp.pcb.pcbs">
             <label class="form-check-label" for="pcbs1">Yes</label>
           </div>
           <!-- Material inline 2 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="pcbs2" name="pcb" value="No" [(ngModel)]="sotp.pcb.pcbs" (click)="clearPCBs()">
+            <input type="radio" class="form-check-input" id="pcbs2" name="pcb" value="No" [(ngModel)]="surveyService.sotp.pcb.pcbs" (click)="clearPCBs()">
             <label class="form-check-label" for="pcbs2">No</label>
           </div>
           <!-- Material inline 3 -->
           <div class="form-check form-check-inline">
-            <input type="radio" class="form-check-input" id="pcbs3" name="pcb" value="Not Known" [(ngModel)]="sotp.pcb.pcbs" (click)="clearPCBs()">
+            <input type="radio" class="form-check-input" id="pcbs3" name="pcb" value="Not Known" [(ngModel)]="surveyService.sotp.pcb.pcbs" (click)="clearPCBs()">
             <label class="form-check-label" for="pcbs3">Not Known</label>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="sotp.pcb.pcbs === 'Yes'">
+      <div class="row" *ngIf="surveyService.sotp.pcb.pcbs === 'Yes'">
         <div class="d-flex flex-column flex-1">
           <div class="flex-1"><strong>If yes, not the presence of the following:</strong></div>
           <div class="d-flex flex-column flex-1">
@@ -219,32 +219,32 @@
               <div class="flex-1"><strong>Transformers</strong></div>
               <div class="switch">
                 <label>
-                  <input type="checkbox" [checked]="sotp.pcb.transforms" (click)="handleSwitch('pcb', 'transforms')" />
+                  <input type="checkbox" [checked]="surveyService.sotp.pcb.transforms" (click)="handleSwitch('pcb', 'transforms')" />
                   <span class="lever"></span>
                 </label>
               </div>
             </div>
-            <div class="d-flex flex-column flex-1" *ngIf="sotp.pcb.transforms">
+            <div class="d-flex flex-column flex-1" *ngIf="surveyService.sotp.pcb.transforms">
               <div>If yes, which type:</div>
               <div class="d-flex flex-column">
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" id="tt1" name="tt" value="Pole top" [(ngModel)]="sotp.pcb.transformType" (click)="clearOtherTransform()">
+                  <input type="radio" class="form-check-input" id="tt1" name="tt" value="Pole top" [(ngModel)]="surveyService.sotp.pcb.transformType" (click)="clearOtherTransform()">
                   <label class="form-check-label" for="tt1">Pole top</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" id="tt2" name="tt" value="Ground" [(ngModel)]="sotp.pcb.transformType" (click)="clearOtherTransform()">
+                  <input type="radio" class="form-check-input" id="tt2" name="tt" value="Ground" [(ngModel)]="surveyService.sotp.pcb.transformType" (click)="clearOtherTransform()">
                   <label class="form-check-label" for="tt2">Ground</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" id="tt3" name="tt" value="Wall-mounted" [(ngModel)]="sotp.pcb.transformType" (click)="clearOtherTransform()">
+                  <input type="radio" class="form-check-input" id="tt3" name="tt" value="Wall-mounted" [(ngModel)]="surveyService.sotp.pcb.transformType" (click)="clearOtherTransform()">
                   <label class="form-check-label" for="tt3">Wall-mounted</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" id="tt4" name="tt" value="Other" [(ngModel)]="sotp.pcb.transformType">
+                  <input type="radio" class="form-check-input" id="tt4" name="tt" value="Other" [(ngModel)]="surveyService.sotp.pcb.transformType">
                   <label class="form-check-label" for="tt4">Other</label>
                 </div>
-                <div class="md-form m-0" *ngIf="sotp.pcb.transformType === 'Other'">
-                  <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="sotp.pcb.otherTransform">
+                <div class="md-form m-0" *ngIf="surveyService.sotp.pcb.transformType === 'Other'">
+                  <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="surveyService.sotp.pcb.otherTransform">
                 </div>
               </div>
             </div>
@@ -253,7 +253,7 @@
             <div class="flex-1"><strong>Are there sampling results?</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="sotp.pcb.sampling" (click)="handleSwitch('pcb', 'sampling')" />
+                <input type="checkbox" [checked]="surveyService.sotp.pcb.sampling" (click)="handleSwitch('pcb', 'sampling')" />
                 <span class="lever"></span>
               </label>
             </div>
@@ -262,20 +262,20 @@
             <div class="flex-1"><strong>Fluorescent light fixtures(pre 1980)</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="sotp.pcb.flf" (click)="handleSwitch('pcb', 'flf')"  />
+                <input type="checkbox" [checked]="surveyService.sotp.pcb.flf" (click)="handleSwitch('pcb', 'flf')"  />
                 <span class="lever"></span>
               </label>
             </div>
           </div>
-          <div class="d-flex flex-column flex-1" *ngIf="sotp.pcb.flf">
+          <div class="d-flex flex-column flex-1" *ngIf="surveyService.sotp.pcb.flf">
             <div>If yes, how many:</div>
             <div class="d-flex flex-row">
               <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" id="flf1" name="flf" value="1-10" [(ngModel)]="sotp.pcb.flfAmount">
+                <input type="radio" class="form-check-input" id="flf1" name="flf" value="1-10" [(ngModel)]="surveyService.sotp.pcb.flfAmount">
                 <label class="form-check-label" for="flf1">1-10</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" id="flf2" name="flf" value="More than 10" [(ngModel)]="sotp.pcb.flfAmount" >
+                <input type="radio" class="form-check-input" id="flf2" name="flf" value="More than 10" [(ngModel)]="surveyService.sotp.pcb.flfAmount" >
                 <label class="form-check-label" for="flf2">More than 10</label>
               </div>
             </div>
@@ -284,35 +284,35 @@
             <div class="flex-1"><strong>Other old electrical equipment</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="sotp.pcb.ooee" (click)="handleSwitch('pcb', 'ooee')"  />
+                <input type="checkbox" [checked]="surveyService.sotp.pcb.ooee" (click)="handleSwitch('pcb', 'ooee')"  />
                 <span class="lever"></span>
               </label>
             </div>
           </div>
-          <div class="d-flex flex-column flex-1" *ngIf="sotp.pcb.ooee">
+          <div class="d-flex flex-column flex-1" *ngIf="surveyService.sotp.pcb.ooee">
             <div>If yes, describe</div>
             <div class="md-form m-0">
-              <input type="text" class="form-control" [(ngModel)]="sotp.pcb.ooee_desc" [appFocus]="true" />
+              <input type="text" class="form-control" [(ngModel)]="surveyService.sotp.pcb.ooee_desc" [appFocus]="true" />
             </div>
           </div>
           <div class="d-flex flex-1 align-items-center">
             <div class="flex-1"><strong>High intensity lamps</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="sotp.pcb.lamps" (click)="handleSwitch('pcb', 'lamps')"  />
+                <input type="checkbox" [checked]="surveyService.sotp.pcb.lamps" (click)="handleSwitch('pcb', 'lamps')"  />
                 <span class="lever"></span>
               </label>
             </div>
           </div>
-          <div class="d-flex flex-column flex-1" *ngIf="sotp.pcb.lamps">
+          <div class="d-flex flex-column flex-1" *ngIf="surveyService.sotp.pcb.lamps">
             <div>If yes, how many:</div>
             <div class="d-flex flex-row">
               <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" id="lamps1" name="lamps2" value="1-10" [(ngModel)]="sotp.pcb.lampsAmount">
+                <input type="radio" class="form-check-input" id="lamps1" name="lamps2" value="1-10" [(ngModel)]="surveyService.sotp.pcb.lampsAmount">
                 <label class="form-check-label" for="lamps1">1-10</label>
               </div>
               <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" id="lamps2" name="lamps2" value="More than 10" [(ngModel)]="sotp.pcb.lampsAmount" >
+                <input type="radio" class="form-check-input" id="lamps2" name="lamps2" value="More than 10" [(ngModel)]="surveyService.sotp.pcb.lampsAmount" >
                 <label class="form-check-label" for="lamps2">More than 10</label>
               </div>
             </div>
@@ -321,15 +321,15 @@
             <div class="flex-1"><strong>PCB storage sites</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="sotp.pcb.pss" (click)="handleSwitch('pcb', 'pss')"  />
+                <input type="checkbox" [checked]="surveyService.sotp.pcb.pss" (click)="handleSwitch('pcb', 'pss')"  />
                 <span class="lever"></span>
               </label>
             </div>
           </div>
-          <div class="d-flex flex-column flex-1" *ngIf="sotp.pcb.pss">
+          <div class="d-flex flex-column flex-1" *ngIf="surveyService.sotp.pcb.pss">
             <div>If yes, describe</div>
             <div class="md-form m-0">
-              <input type="text" class="form-control" [(ngModel)]="sotp.pcb.pss_desc" [appFocus]="true" />
+              <input type="text" class="form-control" [(ngModel)]="surveyService.sotp.pcb.pss_desc" [appFocus]="true" />
             </div>
           </div>
         </div>

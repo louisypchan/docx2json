@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SS} from '../_model/SS';
+import {SurveyService} from '../_service/survey.service';
 
 @Component({
   selector: 'app-ss',
@@ -12,15 +13,14 @@ export class SsComponent implements OnInit {
   ppsOptions: string[];
   indicates: string[];
   @Input() last: boolean;
-  ss: SS;
   @Output() done = new EventEmitter<SS>();
 
 
-  constructor() { }
+  constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
     this.step = 0;
-    this.ss = {
+    this.surveyService.ss = {
       pps: {
         options: [],
         otherOption: ''
@@ -54,35 +54,35 @@ export class SsComponent implements OnInit {
   }
 
   pickPPS(p: string) {
-    const index = this.ss.pps.options.indexOf(p);
+    const index = this.surveyService.ss.pps.options.indexOf(p);
     if (index > -1) {
-      this.ss.pps.options.splice(index, 1);
+      this.surveyService.ss.pps.options.splice(index, 1);
     } else {
-      this.ss.pps.options.push(p);
+      this.surveyService.ss.pps.options.push(p);
     }
   }
 
   pickIndicate(p: string) {
-    const index = this.ss.spetic.iosf.indexOf(p);
+    const index = this.surveyService.ss.spetic.iosf.indexOf(p);
     if (index > -1) {
-      this.ss.spetic.iosf.splice(index, 1);
+      this.surveyService.ss.spetic.iosf.splice(index, 1);
     } else {
-      this.ss.spetic.iosf.push(p);
+      this.surveyService.ss.spetic.iosf.push(p);
     }
-    if (this.ss.spetic.iosf.indexOf('Other (please specify)') === -1) {
-      this.ss.spetic.otherIOSF = '';
+    if (this.surveyService.ss.spetic.iosf.indexOf('Other (please specify)') === -1) {
+      this.surveyService.ss.spetic.otherIOSF = '';
     }
   }
 
   clearWaterQualityDesc() {
-    this.ss.well.waterQuality_desc = '';
+    this.surveyService.ss.well.waterQuality_desc = '';
   }
 
   clearSpeticDesc() {
-    this.ss.spetic.speticProblem_desc = '';
+    this.surveyService.ss.spetic.speticProblem_desc = '';
   }
 
   handover() {
-    this.done.emit(this.ss);
+    this.done.emit(this.surveyService.ss);
   }
 }

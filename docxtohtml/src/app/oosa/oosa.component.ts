@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OOSA} from '../_model/OOSA';
+import {SurveyService} from '../_service/survey.service';
 
 @Component({
   selector: 'app-oosa',
@@ -9,14 +10,13 @@ import {OOSA} from '../_model/OOSA';
 export class OosaComponent implements OnInit {
   step: number;
   @Input() last: boolean;
-  oosa: OOSA;
   @Output() done = new EventEmitter<OOSA>();
 
-  constructor() { }
+  constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
     this.step = 0;
-    this.oosa = {
+    this.surveyService.oosa = {
       gas: {
         oil: '',
         oil_desc: '',
@@ -43,20 +43,20 @@ export class OosaComponent implements OnInit {
   }
 
   clearAbandonActivity() {
-    this.oosa.mine.abandonedActivity_desc = '';
-    this.oosa.mine.number = '';
-    this.oosa.mine.type = '';
+    this.surveyService.oosa.mine.abandonedActivity_desc = '';
+    this.surveyService.oosa.mine.number = '';
+    this.surveyService.oosa.mine.type = '';
   }
 
   onNumberChange(val: string) {
-    this.oosa.mine.number = val;
+    this.surveyService.oosa.mine.number = val;
   }
 
   onTypeChange(val: string) {
-    this.oosa.mine.type = val;
+    this.surveyService.oosa.mine.type = val;
   }
 
   handover() {
-    this.done.emit(this.oosa);
+    this.done.emit(this.surveyService.oosa);
   }
 }

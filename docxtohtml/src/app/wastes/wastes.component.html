@@ -2,15 +2,15 @@
   <div class="flex-1"><strong>Are wastes generated at this site</strong></div>
   <div class="switch">
     <label>
-      <input type="checkbox" [checked]="waste.generate" (click)="handleWaste()" />
+      <input type="checkbox" [checked]="surveyService.waste.generate" (click)="handleWaste()" />
       <span class="lever"></span>
     </label>
   </div>
 </div>
-<div class="pl-3 pr-3" *ngIf="!waste.generate">
+<div class="pl-3 pr-3" *ngIf="!surveyService.waste.generate">
   <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button" (click)="handover()">{{last ? 'Submit': 'Next'}}</button>
 </div>
-<ul class="stepper parallel" *ngIf="waste.generate">
+<ul class="stepper parallel" *ngIf="surveyService.waste.generate">
   <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
     <div class="step-title waves-effect waves-dark" (click)="step = 0">Air Emissions</div>
     <div class="step-new-content" [class.show]="step === 0">
@@ -20,38 +20,38 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="airEmission1" name="airEmission" value="Yes" [(ngModel)]="waste.emission.airEmission">
+              <input type="radio" class="form-check-input" id="airEmission1" name="airEmission" value="Yes" [(ngModel)]="surveyService.waste.emission.airEmission">
               <label class="form-check-label" for="airEmission1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="airEmission2" name="airEmission" value="No"  [(ngModel)]="waste.emission.airEmission">
+              <input type="radio" class="form-check-input" id="airEmission2" name="airEmission" value="No"  [(ngModel)]="surveyService.waste.emission.airEmission">
               <label class="form-check-label" for="airEmission2">No</label>
             </div>
             <!-- Material inline 3 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="airEmission3" name="airEmission" value="Not Known"  [(ngModel)]="waste.emission.airEmission">
+              <input type="radio" class="form-check-input" id="airEmission3" name="airEmission" value="Not Known"  [(ngModel)]="surveyService.waste.emission.airEmission">
               <label class="form-check-label" for="airEmission3">Not Known</label>
             </div>
           </div>
-          <div class="d-flex flex-column flex-1" *ngIf="waste.emission.airEmission === 'Yes'">
+          <div class="d-flex flex-column flex-1" *ngIf="surveyService.waste.emission.airEmission === 'Yes'">
             <div>If yes, check all that apply:</div>
             <div class="d-flex flex-column">
               <div class="form-check" *ngFor="let ops of airEmissionTypes; index as i;">
-                <input type="checkbox" class="form-check-input" [id]="'airEmissionTypes_' + i" [checked]="waste.emission.airEmissionTypes.indexOf(ops) > -1" (click)="pickAirEmissionType(ops)">
+                <input type="checkbox" class="form-check-input" [id]="'airEmissionTypes_' + i" [checked]="surveyService.waste.emission.airEmissionTypes.indexOf(ops) > -1" (click)="pickAirEmissionType(ops)">
                 <label class="form-check-label" [for]="'airEmissionTypes_' + i">{{ops}}</label>
               </div>
             </div>
-            <div class="d-flex flex-column" *ngIf="waste.emission.airEmissionTypes.indexOf('Vent stacks (on roof)') > -1">
+            <div class="d-flex flex-column" *ngIf="surveyService.waste.emission.airEmissionTypes.indexOf('Vent stacks (on roof)') > -1">
               <div>If stacks or vents are present, explain, giving location, number and size:</div>
               <div class="md-form m-0">
-                <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="waste.emission.explainVS">
+                <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="surveyService.waste.emission.explainVS">
               </div>
             </div>
-            <div class="d-flex flex-column" *ngIf="waste.emission.airEmissionTypes.indexOf('Odors') > -1">
+            <div class="d-flex flex-column" *ngIf="surveyService.waste.emission.airEmissionTypes.indexOf('Odors') > -1">
               <div>If odors are present, describe:</div>
               <div class="md-form m-0">
-                <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="waste.emission.odors_desc">
+                <input type="text" class="form-control" [appFocus]="true" [(ngModel)]="surveyService.waste.emission.odors_desc">
               </div>
             </div>
           </div>
@@ -63,17 +63,17 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="monitoring1" name="monitoring" value="Yes" [(ngModel)]="waste.emission.monitoring">
+              <input type="radio" class="form-check-input" id="monitoring1" name="monitoring" value="Yes" [(ngModel)]="surveyService.waste.emission.monitoring">
               <label class="form-check-label" for="monitoring1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="monitoring2" name="monitoring" value="No"  [(ngModel)]="waste.emission.monitoring">
+              <input type="radio" class="form-check-input" id="monitoring2" name="monitoring" value="No"  [(ngModel)]="surveyService.waste.emission.monitoring">
               <label class="form-check-label" for="monitoring2">No</label>
             </div>
             <!-- Material inline 3 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="monitoring3" name="monitoring" value="Not Known"  [(ngModel)]="waste.emission.monitoring">
+              <input type="radio" class="form-check-input" id="monitoring3" name="monitoring" value="Not Known"  [(ngModel)]="surveyService.waste.emission.monitoring">
               <label class="form-check-label" for="monitoring3">Not Known</label>
             </div>
           </div>
@@ -85,15 +85,15 @@
             <div class="flex-1"><strong>Is there any treatment of air emissions prior to discharge?</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="waste.emission.treatment" (click)="handleSwitch('emission', 'treatment')"  />
+                <input type="checkbox" [checked]="surveyService.waste.emission.treatment" (click)="handleSwitch('emission', 'treatment')"  />
                 <span class="lever"></span>
               </label>
             </div>
           </div>
-          <div class="d-flex flex-1" *ngIf="waste.emission.treatment" style="align-items: baseline;">
+          <div class="d-flex flex-1" *ngIf="surveyService.waste.emission.treatment" style="align-items: baseline;">
             <div>If yes, describe</div>
             <div class="md-form m-0 ml-2 flex-1">
-              <input type="text" class="form-control" [(ngModel)]="waste.emission.treatment_desc" [appFocus]="true" />
+              <input type="text" class="form-control" [(ngModel)]="surveyService.waste.emission.treatment_desc" [appFocus]="true" />
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@
             <div class="flex-1"><strong>Is there a Certificate of Approval for air emissions?</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="waste.emission.certificate" (click)="handleSwitch('emission', 'certificate')"  />
+                <input type="checkbox" [checked]="surveyService.waste.emission.certificate" (click)="handleSwitch('emission', 'certificate')"  />
                 <span class="lever"></span>
               </label>
             </div>
@@ -117,7 +117,7 @@
             <div class="flex-1"><strong>Are there any indications of air emissions from adjacent properties?</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="waste.emission.indications" (click)="handleSwitch('emission', 'indications')"  />
+                <input type="checkbox" [checked]="surveyService.waste.emission.indications" (click)="handleSwitch('emission', 'indications')"  />
                 <span class="lever"></span>
               </label>
             </div>
@@ -138,32 +138,32 @@
             <div class="flex-1"><strong>Are liquid wastes other than domestic sewage generated at this site?</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="waste.liquid.wotds" (click)="handleSwitch('liquid', 'wotds')"  />
+                <input type="checkbox" [checked]="surveyService.waste.liquid.wotds" (click)="handleSwitch('liquid', 'wotds')"  />
                 <span class="lever"></span>
               </label>
             </div>
           </div>
-          <div class="d-flex flex-column flex-1" *ngIf="waste.liquid.wotds">
+          <div class="d-flex flex-column flex-1" *ngIf="surveyService.waste.liquid.wotds">
             <div>If yes, where is the waste treated:</div>
             <div class="d-flex flex-row">
               <!-- Material inline 1 -->
               <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" id="whereToTreat1" name="whereToTreat" value="Onsite" [(ngModel)]="waste.liquid.whereToTreat">
+                <input type="radio" class="form-check-input" id="whereToTreat1" name="whereToTreat" value="Onsite" [(ngModel)]="surveyService.waste.liquid.whereToTreat">
                 <label class="form-check-label" for="whereToTreat1">Onsite</label>
               </div>
               <!-- Material inline 2 -->
               <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" id="whereToTreat2" name="whereToTreat" value="Offsite"  [(ngModel)]="waste.liquid.whereToTreat">
+                <input type="radio" class="form-check-input" id="whereToTreat2" name="whereToTreat" value="Offsite"  [(ngModel)]="surveyService.waste.liquid.whereToTreat">
                 <label class="form-check-label" for="whereToTreat2">Offsite</label>
               </div>
               <!-- Material inline 3 -->
               <div class="form-check form-check-inline">
-                <input type="radio" class="form-check-input" id="whereToTreat3" name="whereToTreat" value="Both"  [(ngModel)]="waste.liquid.whereToTreat">
+                <input type="radio" class="form-check-input" id="whereToTreat3" name="whereToTreat" value="Both"  [(ngModel)]="surveyService.waste.liquid.whereToTreat">
                 <label class="form-check-label" for="whereToTreat3">Both</label>
               </div>
             </div>
           </div>
-          <div class="d-flex flex-column flex-1" *ngIf="waste.liquid.wotds">
+          <div class="d-flex flex-column flex-1" *ngIf="surveyService.waste.liquid.wotds">
             <div>Check all that apply:</div>
             <div class="d-flex flex-column">
               <div class="form-check" *ngFor="let ops of treatTypes; index as i;">
@@ -172,7 +172,7 @@
               </div>
             </div>
           </div>
-          <div class="d-flex flex-column flex-1" *ngIf="waste.liquid.wotds">
+          <div class="d-flex flex-column flex-1" *ngIf="surveyService.waste.liquid.wotds">
             <app-input [label]="'Describe on-site treatment system'" (changed)="descTreatmentSystem($event)"></app-input>
           </div>
         </div>
@@ -193,17 +193,17 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="landfills1" name="landfills" value="Yes" [(ngModel)]="waste.solid.landfills">
+              <input type="radio" class="form-check-input" id="landfills1" name="landfills" value="Yes" [(ngModel)]="surveyService.waste.solid.landfills">
               <label class="form-check-label" for="landfills1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="landfills2" name="landfills" value="No"  [(ngModel)]="waste.solid.landfills">
+              <input type="radio" class="form-check-input" id="landfills2" name="landfills" value="No"  [(ngModel)]="surveyService.waste.solid.landfills">
               <label class="form-check-label" for="landfills2">No</label>
             </div>
             <!-- Material inline 3 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="landfills3" name="landfills" value="Not Known"  [(ngModel)]="waste.solid.landfills">
+              <input type="radio" class="form-check-input" id="landfills3" name="landfills" value="Not Known"  [(ngModel)]="surveyService.waste.solid.landfills">
               <label class="form-check-label" for="landfills3">Not Known</label>
             </div>
           </div>
@@ -214,11 +214,11 @@
           <div class="mb-2 flex-1"><strong>Nature of solid waste materials generated:</strong></div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of materials; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'materials_' + i" [checked]="waste.solid.materials.indexOf(ops) > -1" (click)="pickMaterial(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'materials_' + i" [checked]="surveyService.waste.solid.materials.indexOf(ops) > -1" (click)="pickMaterial(ops)">
               <label class="form-check-label" [for]="'materials_' + i">{{ops}}</label>
             </div>
-            <div class="md-form m-0" *ngIf="waste.solid.materials.indexOf('Other') > -1">
-              <input type="text" class="form-control" placeholder="If other, please describe" [appFocus]="true" [(ngModel)]="waste.solid.otherMaterial">
+            <div class="md-form m-0" *ngIf="surveyService.waste.solid.materials.indexOf('Other') > -1">
+              <input type="text" class="form-control" placeholder="If other, please describe" [appFocus]="true" [(ngModel)]="surveyService.waste.solid.otherMaterial">
             </div>
           </div>
         </div>
@@ -232,23 +232,23 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="recycled1" name="recycled" value="Yes" [(ngModel)]="waste.solid.recycled">
+              <input type="radio" class="form-check-input" id="recycled1" name="recycled" value="Yes" [(ngModel)]="surveyService.waste.solid.recycled">
               <label class="form-check-label" for="recycled1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="recycled2" name="recycled" value="No"  [(ngModel)]="waste.solid.recycled" (click)="waste.solid.recycled_desc = ''">
+              <input type="radio" class="form-check-input" id="recycled2" name="recycled" value="No"  [(ngModel)]="surveyService.waste.solid.recycled" (click)="surveyService.waste.solid.recycled_desc = ''">
               <label class="form-check-label" for="recycled2">No</label>
             </div>
             <!-- Material inline 3 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="recycled3" name="recycled" value="Not Known"  [(ngModel)]="waste.solid.recycled" (click)="waste.solid.recycled_desc = ''">
+              <input type="radio" class="form-check-input" id="recycled3" name="recycled" value="Not Known"  [(ngModel)]="surveyService.waste.solid.recycled" (click)="surveyService.waste.solid.recycled_desc = ''">
               <label class="form-check-label" for="recycled3">Not Known</label>
             </div>
           </div>
-          <div *ngIf="waste.solid.recycled === 'Yes'">
+          <div *ngIf="surveyService.waste.solid.recycled === 'Yes'">
             <div class="md-form m-0">
-              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="waste.solid.recycled_desc">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="surveyService.waste.solid.recycled_desc">
             </div>
           </div>
         </div>
@@ -262,14 +262,14 @@
             <div class="flex-1"><strong>Is there evidence of uncontrolled dumping on or near the property?</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="waste.solid.uncontrolled" (click)="handleSwitch('solid', 'uncontrolled')"  />
+                <input type="checkbox" [checked]="surveyService.waste.solid.uncontrolled" (click)="handleSwitch('solid', 'uncontrolled')"  />
                 <span class="lever"></span>
               </label>
             </div>
           </div>
-          <div class="d-flex flex-1" style="align-items: baseline;" *ngIf="waste.solid.uncontrolled">
+          <div class="d-flex flex-1" style="align-items: baseline;" *ngIf="surveyService.waste.solid.uncontrolled">
             <div class="md-form m-0 flex-1">
-              <input type="text" class="form-control" placeholder="If yes, describe" [(ngModel)]="waste.solid.uncontrolled_desc" [appFocus]="true" />
+              <input type="text" class="form-control" placeholder="If yes, describe" [(ngModel)]="surveyService.waste.solid.uncontrolled_desc" [appFocus]="true" />
             </div>
           </div>
         </div>
@@ -290,7 +290,7 @@
             <div class="flex-1"><strong>Are fuel or chemical wastes generated at this site?</strong></div>
             <div class="switch">
               <label>
-                <input type="checkbox" [checked]="waste.chemical.fuel" (click)="handleSwitch('chemical', 'fuel')"  />
+                <input type="checkbox" [checked]="surveyService.waste.chemical.fuel" (click)="handleSwitch('chemical', 'fuel')"  />
                 <span class="lever"></span>
               </label>
             </div>
@@ -302,11 +302,11 @@
           <div class="mb-2 flex-1"><strong>Nature of the wastes generated?</strong></div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of natureWastes; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'natureWastes_' + i" [checked]="waste.chemical.natureWastes.indexOf(ops) > -1" (click)="pickNatureWaste(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'natureWastes_' + i" [checked]="surveyService.waste.chemical.natureWastes.indexOf(ops) > -1" (click)="pickNatureWaste(ops)">
               <label class="form-check-label" [for]="'natureWastes_' + i">{{ops}}</label>
             </div>
-            <div class="md-form m-0" *ngIf="waste.chemical.natureWastes.indexOf('Other') > -1">
-              <input type="text" class="form-control" placeholder="If other, please describe" [appFocus]="true" [(ngModel)]="waste.chemical.otherNatureWaste">
+            <div class="md-form m-0" *ngIf="surveyService.waste.chemical.natureWastes.indexOf('Other') > -1">
+              <input type="text" class="form-control" placeholder="If other, please describe" [appFocus]="true" [(ngModel)]="surveyService.waste.chemical.otherNatureWaste">
             </div>
           </div>
         </div>
@@ -317,12 +317,12 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="management1" name="management" value="Yes" [(ngModel)]="waste.chemical.management">
+              <input type="radio" class="form-check-input" id="management1" name="management" value="Yes" [(ngModel)]="surveyService.waste.chemical.management">
               <label class="form-check-label" for="management1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="management2" name="management" value="No"  [(ngModel)]="waste.chemical.management" (click)="waste.chemical.management_desc = ''">
+              <input type="radio" class="form-check-input" id="management2" name="management" value="No"  [(ngModel)]="surveyService.waste.chemical.management" (click)="surveyService.waste.chemical.management_desc = ''">
               <label class="form-check-label" for="management2">No</label>
             </div>
             <!-- Material inline 3 -->
@@ -331,9 +331,9 @@
               <label class="form-check-label" for="management3">Not Known</label>
             </div>
           </div>
-          <div *ngIf="waste.chemical.management === 'Yes'">
+          <div *ngIf="surveyService.waste.chemical.management === 'Yes'">
             <div class="md-form m-0">
-              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="waste.chemical.management_desc">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="surveyService.waste.chemical.management_desc">
             </div>
           </div>
         </div>
@@ -347,23 +347,23 @@
           <div class="d-flex flex-row">
             <!-- Material inline 1 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="fuelOnSite1" name="fuelOnSite" value="Yes" [(ngModel)]="waste.chemical.fuelOnSite">
+              <input type="radio" class="form-check-input" id="fuelOnSite1" name="fuelOnSite" value="Yes" [(ngModel)]="surveyService.waste.chemical.fuelOnSite">
               <label class="form-check-label" for="fuelOnSite1">Yes</label>
             </div>
             <!-- Material inline 2 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="fuelOnSite2" name="fuelOnSite" value="No"  [(ngModel)]="waste.chemical.fuelOnSite" (click)="waste.chemical.fuelOnSite_desc = ''">
+              <input type="radio" class="form-check-input" id="fuelOnSite2" name="fuelOnSite" value="No"  [(ngModel)]="surveyService.waste.chemical.fuelOnSite" (click)="surveyService.waste.chemical.fuelOnSite_desc = ''">
               <label class="form-check-label" for="fuelOnSite2">No</label>
             </div>
             <!-- Material inline 3 -->
             <div class="form-check form-check-inline">
-              <input type="radio" class="form-check-input" id="fuelOnSite3" name="fuelOnSite" value="Not Known"  [(ngModel)]="waste.chemical.fuelOnSite" (click)="waste.chemical.fuelOnSite_desc = ''">
+              <input type="radio" class="form-check-input" id="fuelOnSite3" name="fuelOnSite" value="Not Known"  [(ngModel)]="surveyService.waste.chemical.fuelOnSite" (click)="surveyService.waste.chemical.fuelOnSite_desc = ''">
               <label class="form-check-label" for="fuelOnSite3">Not Known</label>
             </div>
           </div>
-          <div *ngIf="waste.chemical.fuelOnSite === 'Yes'">
+          <div *ngIf="surveyService.waste.chemical.fuelOnSite === 'Yes'">
             <div class="md-form m-0">
-              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="waste.chemical.fuelOnSite_desc">
+              <input type="text" class="form-control" placeholder="If yes, describe" [appFocus]="true" [(ngModel)]="surveyService.waste.chemical.fuelOnSite_desc">
             </div>
           </div>
         </div>

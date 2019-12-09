@@ -6,6 +6,11 @@ import {Resp} from '../_model/Resp';
 import {environment} from '../../environments/environment';
 import {GSI} from '../_model/GSI';
 import {NSC} from '../_model/NSC';
+import {SOTP} from '../_model/SOTP';
+import {SS} from '../_model/SS';
+import {MUAS} from '../_model/MUAS';
+import {WASTE} from '../_model/WASTE';
+import {OOSA} from '../_model/OOSA';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +24,11 @@ export class SurveyService {
   public resp: Resp;
   public gsi: GSI;
   public nsc: NSC;
+  public sotp: SOTP;
+  public ss: SS;
+  public muas: MUAS;
+  public waste: WASTE;
+  public oosa: OOSA;
 
   constructor(private http: HttpClient) {
     this.options = [

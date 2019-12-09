@@ -12,22 +12,10 @@ export class NscComponent implements OnInit {
   step: number;
   topography: string[];
   swd: string[];
-  selectedSWD: string[];
-  otherDrainage: string;
-  selectedTopography: string[];
-  vs: string;
   vsPicks: string[];
-  vsPicked: string[];
   vegetation: string[];
-  selectedVegetation: string[];
-  isVegetationOnSite: boolean;
-  sv: boolean;
   geology: string[];
-  selectedGeology: string[];
-  socotg: boolean;
   socotgs: string[];
-  selectedsocotg: string[];
-  stressedVegetationDesc: string;
   @Input() last: boolean;
   @Output() done = new EventEmitter<any>();
 
@@ -40,7 +28,7 @@ export class NscComponent implements OnInit {
       topography: [],
       drainage: [],
       otherDrainage: '',
-      contamination: '',
+      contamination: 'No',
       visibleSigns : [],
       isVegetationOnSite: false,
       vegetation: [],
@@ -50,16 +38,9 @@ export class NscComponent implements OnInit {
       socotg: false,
       socotgs: []
     };
-    this.selectedSWD = [];
-    this.selectedTopography = [];
-    this.vsPicked = [];
-    this.selectedVegetation = [];
-    this.selectedGeology = [];
-    this.selectedsocotg = [];
     this.vsPicks = ['Oily Films', 'Sheen', 'Staining/Discoloration', 'Odours'];
     this.vegetation = ['Crops', 'Grass', 'Landscaping', 'Tress', 'Shrubs'];
     this.geology = ['Fill', 'Clay', 'Rocky outcrops', 'Sand', 'Gravel', 'Other', 'Not Known', 'Silt'];
-    this.vs = 'No';
     this.topography = ['Lowland', 'Hill', 'Flat', 'Slope'];
     this.swd = ['Wetlands', 'Ditches', 'Ponds', 'Rivers/Streams', 'Creeks', 'Other'];
     this.socotgs = ['Staining/Discoloration', 'Odors', 'Oily Films'];
@@ -73,100 +54,87 @@ export class NscComponent implements OnInit {
   }
 
   onClickVS() {
-    this.vs = this.vs === 'Yes' ? 'No' : 'Yes';
-    if (this.vs === 'No') {
-      this.vsPicked.length = 0;
+    this.surveyService.nsc.contamination = this.surveyService.nsc.contamination === 'Yes' ? 'No' : 'Yes';
+    if (this.surveyService.nsc.contamination === 'No') {
+      this.surveyService.nsc.visibleSigns.length = 0;
     }
   }
 
   onClickVegetation() {
-    this.isVegetationOnSite = !this.isVegetationOnSite;
+    this.surveyService.nsc.isVegetationOnSite = !this.surveyService.nsc.isVegetationOnSite;
   }
 
   onClickSV() {
-    this.sv = !this.sv;
-    if (!this.sv) {
-      this.stressedVegetationDesc = '';
+    this.surveyService.nsc.stressedVegetation = !this.surveyService.nsc.stressedVegetation;
+    if (!this.surveyService.nsc.stressedVegetation) {
+      this.surveyService.nsc.stressedVegetationDesc = '';
     }
   }
 
   onClicksocotg() {
-    this.socotg = !this.socotg;
+    this.surveyService.nsc.socotg = !this.surveyService.nsc.socotg;
   }
 
   picksocotg(p: string) {
     const index = this.socotgs.indexOf(p);
     if (index > -1) {
-      this.selectedsocotg.splice(index, 1);
+      this.surveyService.nsc.socotgs.splice(index, 1);
     } else {
-      this.selectedsocotg.push(p);
+      this.surveyService.nsc.socotgs.push(p);
     }
   }
 
   pickGeology(p: string) {
-    const index = this.selectedGeology.indexOf(p);
+    const index = this.surveyService.nsc.geology.indexOf(p);
     if (index > -1) {
-      this.selectedGeology.splice(index, 1);
+      this.surveyService.nsc.geology.splice(index, 1);
     } else {
-      this.selectedGeology.push(p);
+      this.surveyService.nsc.geology.push(p);
     }
   }
 
   pickVegetation(p: string) {
-    const index = this.selectedVegetation.indexOf(p);
+    const index = this.surveyService.nsc.vegetation.indexOf(p);
     if (index > -1) {
-      this.selectedVegetation.splice(index, 1);
+      this.surveyService.nsc.vegetation.splice(index, 1);
     } else {
-      this.selectedVegetation.push(p);
+      this.surveyService.nsc.vegetation.push(p);
     }
   }
 
   pickTopography(p: string) {
-    const index = this.selectedTopography.indexOf(p);
+    const index = this.surveyService.nsc.topography.indexOf(p);
     if (index > -1) {
-      this.selectedTopography.splice(index, 1);
+      this.surveyService.nsc.topography.splice(index, 1);
     } else {
-      this.selectedTopography.push(p);
+      this.surveyService.nsc.topography.push(p);
     }
   }
   pickVS(p: string) {
-    const index = this.vsPicked.indexOf(p);
+    const index = this.surveyService.nsc.visibleSigns.indexOf(p);
     if (index > -1) {
-      this.vsPicked.splice(index, 1);
+      this.surveyService.nsc.visibleSigns.splice(index, 1);
     } else {
-      this.vsPicked.push(p);
+      this.surveyService.nsc.visibleSigns.push(p);
     }
   }
 
   pickSWD(p: string) {
-    const index = this.selectedSWD.indexOf(p);
+    const index = this.surveyService.nsc.drainage.indexOf(p);
     if (index > -1) {
-      this.selectedSWD.splice(index, 1);
+      this.surveyService.nsc.drainage.splice(index, 1);
     } else {
-      this.selectedSWD.push(p);
+      this.surveyService.nsc.drainage.push(p);
     }
-    if (this.selectedSWD.indexOf('Other') === -1) {
-      this.otherDrainage  = '';
+    if (this.surveyService.nsc.drainage.indexOf('Other') === -1) {
+      this.surveyService.nsc.otherDrainage  = '';
     }
   }
   onDrainage(val: string) {
-    this.otherDrainage = val;
+    this.surveyService.nsc.otherDrainage = val;
   }
 
   handover() {
-    this.done.emit({
-      topography: this.selectedTopography,
-      drainage: this.selectedSWD,
-      otherDrainage: this.otherDrainage,
-      contamination: this.vs,
-      visibleSigns : this.vsPicked,
-      isVegetationOnSite: this.isVegetationOnSite,
-      vegetation: this.selectedVegetation,
-      stressedVegetation: this.sv,
-      stressedVegetationDesc: this.stressedVegetationDesc,
-      geology: this.selectedGeology,
-      socotg: this.socotg,
-      socotgs: this.socotgs
-    });
+    this.done.emit(this.surveyService.nsc);
   }
 }

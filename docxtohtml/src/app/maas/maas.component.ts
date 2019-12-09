@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MUAS} from '../_model/MUAS';
+import {SurveyService} from '../_service/survey.service';
 
 @Component({
   selector: 'app-maas',
@@ -10,7 +11,6 @@ export class MaasComponent implements OnInit {
 
   step: number;
   @Input() last: boolean;
-  muas: MUAS;
   evidence: string[];
   conditions: string[];
   msapOps: string[];
@@ -19,11 +19,11 @@ export class MaasComponent implements OnInit {
   @Output() done = new EventEmitter<MUAS>();
 
 
-  constructor() { }
+  constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
     this.step = 0;
-    this.muas = {
+    this.surveyService.muas = {
       tank: {
         utank: '',
         utankAmount: '',
@@ -79,73 +79,73 @@ export class MaasComponent implements OnInit {
   }
 
   clearUA() {
-    this.muas.tank.utankAmount = '';
+    this.surveyService.muas.tank.utankAmount = '';
   }
 
   pickEvidence(p: string) {
-    const index = this.muas.tank.evidence.indexOf(p);
+    const index = this.surveyService.muas.tank.evidence.indexOf(p);
     if (index > -1) {
-      this.muas.tank.evidence.splice(index, 1);
+      this.surveyService.muas.tank.evidence.splice(index, 1);
     } else {
-      this.muas.tank.evidence.push(p);
+      this.surveyService.muas.tank.evidence.push(p);
     }
   }
   pickCondition(p: string) {
-    const index = this.muas.tank.tankConditions.indexOf(p);
+    const index = this.surveyService.muas.tank.tankConditions.indexOf(p);
     if (index > -1) {
-      this.muas.tank.tankConditions.splice(index, 1);
+      this.surveyService.muas.tank.tankConditions.splice(index, 1);
     } else {
-      this.muas.tank.tankConditions.push(p);
+      this.surveyService.muas.tank.tankConditions.push(p);
     }
   }
 
   pickMsap(p: string) {
-    const index = this.muas.osa.msapOps.indexOf(p);
+    const index = this.surveyService.muas.osa.msapOps.indexOf(p);
     if (index > -1) {
-      this.muas.osa.msapOps.splice(index, 1);
+      this.surveyService.muas.osa.msapOps.splice(index, 1);
     } else {
-      this.muas.osa.msapOps.push(p);
+      this.surveyService.muas.osa.msapOps.push(p);
     }
-    if (this.muas.osa.msapOps.indexOf('Other') === -1) {
-      this.muas.osa.otherMsap = '';
+    if (this.surveyService.muas.osa.msapOps.indexOf('Other') === -1) {
+      this.surveyService.muas.osa.otherMsap = '';
     }
   }
   pickWay(p: string) {
-    const index = this.muas.osa.waysToStore.indexOf(p);
+    const index = this.surveyService.muas.osa.waysToStore.indexOf(p);
     if (index > -1) {
-      this.muas.osa.waysToStore.splice(index, 1);
+      this.surveyService.muas.osa.waysToStore.splice(index, 1);
     } else {
-      this.muas.osa.waysToStore.push(p);
+      this.surveyService.muas.osa.waysToStore.push(p);
     }
-    if (this.muas.osa.waysToStore.indexOf('Other') === -1) {
-      this.muas.osa.otherWayToStore = '';
+    if (this.surveyService.muas.osa.waysToStore.indexOf('Other') === -1) {
+      this.surveyService.muas.osa.otherWayToStore = '';
     }
   }
 
   pickMaterial(p: string) {
-    const index = this.muas.osa.stockpiled.indexOf(p);
+    const index = this.surveyService.muas.osa.stockpiled.indexOf(p);
     if (index > -1) {
-      this.muas.osa.stockpiled.splice(index, 1);
+      this.surveyService.muas.osa.stockpiled.splice(index, 1);
     } else {
-      this.muas.osa.stockpiled.push(p);
+      this.surveyService.muas.osa.stockpiled.push(p);
     }
-    if (this.muas.osa.stockpiled.indexOf('Other') === -1) {
-      this.muas.osa.otherMaterial = '';
+    if (this.surveyService.muas.osa.stockpiled.indexOf('Other') === -1) {
+      this.surveyService.muas.osa.otherMaterial = '';
     }
   }
 
   handleSwitch(obj: string, prop: string) {
-    this.muas[obj][prop] = !this.muas[obj][prop];
+    this.surveyService.muas[obj][prop] = !this.surveyService.muas[obj][prop];
     switch (obj) {
       case 'osa':
         if (prop === 'secure') {
-          if (this.muas[obj][prop]) {
-            this.muas.osa.insecure_desc = '';
+          if (this.surveyService.muas[obj][prop]) {
+            this.surveyService.muas.osa.insecure_desc = '';
           }
         }
         if (prop === 'ssa') {
-          if (this.muas[obj][prop]) {
-            this.muas.osa.ssa_desc = '';
+          if (this.surveyService.muas[obj][prop]) {
+            this.surveyService.muas.osa.ssa_desc = '';
           }
         }
         break;
@@ -155,6 +155,6 @@ export class MaasComponent implements OnInit {
   }
 
   handover() {
-    this.done.emit(this.muas);
+    this.done.emit(this.surveyService.muas);
   }
 }

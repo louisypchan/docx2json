@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SOTP} from '../_model/SOTP';
+import {SurveyService} from '../_service/survey.service';
 
 @Component({
   selector: 'app-sotp',
@@ -10,16 +11,15 @@ export class SotpComponent implements OnInit {
 
   step: number;
   @Input() last: boolean;
-  sotp: SOTP;
   heatingTypes: string[];
   asbestosProperties: string[];
   @Output() done = new EventEmitter<SOTP>();
 
 
-  constructor() { }
+  constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    this.sotp = {
+    this.surveyService.sotp = {
       bi: {
         nob: '',
         toc: '',
@@ -78,38 +78,38 @@ export class SotpComponent implements OnInit {
   }
 
   handleSwitch(obj: string, prop: string) {
-    this.sotp[obj][prop] = !this.sotp[obj][prop];
+    this.surveyService.sotp[obj][prop] = !this.surveyService.sotp[obj][prop];
   }
 
   pickHeatingType(ops: string) {
-    const index = this.sotp.bi.heatingTypes.indexOf(ops);
+    const index = this.surveyService.sotp.bi.heatingTypes.indexOf(ops);
     if (index > -1) {
-      this.sotp.bi.heatingTypes.splice(index, 1);
+      this.surveyService.sotp.bi.heatingTypes.splice(index, 1);
     } else {
-      this.sotp.bi.heatingTypes.push(ops);
+      this.surveyService.sotp.bi.heatingTypes.push(ops);
     }
   }
 
   onBIChanged(val: string, prop: string) {
-    this.sotp.bi[prop] = val;
+    this.surveyService.sotp.bi[prop] = val;
   }
 
   pickProperties(ops: string) {
-    const index = this.sotp.asbestos.properties.indexOf(ops);
+    const index = this.surveyService.sotp.asbestos.properties.indexOf(ops);
     if (index > -1) {
-      this.sotp.asbestos.properties.splice(index, 1);
+      this.surveyService.sotp.asbestos.properties.splice(index, 1);
     } else {
-      this.sotp.asbestos.properties.push(ops);
+      this.surveyService.sotp.asbestos.properties.push(ops);
     }
   }
 
   clearLead() {
-    this.sotp.lead.desc = '';
+    this.surveyService.sotp.lead.desc = '';
   }
 
   clearPCBs() {
-    this.sotp.pcb = {
-      pcbs: this.sotp.pcb.pcbs,
+    this.surveyService.sotp.pcb = {
+      pcbs: this.surveyService.sotp.pcb.pcbs,
       transforms: false,
       transformType: '',
       sampling: false,
@@ -126,14 +126,14 @@ export class SotpComponent implements OnInit {
   }
 
   clearOtherTransform() {
-    this.sotp.pcb.otherTransform = '';
+    this.surveyService.sotp.pcb.otherTransform = '';
   }
 
   clearAsbestos() {
-    this.sotp.asbestos.properties = [];
+    this.surveyService.sotp.asbestos.properties = [];
   }
 
   handover() {
-    this.done.emit(this.sotp);
+    this.done.emit(this.surveyService.sotp);
   }
 }

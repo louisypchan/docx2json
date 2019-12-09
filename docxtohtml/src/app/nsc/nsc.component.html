@@ -6,7 +6,7 @@
         <div class="mb-2 flex-1"><strong>Topography:</strong></div>
         <div class="d-flex flex-column">
           <div class="form-check" *ngFor="let ops of topography; index as i;">
-            <input type="checkbox" class="form-check-input" [id]="'topography_' + i" [checked]="selectedTopography.indexOf(ops) > -1" (click)="pickTopography(ops)">
+            <input type="checkbox" class="form-check-input" [id]="'topography_' + i" [checked]="surveyService.nsc.topography.indexOf(ops) > -1" (click)="pickTopography(ops)">
             <label class="form-check-label" [for]="'topography_' + i">{{ops}}</label>
           </div>
         </div>
@@ -15,9 +15,9 @@
         <div class="mb-2 flex-1"><strong>Surface Water/Drainage:</strong></div>
         <div class="d-flex flex-column">
           <div class="form-check" *ngFor="let ops of swd; index as i;">
-            <input type="checkbox" class="form-check-input" [id]="'swd_' + i" [checked]="selectedSWD.indexOf(ops) > -1" (click)="pickSWD(ops)">
+            <input type="checkbox" class="form-check-input" [id]="'swd_' + i" [checked]="surveyService.nsc.drainage.indexOf(ops) > -1" (click)="pickSWD(ops)">
             <label class="form-check-label" [for]="'swd_' + i">{{ops}}</label>
-            <app-input *ngIf="selectedSWD.indexOf('Other') > -1 && ops === 'Other'" [focus]="true" (changed)="onDrainage($event)"></app-input>
+            <app-input *ngIf="surveyService.nsc.drainage.indexOf('Other') > -1 && ops === 'Other'" [focus]="true" (changed)="onDrainage($event)"></app-input>
           </div>
         </div>
       </div>
@@ -26,18 +26,18 @@
           <div class="flex-1"><strong>Visible Signs of contamination on or near water sources</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox" [checked]="vs === 'Yes'" (click)="onClickVS()">
+              <input type="checkbox" [checked]="surveyService.nsc.contamination === 'Yes'" (click)="onClickVS()">
               <span class="lever"></span>
             </label>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="vs === 'Yes'">
+      <div class="row" *ngIf="surveyService.nsc.contamination === 'Yes'">
         <div class="d-flex flex-column">
           <div class="mr-2">If yes, check those that apply</div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of vsPicks; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'vs_' + i" [checked]="vsPicked.indexOf(ops) > -1" (click)="pickVS(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'vs_' + i" [checked]="surveyService.nsc.visibleSigns.indexOf(ops) > -1" (click)="pickVS(ops)">
               <label class="form-check-label" [for]="'vs_' + i">{{ops}}</label>
             </div>
           </div>
@@ -56,18 +56,18 @@
           <div class="flex-1"><strong>Is there vegetation on the site?</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox" [checked]="isVegetationOnSite" (click)="onClickVegetation()">
+              <input type="checkbox" [checked]="surveyService.nsc.isVegetationOnSite" (click)="onClickVegetation()">
               <span class="lever"></span>
             </label>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="isVegetationOnSite">
+      <div class="row" *ngIf="surveyService.nsc.isVegetationOnSite">
         <div class="d-flex flex-column">
           <div class="mr-2">If yes, check those that apply</div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of vegetation; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'vegetation_' + i" [checked]="selectedVegetation.indexOf(ops) > -1" (click)="pickVegetation(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'vegetation_' + i" [checked]="surveyService.nsc.vegetation.indexOf(ops) > -1" (click)="pickVegetation(ops)">
               <label class="form-check-label" [for]="'vegetation_' + i">{{ops}}</label>
             </div>
           </div>
@@ -78,13 +78,13 @@
           <div class="flex-1"><strong>Is there any sign of stressed vegetation?</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox" [checked]="sv" (click)="onClickSV()">
+              <input type="checkbox" [checked]="surveyService.nsc.stressedVegetation" (click)="onClickSV()">
               <span class="lever"></span>
             </label>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="sv">
+      <div class="row" *ngIf="surveyService.nsc.stressedVegetation">
         <div class="d-flex align-items-center flex-1">
           <div>If yes,</div>
           <div class="flex-1">
@@ -92,7 +92,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" style="background-color: transparent; border: none;">describe</span>
               </div>
-              <input type="text" class="form-control" [appFocus]="sv" [(ngModel)]="stressedVegetationDesc">
+              <input type="text" class="form-control" [appFocus]="surveyService.nsc.stressedVegetation" [(ngModel)]="surveyService.nsc.stressedVegetationDesc">
             </div>
           </div>
         </div>
@@ -110,7 +110,7 @@
         <div class="mb-2 flex-1"><strong>Soils/Geology:</strong></div>
         <div class="d-flex flex-column">
           <div class="form-check" *ngFor="let ops of geology; index as i;">
-            <input type="checkbox" class="form-check-input" [id]="'geology_' + i" [checked]="selectedGeology.indexOf(ops) > -1" (click)="pickGeology(ops)">
+            <input type="checkbox" class="form-check-input" [id]="'geology_' + i" [checked]="surveyService.nsc.geology.indexOf(ops) > -1" (click)="pickGeology(ops)">
             <label class="form-check-label" [for]="'geology_' + i">{{ops}}</label>
           </div>
         </div>
@@ -120,7 +120,7 @@
           <div class="flex-1"><strong>Is there any sign of contamination on the ground?</strong></div>
           <div class="switch">
             <label>
-              <input type="checkbox" [checked]="socotg" (click)="onClicksocotg()" />
+              <input type="checkbox" [checked]="surveyService.nsc.socotg" (click)="onClicksocotg()" />
               <span class="lever"></span>
             </label>
           </div>
@@ -131,7 +131,7 @@
           <div class="mr-2">If yes, check those that apply</div>
           <div class="d-flex flex-column">
             <div class="form-check" *ngFor="let ops of socotgs; index as i;">
-              <input type="checkbox" class="form-check-input" [id]="'socotg_' + i" [checked]="selectedsocotg.indexOf(ops) > -1" (click)="picksocotg(ops)">
+              <input type="checkbox" class="form-check-input" [id]="'socotg_' + i" [checked]="surveyService.nsc.socotgs.indexOf(ops) > -1" (click)="picksocotg(ops)">
               <label class="form-check-label" [for]="'socotg_' + i">{{ops}}</label>
             </div>
           </div>

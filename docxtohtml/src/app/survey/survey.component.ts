@@ -55,16 +55,19 @@ export class SurveyComponent implements OnInit {
             if (obj.selectedItems && obj.selectedItems.length > 0) {
               this.surveyService.selectedSurvey = [].concat(obj.selectedItems);
             }
-            this.surveyService.gsi = data.gsi;
-            this.surveyService.nsc = data.nsc;
-            this.surveyService.sotp = data.sotp;
-            this.surveyService.ss = data.ss;
-            this.surveyService.muas = data.muas;
-            this.surveyService.waste = data.waste;
-            this.surveyService.oosa = data.oosa;
+            this.surveyService.gsi = obj.gsi;
+            this.surveyService.nsc = obj.nsc;
+            this.surveyService.sotp = obj.sotp;
+            this.surveyService.ss = obj.ss;
+            this.surveyService.muas = obj.muas;
+            this.surveyService.waste = obj.waste;
+            this.surveyService.oosa = obj.oosa;
             const index = this.surveyService.selectedSurvey.findIndex(s => s.show);
             if (index > -1) {
               this.showOptions = false;
+              if (window['eris']) {
+                window['eris'].showMenu();
+              }
             }
           });
         } catch (e) {
@@ -144,6 +147,21 @@ export class SurveyComponent implements OnInit {
     } else {
       // #TODO:
       this.showOptions = true;
+    }
+  }
+
+  onSave() {
+    if (window['eris']) {
+      window['eris'].saveSurveyData(JSON.stringify({
+        selectedItems: this.surveyService.selectedSurvey,
+        gsi: this.surveyService.gsi,
+        nsc: this.surveyService.nsc,
+        sotp: this.surveyService.sotp,
+        ss: this.surveyService.ss,
+        muas: this.surveyService.muas,
+        waste: this.surveyService.waste,
+        oosa: this.surveyService.oosa
+      }));
     }
   }
 

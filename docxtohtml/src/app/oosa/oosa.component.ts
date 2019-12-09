@@ -15,23 +15,25 @@ export class OosaComponent implements OnInit {
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    this.surveyService.oosa = {
-      step: 0,
-      gas: {
-        oil: '',
-        oil_desc: '',
-        pipelines: '',
-        pipelines_desc: ''
-      },
-      mine: {
-        activity: '',
-        activity_desc: '',
-        abandonedActivity: '',
-        abandonedActivity_desc: '',
-        number: '',
-        type: ''
-      }
-    };
+    if (!this.surveyService.oosa) {
+      this.surveyService.oosa = {
+        step: 0,
+        gas: {
+          oil: '',
+          oil_desc: '',
+          pipelines: '',
+          pipelines_desc: ''
+        },
+        mine: {
+          activity: '',
+          activity_desc: '',
+          abandonedActivity: '',
+          abandonedActivity_desc: '',
+          number: '',
+          type: ''
+        }
+      };
+    }
   }
 
   nextStep() {

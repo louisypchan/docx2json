@@ -1,15 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild, ChangeDetectorRef, NgZone} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, NgZone} from '@angular/core';
 import {SurveyService} from '../_service/survey.service';
 import {Section} from '../_model/Section';
 import {ActivatedRoute} from '@angular/router';
 import {Resp} from '../_model/Resp';
-import {GSI} from '../_model/GSI';
-import {NSC} from '../_model/NSC';
-import {SOTP} from '../_model/SOTP';
-import {SS} from '../_model/SS';
-import {MUAS} from '../_model/MUAS';
-import {WASTE} from '../_model/WASTE';
-import {OOSA} from '../_model/OOSA';
 
 @Component({
   selector: 'app-survey',
@@ -20,6 +13,7 @@ export class SurveyComponent implements OnInit {
 
   showOptions = true;
   resp: Resp;
+  testStr: string;
 
   @ViewChild('nav') nav: ElementRef;
 
@@ -47,6 +41,52 @@ export class SurveyComponent implements OnInit {
       };
     }
     this.surveyService.selectedSurvey = [...this.surveyService.options];
+    if (window['eris']) {
+      const data = window['eris'].resumeData();
+      // this.testStr = typeof data;
+      // this.testStr = data.length;
+      if (data.length > 0) {
+        try {
+          let obj = JSON.parse(data + '');
+          if (typeof obj === 'string') {
+            obj = JSON.parse(obj);
+          }
+          this.zone.run(() => {
+            if (obj.selectedItems && obj.selectedItems.length > 0) {
+              this.surveyService.selectedSurvey = [].concat(obj.selectedItems);
+            }
+            this.surveyService.gsi = data.gsi;
+            this.surveyService.nsc = data.nsc;
+            this.surveyService.sotp = data.sotp;
+            this.surveyService.ss = data.ss;
+            this.surveyService.muas = data.muas;
+            this.surveyService.waste = data.waste;
+            this.surveyService.oosa = data.oosa;
+            const index = this.surveyService.selectedSurvey.findIndex(s => s.show);
+            if (index > -1) {
+              this.showOptions = false;
+            }
+          });
+        } catch (e) {
+          this.testStr = 'Hello';
+        }
+      }
+      // if (data) {
+
+      // }
+      // this.surveyService.selectedSurvey = it.selectedItems;
+      // this.surveyService.gsi = data.gsi;
+      // this.surveyService.nsc = data.nsc;
+      // this.surveyService.sotp = data.sotp;
+      // this.surveyService.ss = data.ss;
+      // this.surveyService.muas = data.muas;
+      // this.surveyService.waste = data.waste;
+      // this.surveyService.oosa = data.oosa;
+    }
+  }
+
+  isChecked(section: Section): boolean {
+    return this.surveyService.selectedSurvey.findIndex(it => it.name === section.name) > -1;
   }
 
   pickUpSurvey(index: number) {
@@ -62,7 +102,7 @@ export class SurveyComponent implements OnInit {
   }
 
   storeSurveyData(): string {
-    const result = {
+    return JSON.stringify({
       selectedItems: this.surveyService.selectedSurvey,
       gsi: this.surveyService.gsi,
       nsc: this.surveyService.nsc,
@@ -71,8 +111,7 @@ export class SurveyComponent implements OnInit {
       muas: this.surveyService.muas,
       waste: this.surveyService.waste,
       oosa: this.surveyService.oosa
-    };
-    return JSON.stringify(result);
+    });
   }
 
   backToSelection() {

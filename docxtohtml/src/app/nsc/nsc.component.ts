@@ -22,21 +22,23 @@ export class NscComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.surveyService.nsc = {
-      step: 0,
-      topography: [],
-      drainage: [],
-      otherDrainage: '',
-      contamination: 'No',
-      visibleSigns : [],
-      isVegetationOnSite: false,
-      vegetation: [],
-      stressedVegetation: false,
-      stressedVegetationDesc: '',
-      geology: [],
-      socotg: false,
-      socotgs: []
-    };
+    if (!this.surveyService.nsc) {
+      this.surveyService.nsc = {
+        step: 0,
+        topography: [],
+        drainage: [],
+        otherDrainage: '',
+        contamination: 'No',
+        visibleSigns : [],
+        isVegetationOnSite: false,
+        vegetation: [],
+        stressedVegetation: false,
+        stressedVegetationDesc: '',
+        geology: [],
+        socotg: false,
+        socotgs: []
+      };
+    }
     this.vsPicks = ['Oily Films', 'Sheen', 'Staining/Discoloration', 'Odours'];
     this.vegetation = ['Crops', 'Grass', 'Landscaping', 'Tress', 'Shrubs'];
     this.geology = ['Fill', 'Clay', 'Rocky outcrops', 'Sand', 'Gravel', 'Other', 'Not Known', 'Silt'];

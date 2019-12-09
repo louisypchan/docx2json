@@ -21,45 +21,47 @@ export class MaasComponent implements OnInit {
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    this.surveyService.muas = {
-      step: 0,
-      tank: {
-        utank: '',
-        utankAmount: '',
-        evidence: [],
-        tankInUse: '',
-        ageOfTankOutOfService: '',
-        emptied: '',
-        atank: '',
-        atankAmount: '',
-        tankConditions: [],
-        spill: false,
-        spillDetail: '',
-        spills: '',
-        spills_desc: ''
-      },
-      osa: {
-        msop: false,
-        msap: false,
-        msapOps: [],
-        otherMsap: '',
-        waysToStore: [],
-        otherWayToStore: '',
-        observed: [],
-        cst2: '',
-        c2l: '',
-        drums: '',
-        tanks: '',
-        stockpiled: [],
-        otherMaterial: '',
-        secure: true,
-        insecure_desc: '',
-        ssa: true,
-        ssa_desc: '',
-        krhp: false,
-        krhpDetail: ''
-      }
-    };
+    if (!this.surveyService.muas) {
+      this.surveyService.muas = {
+        step: 0,
+        tank: {
+          utank: '',
+          utankAmount: '',
+          evidence: [],
+          tankInUse: '',
+          ageOfTankOutOfService: '',
+          emptied: '',
+          atank: '',
+          atankAmount: '',
+          tankConditions: [],
+          spill: false,
+          spillDetail: '',
+          spills: '',
+          spills_desc: ''
+        },
+        osa: {
+          msop: false,
+          msap: false,
+          msapOps: [],
+          otherMsap: '',
+          waysToStore: [],
+          otherWayToStore: '',
+          observed: [],
+          cst2: '',
+          c2l: '',
+          drums: '',
+          tanks: '',
+          stockpiled: [],
+          otherMaterial: '',
+          secure: true,
+          insecure_desc: '',
+          ssa: true,
+          ssa_desc: '',
+          krhp: false,
+          krhpDetail: ''
+        }
+      };
+    }
     this.evidence = ['Vent Pipe', 'Staining', 'Fill Pipe', 'Depression', 'Mound'];
     this.conditions = ['Dented', 'New', 'Old', 'Rusty'];
     this.msapOps = ['Solvents', 'Fuels', 'Paints', 'Paint thinners', 'Antifreeze', 'Oils', 'Glues', 'Batteries', 'Compressed Gas',

@@ -8,7 +8,6 @@ import {SurveyService} from '../_service/survey.service';
   styleUrls: ['./wastes.component.scss']
 })
 export class WastesComponent implements OnInit {
-  step: number;
   @Input() last: boolean;
 
   airEmissionTypes: string[];
@@ -21,68 +20,9 @@ export class WastesComponent implements OnInit {
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    this.step = 0;
-    this.surveyService.waste = {
-      generate: false,
-      emission: {
-        airEmission: '',
-        airEmissionTypes: [],
-        explainVS: '',
-        odors_desc: '',
-        monitoring: '',
-        treatment: false,
-        treatment_desc: '',
-        certificate: false,
-        indications: false
-      },
-      liquid: {
-        wotds: false, // wastes other than domestic sewage
-        whereToTreat: '',
-        treatTypes: [],
-        treatment_desc: ''
-      },
-      solid: {
-        landfills: '',
-        materials: [],
-        otherMaterial: '',
-        avgQuaWaste: '',
-        recycled: '',
-        recycled_desc: '',
-        disposed: '',
-        uncontrolled: false,
-        uncontrolled_desc: '',
-      },
-      chemical: {
-        fuel: '',
-        natureWastes: [],
-        otherNatureWaste: '',
-        management: '',
-        management_desc: '',
-        disposed: '',
-        fuelOnSite: '',
-        fuelOnSite_desc: ''
-      }
-    };
-    this.airEmissionTypes = ['Odors', 'Vent stacks (on roof)', 'Wall Vents', 'Visible Particles', 'Build-up dusts', 'Soot'];
-    this.treatTypes = ['Collection Pond', 'Sludge Lagoon', 'Drains', 'Sumps', 'Oil interceptor', 'Treatment System'];
-    this.materials = ['Metal', 'Paper', 'Cardboard', 'Wood', 'Batteries', 'Glass', 'Plastic', 'Tires', 'Other'];
-    this.natureWastes = ['Solvents', 'Fuels', 'Antifreeze', 'Paints', 'Oil Lubricants', 'Chlorofluorocarbons', 'Thinners',
-    'Radioactive Wastes', 'Pesticides/Herbicides', 'Other'];
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  previousStep() {
-    this.step--;
-  }
-
-  handleWaste() {
-    this.surveyService.waste.generate = !this.surveyService.waste.generate;
-    if (!this.surveyService.waste.generate) {
-      this.step = 0;
+    if (!this.surveyService.waste) {
       this.surveyService.waste = {
+        step: 0,
         generate: false,
         emission: {
           airEmission: '',
@@ -124,6 +64,23 @@ export class WastesComponent implements OnInit {
         }
       };
     }
+    this.airEmissionTypes = ['Odors', 'Vent stacks (on roof)', 'Wall Vents', 'Visible Particles', 'Build-up dusts', 'Soot'];
+    this.treatTypes = ['Collection Pond', 'Sludge Lagoon', 'Drains', 'Sumps', 'Oil interceptor', 'Treatment System'];
+    this.materials = ['Metal', 'Paper', 'Cardboard', 'Wood', 'Batteries', 'Glass', 'Plastic', 'Tires', 'Other'];
+    this.natureWastes = ['Solvents', 'Fuels', 'Antifreeze', 'Paints', 'Oil Lubricants', 'Chlorofluorocarbons', 'Thinners',
+    'Radioactive Wastes', 'Pesticides/Herbicides', 'Other'];
+  }
+
+  nextStep() {
+    this.surveyService.waste.step++;
+  }
+
+  previousStep() {
+    this.surveyService.waste.step--;
+  }
+
+  handleWaste() {
+    this.surveyService.waste.generate = !this.surveyService.waste.generate;
   }
 
   pickAirEmissionType(p: string) {

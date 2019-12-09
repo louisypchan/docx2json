@@ -11,9 +11,9 @@
   <button class="waves-effect waves-dark btn-sm  btn btn-primary m-0 mt-4" type="button" (click)="handover()">{{last ? 'Submit': 'Next'}}</button>
 </div>
 <ul class="stepper parallel" *ngIf="surveyService.waste.generate">
-  <li class="step" [class.active]="step === 0" [class.done]="step > 0" >
-    <div class="step-title waves-effect waves-dark" (click)="step = 0">Air Emissions</div>
-    <div class="step-new-content" [class.show]="step === 0">
+  <li class="step" [class.active]="surveyService.waste.step === 0" [class.done]="surveyService.waste.step > 0" >
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.waste.step = 0">Air Emissions</div>
+    <div class="step-new-content" [class.show]="surveyService.waste.step === 0">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div><strong>Are there any air emissions from the property?</strong></div>
@@ -129,9 +129,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 1" [class.done]="step > 1">
-    <div class="step-title waves-effect waves-dark" (click)="step = 1">Liquid Discharges</div>
-    <div class="step-new-content" [class.show]="step === 1">
+  <li class="step" [class.active]="surveyService.waste.step === 1" [class.done]="surveyService.waste.step > 1">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.waste.step = 1">Liquid Discharges</div>
+    <div class="step-new-content" [class.show]="surveyService.waste.step === 1">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div class="d-flex flex-1 align-items-center">
@@ -184,9 +184,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 2" [class.done]="step > 2">
-    <div class="step-title waves-effect waves-dark" (click)="step = 2">Solid Waste</div>
-    <div class="step-new-content" [class.show]="step === 2">
+  <li class="step" [class.active]="surveyService.waste.step === 2" [class.done]="surveyService.waste.step > 2">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.waste.step = 2">Solid Waste</div>
+    <div class="step-new-content" [class.show]="surveyService.waste.step === 2">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div><strong>Are there waste dumps or landfills on or near the property?</strong></div>
@@ -281,9 +281,9 @@
       </div>
     </div>
   </li>
-  <li class="step" [class.active]="step === 3" [class.done]="step > 3">
-    <div class="step-title waves-effect waves-dark" (click)="step = 3">Chemical and Hazardous Wastes</div>
-    <div class="step-new-content" [class.show]="step === 3">
+  <li class="step" [class.active]="surveyService.waste.step === 3" [class.done]="surveyService.waste.step > 3">
+    <div class="step-title waves-effect waves-dark" (click)="surveyService.waste.step = 3">Chemical and Hazardous Wastes</div>
+    <div class="step-new-content" [class.show]="surveyService.waste.step === 3">
       <div class="row mt-2">
         <div class="d-flex flex-column flex-1">
           <div class="d-flex flex-1 align-items-center">

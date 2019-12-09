@@ -17,50 +17,52 @@ export class SotpComponent implements OnInit {
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    this.surveyService.sotp = {
-      step: 0,
-      bi: {
-        nob: '',
-        toc: '',
-        doc: '',
-        uses: '',
-        size: '',
-        nof: '',
-        basement: false,
-        renovations: false,
-        renovations_desc: '',
-        staining: false,
-        heating: false,
-        heatingTypes: [],
-        ageOfHeating: '',
-        psu: '',
-        cooling: false
-      },
-      asbestos: {
-        hasAsbestos: '',
-        properties: [],
-        uffi: ''
-      },
-      lead: {
-        hasLeadPaint: '',
-        desc: ''
-      },
-      pcb: {
-        pcbs: '',
-        transforms: false,
-        transformType: '',
-        sampling: false,
-        flf: false,
-        flfAmount: '',
-        ooee: false,
-        ooee_desc: '',
-        lamps: false,
-        lampsAmount: '',
-        pss: false,
-        pss_desc: '',
-        otherTransform: ''
-      }
-    };
+    if (!this.surveyService.sotp) {
+      this.surveyService.sotp = {
+        step: 0,
+        bi: {
+          nob: '',
+          toc: '',
+          doc: '',
+          uses: '',
+          size: '',
+          nof: '',
+          basement: false,
+          renovations: false,
+          renovations_desc: '',
+          staining: false,
+          heating: false,
+          heatingTypes: [],
+          ageOfHeating: '',
+          psu: '',
+          cooling: false
+        },
+        asbestos: {
+          hasAsbestos: '',
+          properties: [],
+          uffi: ''
+        },
+        lead: {
+          hasLeadPaint: '',
+          desc: ''
+        },
+        pcb: {
+          pcbs: '',
+          transforms: false,
+          transformType: '',
+          sampling: false,
+          flf: false,
+          flfAmount: '',
+          ooee: false,
+          ooee_desc: '',
+          lamps: false,
+          lampsAmount: '',
+          pss: false,
+          pss_desc: '',
+          otherTransform: ''
+        }
+      };
+    }
     this.heatingTypes = ['Natural Gas', 'Oil', 'Steam', 'Propane', 'Electric', 'Not Known', 'Wood', 'Coal'];
     this.asbestosProperties = ['Sprayed-on fire proofing (walls, ceiling)', 'Acoustical plaster', 'Insulation on furnace or boiler',
     'Roof shingles', 'Pipe insulation (other than pink fiberglass)', 'Vinyl floor tiles', 'Acoustic ceiling tiles',

@@ -29,51 +29,52 @@ export class GsiComponent implements OnInit, OnChanges {
     this.preLandUse = [];
     this.zoning = [];
     const d = new Date();
-    this.surveyService.gsi = {
-      step: 0,
-      pi: {
-        pn: '',
-        addr: '',
-        city: '',
-        prov: '',
-        zip: '',
-        ld: '',
-        mailAddr: '',
-        parcel: '',
-        ocn: '',
-        ocnum: '',
-        pi: '',
-        pici: '',
-        dosv: `${d.getDate()}/${d.getMonth() + 1} ${d.getFullYear()}`
-      },
-      po: {
-        pon: '',
-        addr: '',
-        phone: '',
-        email: ''
-      },
-      lu: {
-        lu: [],
-        lu_desc: '',
-        plu: [],
-        plu_desc: '',
-        zoning: [],
-        zoning_desc: ''
-      },
-      ap: [{
-        location: 'North',
-        noo: '',
-        details: ''
-      }],
-      heritage: {
-        q1: '',
-        q2: '',
-        q2_desc: ''
-      }
-    };
+    if  (!this.surveyService.gsi) {
+      this.surveyService.gsi = {
+        step: 0,
+        pi: {
+          pn: '',
+          addr: '',
+          city: '',
+          prov: '',
+          zip: '',
+          ld: '',
+          mailAddr: '',
+          parcel: '',
+          ocn: '',
+          ocnum: '',
+          pi: '',
+          pici: '',
+          dosv: `${d.getDate()}/${d.getMonth() + 1} ${d.getFullYear()}`
+        },
+        po: {
+          pon: '',
+          addr: '',
+          phone: '',
+          email: ''
+        },
+        lu: {
+          lu: [],
+          lu_desc: '',
+          plu: [],
+          plu_desc: '',
+          zoning: [],
+          zoning_desc: ''
+        },
+        ap: [{
+          location: 'North',
+          noo: '',
+          details: ''
+        }],
+        heritage: {
+          q1: '',
+          q2: '',
+          q2_desc: ''
+        }
+      };
+    }
     this.options = ['Industrial', 'Residential', 'Federal Land', 'Commercial',
       'Transportation', 'Vacant', 'Agricultural', 'Park/Conservation Area', 'Other (please specify)'];
-
     this.reset();
     // just for testing
     // this.surveyService.getData().subscribe(resp => {

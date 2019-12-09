@@ -18,27 +18,29 @@ export class SsComponent implements OnInit {
   constructor(public surveyService: SurveyService) { }
 
   ngOnInit() {
-    this.surveyService.ss = {
-      step: 0,
-      pps: {
-        options: [],
-        otherOption: ''
-      },
-      well: {
-        wwp: '',
-        status: '',
-        material: '',
-        waterQuality: '',
-        waterQuality_desc: ''
-      },
-      spetic: {
-        spetic: '',
-        speticProblem: '',
-        speticProblem_desc: '',
-        iosf: [],
-        otherIOSF: ''
-      }
-    };
+    if (!this.surveyService.ss) {
+      this.surveyService.ss = {
+        step: 0,
+        pps: {
+          options: [],
+          otherOption: ''
+        },
+        well: {
+          wwp: '',
+          status: '',
+          material: '',
+          waterQuality: '',
+          waterQuality_desc: ''
+        },
+        spetic: {
+          spetic: '',
+          speticProblem: '',
+          speticProblem_desc: '',
+          iosf: [],
+          otherIOSF: ''
+        }
+      };
+    }
     this.ppsOptions = ['Natural Gas', 'Electricity', 'Telephone', 'Cable', 'Storm Sewer', 'Pipelines', 'Roadways', 'Sanitary Sewer',
     'Municipal Water', 'Entrances/Exits', 'Parking Lots', 'Rail Lines', 'Other'];
     this.indicates = ['Odors', 'Soft Ground', 'Pooling', 'Seepage', 'Other (please specify)'];

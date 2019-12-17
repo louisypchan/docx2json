@@ -24,24 +24,43 @@ export class SurveyComponent implements OnInit {
     (window as any).backToSelection = this.backToSelection.bind(this);
     (window as any).storeSurveyData = this.storeSurveyData.bind(this);
     //
-    if (this.route.snapshot.queryParams.d) {
-      const initData = JSON.parse(atob(this.route.snapshot.queryParams.d));
-      this.resp = {
-        ORDER_NUM: initData.ORDER_NUM,
-        ADDRESS: initData.ADDRESS,
-        CITY: initData.CITY,
-        PROVSTATE: initData.PROVSTATE,
-        POSTAL_CODE: initData.POSTAL_CODE,
-        PROJECT_NUM: initData.PROJECT_NUM,
-        FULL_ADDRESS: initData.FULL_ADDRESS,
-        SITE_NAME: initData.SITE_NAME,
-        SESSION_ID: initData.SESSION_ID,
-        RESPONSE_MSG: initData.RESPONSE_MSG,
-        ERRORCODE: initData.ERRORCODE
-      };
-    }
+    // if (this.route.snapshot.queryParams.d) {
+    //   const initData = JSON.parse(atob(this.route.snapshot.queryParams.d));
+    //   this.resp = {
+    //     ORDER_NUM: initData.ORDER_NUM,
+    //     ADDRESS: initData.ADDRESS,
+    //     CITY: initData.CITY,
+    //     PROVSTATE: initData.PROVSTATE,
+    //     POSTAL_CODE: initData.POSTAL_CODE,
+    //     PROJECT_NUM: initData.PROJECT_NUM,
+    //     FULL_ADDRESS: initData.FULL_ADDRESS,
+    //     SITE_NAME: initData.SITE_NAME,
+    //     SESSION_ID: initData.SESSION_ID,
+    //     RESPONSE_MSG: initData.RESPONSE_MSG,
+    //     ERRORCODE: initData.ERRORCODE
+    //   };
+    // }
     this.surveyService.selectedSurvey = [...this.surveyService.options];
     if (window['eris']) {
+      let initData = window['eris'].prefill();
+      if (initData) {
+        initData = JSON.parse(atob(initData));
+        this.zone.run(() => {
+          this.resp = {
+            ORDER_NUM: initData.ORDER_NUM,
+            ADDRESS: initData.ADDRESS,
+            CITY: initData.CITY,
+            PROVSTATE: initData.PROVSTATE,
+            POSTAL_CODE: initData.POSTAL_CODE,
+            PROJECT_NUM: initData.PROJECT_NUM,
+            FULL_ADDRESS: initData.FULL_ADDRESS,
+            SITE_NAME: initData.SITE_NAME,
+            SESSION_ID: initData.SESSION_ID,
+            RESPONSE_MSG: initData.RESPONSE_MSG,
+            ERRORCODE: initData.ERRORCODE
+          };
+        });
+      }
       const data = window['eris'].resumeData();
       // this.testStr = typeof data;
       // this.testStr = data.length;

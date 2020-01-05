@@ -5,8 +5,10 @@ import { SurveyComponent } from './survey/survey.component';
 
 
 const routes: Routes = [
-  {path: 'dt', component: DtComponent},
-  {path: 'survey', component: SurveyComponent}
+  { path: '', redirectTo: 'view', pathMatch: 'full' },
+  { path: 'view', loadChildren: () => import('./view/view.module').then(m => m.ViewModule) },
+  { path: 'dt', component: DtComponent },
+  { path: 'survey', component: SurveyComponent }
 ];
 
 @NgModule({

@@ -1,15 +1,16 @@
-import {Component, ElementRef, OnInit, ViewChild, NgZone} from '@angular/core';
-import {SurveyService} from '../_service/survey.service';
-import {Section} from '../_model/Section';
-import {ActivatedRoute} from '@angular/router';
-import {Resp} from '../_model/Resp';
+import { Component, ElementRef, OnInit, ViewChild, NgZone, AfterViewInit } from '@angular/core';
+import { SurveyService } from '../_service/survey.service';
+import { Section } from '../_model/Section';
+import { ActivatedRoute } from '@angular/router';
+import { Resp } from '../_model/Resp';
 
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
   styleUrls: ['./survey.component.scss']
 })
-export class SurveyComponent implements OnInit {
+export class SurveyComponent implements OnInit, AfterViewInit {
+
 
   showOptions = true;
   resp: Resp;
@@ -20,90 +21,120 @@ export class SurveyComponent implements OnInit {
   constructor(public surveyService: SurveyService, private zone: NgZone, private route: ActivatedRoute) {
   }
 
+  setupWKWebViewJavascriptBridge(callback: (bridge) => void) {
+    const bridge = (window as any).WKWebViewJavascriptBridge;
+    console.log('bridge', bridge);
+    if (bridge) { return callback(bridge); }
+    let callbacks = (window as any).WKWVJBCallbacks;
+    if (callbacks) { return callbacks.push(callback); }
+    callbacks = [callback];
+    if (
+      (window as any).webkit
+      && (window as any).webkit.messageHandlers
+      && (window as any).webkit.messageHandlers.iOS_Native_InjectJavascript) {
+        (window as any).WKWVJBCallbacks = callbacks;
+        (window as any).webkit.messageHandlers.iOS_Native_InjectJavascript.postMessage(null);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    let data;
+    let initData;
+    this.setupWKWebViewJavascriptBridge(bridge => {
+
+      bridge.registerHandler('backToSelection', (data, responseCallback) => {
+        const result = this.backToSelection();
+        responseCallback({ data: result });
+      });
+      bridge.registerHandler('storeSurveyData', (data, responseCallback) => {
+        const result = this.storeSurveyData();
+        responseCallback({ data: result });
+      });
+      // iOS call Javascript method
+
+      bridge.callHandler('resumeData', { foo: 'resumeData' }, (response) => {
+        console.dir(response);
+        data = response;
+      });
+      bridge.callHandler('prefill', { foo: 'prefill' }, (response) => {
+        initData = response;
+      });
+    });
+    this.do_initData(initData);
+    this.do_resumeData(data);
+  }
+
   ngOnInit() {
     (window as any).backToSelection = this.backToSelection.bind(this);
     (window as any).storeSurveyData = this.storeSurveyData.bind(this);
-    //
-    // if (this.route.snapshot.queryParams.d) {
-    //   const initData = JSON.parse(atob(this.route.snapshot.queryParams.d));
-    //   this.resp = {
-    //     ORDER_NUM: initData.ORDER_NUM,
-    //     ADDRESS: initData.ADDRESS,
-    //     CITY: initData.CITY,
-    //     PROVSTATE: initData.PROVSTATE,
-    //     POSTAL_CODE: initData.POSTAL_CODE,
-    //     PROJECT_NUM: initData.PROJECT_NUM,
-    //     FULL_ADDRESS: initData.FULL_ADDRESS,
-    //     SITE_NAME: initData.SITE_NAME,
-    //     SESSION_ID: initData.SESSION_ID,
-    //     RESPONSE_MSG: initData.RESPONSE_MSG,
-    //     ERRORCODE: initData.ERRORCODE
-    //   };
-    // }
     this.surveyService.selectedSurvey = [...this.surveyService.options];
+    let data;
+    let initData;
     if (window['eris']) {
-      let initData = window['eris'].prefill();
-      if (initData) {
-        initData = JSON.parse(atob(initData));
-        this.zone.run(() => {
-          this.resp = {
-            ORDER_NUM: initData.ORDER_NUM,
-            ADDRESS: initData.ADDRESS,
-            CITY: initData.CITY,
-            PROVSTATE: initData.PROVSTATE,
-            POSTAL_CODE: initData.POSTAL_CODE,
-            PROJECT_NUM: initData.PROJECT_NUM,
-            FULL_ADDRESS: initData.FULL_ADDRESS,
-            SITE_NAME: initData.SITE_NAME,
-            SESSION_ID: initData.SESSION_ID,
-            RESPONSE_MSG: initData.RESPONSE_MSG,
-            ERRORCODE: initData.ERRORCODE
-          };
-        });
-      }
-      const data = window['eris'].resumeData();
-      // this.testStr = typeof data;
-      // this.testStr = data.length;
-      if (data.length > 0) {
-        try {
-          let obj = JSON.parse(data + '');
-          if (typeof obj === 'string') {
-            obj = JSON.parse(obj);
-          }
-          this.zone.run(() => {
-            if (obj.selectedItems && obj.selectedItems.length > 0) {
-              this.surveyService.selectedSurvey = [].concat(obj.selectedItems);
-            }
-            this.surveyService.gsi = obj.gsi;
-            this.surveyService.nsc = obj.nsc;
-            this.surveyService.sotp = obj.sotp;
-            this.surveyService.ss = obj.ss;
-            this.surveyService.muas = obj.muas;
-            this.surveyService.waste = obj.waste;
-            this.surveyService.oosa = obj.oosa;
-            const index = this.surveyService.selectedSurvey.findIndex(s => s.show);
-            if (index > -1) {
-              this.showOptions = false;
-              if (window['eris']) {
-                window['eris'].showMenu();
-              }
-            }
-          });
-        } catch (e) {
-          this.testStr = 'Hello';
-        }
-      }
-      // if (data) {
+      initData = window['eris'].prefill();
+      data = window['eris'].resumeData();
+      this.do_initData(initData);
+      this.do_resumeData(data);
+    }
+  }
 
-      // }
-      // this.surveyService.selectedSurvey = it.selectedItems;
-      // this.surveyService.gsi = data.gsi;
-      // this.surveyService.nsc = data.nsc;
-      // this.surveyService.sotp = data.sotp;
-      // this.surveyService.ss = data.ss;
-      // this.surveyService.muas = data.muas;
-      // this.surveyService.waste = data.waste;
-      // this.surveyService.oosa = data.oosa;
+
+  do_initData(initData) {
+    if (initData) {
+      initData = JSON.parse(atob(initData));
+      this.zone.run(() => {
+        this.resp = {
+          ORDER_NUM: initData.ORDER_NUM,
+          ADDRESS: initData.ADDRESS,
+          CITY: initData.CITY,
+          PROVSTATE: initData.PROVSTATE,
+          POSTAL_CODE: initData.POSTAL_CODE,
+          PROJECT_NUM: initData.PROJECT_NUM,
+          FULL_ADDRESS: initData.FULL_ADDRESS,
+          SITE_NAME: initData.SITE_NAME,
+          SESSION_ID: initData.SESSION_ID,
+          RESPONSE_MSG: initData.RESPONSE_MSG,
+          ERRORCODE: initData.ERRORCODE
+        };
+      });
+    }
+  }
+  do_resumeData(data) {
+    if (data && data.length > 0) {
+      try {
+        let obj = JSON.parse(data + '');
+        if (typeof obj === 'string') {
+          obj = JSON.parse(obj);
+        }
+        this.zone.run(() => {
+          if (obj.selectedItems && obj.selectedItems.length > 0) {
+            this.surveyService.selectedSurvey = [].concat(obj.selectedItems);
+          }
+          this.surveyService.gsi = obj.gsi;
+          this.surveyService.nsc = obj.nsc;
+          this.surveyService.sotp = obj.sotp;
+          this.surveyService.ss = obj.ss;
+          this.surveyService.muas = obj.muas;
+          this.surveyService.waste = obj.waste;
+          this.surveyService.oosa = obj.oosa;
+          const index = this.surveyService.selectedSurvey.findIndex(s => s.show);
+          if (index > -1) {
+            this.showOptions = false;
+            if (window['eris']) {
+              window['eris'].showMenu();
+            } else {
+              this.setupWKWebViewJavascriptBridge(bridge => {
+                bridge.callHandler('showMenu', { foo: 'showMenu' }, (response) => {
+                  console.dir(response);
+                });
+              });
+
+            }
+          }
+        });
+      } catch (e) {
+        this.testStr = 'Hello';
+      }
     }
   }
 
@@ -152,8 +183,62 @@ export class SurveyComponent implements OnInit {
       this.surveyService.selectedSurvey[0].show = true;
       if (window['eris']) {
         window['eris'].showMenu();
+      } else {
+        this.setupWKWebViewJavascriptBridge(bridge => {
+          bridge.callHandler('showMenu', { foo: 'showMenu' }, (response) => {
+            console.dir(response);
+          });
+        });
       }
     }
+
+    // this.setupWKWebViewJavascriptBridge(bridge => {
+    //   // iOS call Javascript method
+    //   bridge.registerHandler('backToSelection', (data, responseCallback) => {
+    //     const result = this.backToSelection();
+    //     responseCallback({ 'data': result });
+    //   });
+    //   bridge.registerHandler('storeSurveyData', (data, responseCallback) => {
+    //     const result = this.storeSurveyData();
+    //     responseCallback({ 'data': result });
+    //   });
+
+    //   // Javascript call iOS method
+    //   // bridge.callHandler('showMenu', { foo: 'showMenu' }, (response) => {
+    //   // });
+    //   // bridge.callHandler('saveSurveyData', { foo: 'saveSurveyData' }, (response) => {
+    //   // });
+    //   bridge.callHandler('resumeData', { foo: 'resumeData' }, (response) => {
+    //     console.dir(response);
+    //   });
+    //   bridge.callHandler('prefill', { foo: 'prefill' }, (response) => {
+
+    //   });
+    // });
+    // this.setupWKWebViewJavascriptBridge(bridge => {
+    //     // iOS call Javascript method
+    //     bridge.registerHandler('backToSelection', (data, responseCallback) => {
+    //       const result = this.backToSelection();
+    //       responseCallback({ data: result });
+    //     });
+    //     bridge.registerHandler('storeSurveyData', (data, responseCallback) => {
+    //       const result = this.storeSurveyData();
+    //       responseCallback({ data: result });
+    //     });
+
+    //     // Javascript call iOS method
+    //     // bridge.callHandler('showMenu', { foo: 'showMenu' }, (response) => {
+    //     // });
+    //     // bridge.callHandler('saveSurveyData', { foo: 'saveSurveyData' }, (response) => {
+    //     // });
+    //     bridge.callHandler('resumeData', { foo: 'resumeData' }, (response) => {
+
+    //     });
+    //     bridge.callHandler('prefill', { foo: 'prefill' }, (response) => {
+
+    //     });
+    // });
+
   }
 
   handover(data: any, section: Section) {
@@ -170,17 +255,25 @@ export class SurveyComponent implements OnInit {
   }
 
   onSave() {
+    const data = JSON.stringify({
+      selectedItems: this.surveyService.selectedSurvey,
+      gsi: this.surveyService.gsi,
+      nsc: this.surveyService.nsc,
+      sotp: this.surveyService.sotp,
+      ss: this.surveyService.ss,
+      muas: this.surveyService.muas,
+      waste: this.surveyService.waste,
+      oosa: this.surveyService.oosa
+    });
+
     if (window['eris']) {
-      window['eris'].saveSurveyData(JSON.stringify({
-        selectedItems: this.surveyService.selectedSurvey,
-        gsi: this.surveyService.gsi,
-        nsc: this.surveyService.nsc,
-        sotp: this.surveyService.sotp,
-        ss: this.surveyService.ss,
-        muas: this.surveyService.muas,
-        waste: this.surveyService.waste,
-        oosa: this.surveyService.oosa
-      }));
+      window['eris'].saveSurveyData(data);
+    } else {
+      this.setupWKWebViewJavascriptBridge(bridge => {
+        console.log('data', data);
+        bridge.callHandler('saveSurveyData', { data }, (response) => {
+        });
+      });
     }
   }
 

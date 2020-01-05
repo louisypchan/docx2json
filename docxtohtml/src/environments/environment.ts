@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api: {
+    hostName: 'http://erisservice7.ecologeris.com',
     callOra : '/ErisExt/emobile_test/MobileService.svc/callOra'
   }
 };

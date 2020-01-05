@@ -16,7 +16,14 @@ import { SsComponent } from './ss/ss.component';
 import { MaasComponent } from './maas/maas.component';
 import { WastesComponent } from './wastes/wastes.component';
 import { OosaComponent } from './oosa/oosa.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SurveyHttpInterceptor } from './_service/survey.http.interceptor';
+import { SurveyService } from './_service/survey.service';
+import { AuthenticationGuard } from './_service/authentication.guard';
+import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
@@ -32,15 +39,27 @@ import { HttpClientModule } from '@angular/common/http';
     SsComponent,
     MaasComponent,
     WastesComponent,
-    OosaComponent
+    OosaComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PDFExportModule,
+    BrowserAnimationsModule,
+
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SurveyHttpInterceptor,
+      multi: true,
+    },
+    SurveyService,
+    AuthenticationGuard,
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

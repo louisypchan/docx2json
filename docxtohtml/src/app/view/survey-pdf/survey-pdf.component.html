@@ -1,0 +1,16 @@
+<div style="width: 100%;background-color: gray;">
+  <div style="margin: 0 auto;width:992px;background-color: white; border: 1px solid black">
+    <kendo-pdf-export #pdf paperSize="Letter" margin="1cm" [scale]="0.6">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">[{{survey?.FULL_ADDRESS}}] Survey</h4>
+      </div>
+      <div class="modal-body">
+        <app-survey-viewer [data]="data"></app-survey-viewer>
+      </div>
+    </kendo-pdf-export>
+    <div class="modal-footer">
+      <button *ngIf="fileName" type="button" mdbBtn color="primary" class="waves-light" aria-label="Download"
+        (click)="pdf.saveAs(fileName)" mdbWavesEffect>Download Pdf</button>
+    </div>
+  </div>
+</div>

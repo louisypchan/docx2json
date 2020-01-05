@@ -1,0 +1,6 @@
+<div class="row">
+  <div [ngClass]="{'col-4': colNumber===3,'col-3': colNumber===4}" *ngFor="let ops of options; index as i">
+    <input type="radio" onclick="return false;" class="form-check-input" [id]="'p_' +id + i" [checked]="isCheck(ops)">
+    <label class="form-check-label" [for]="'p_' + id + i">{{ops}}</label>
+  </div>
+</div>

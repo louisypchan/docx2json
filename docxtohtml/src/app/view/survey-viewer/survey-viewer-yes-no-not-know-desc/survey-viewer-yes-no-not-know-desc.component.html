@@ -1,0 +1,17 @@
+<div>
+  {{question}}
+</div>
+<div>
+  <div style="width: 150px;"> </div>
+  <div>
+    <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+      [selected]="value">
+    </app-survey-check-item>
+  </div>
+</div>
+<div *ngIf="value==='Yes'">
+  <div>If yes, describe</div>
+  <div>
+    {{valueDesc}}
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo fixed-top">
+  <mdb-navbar-brand>
+    <a class="navbar-brand" href="javascript:">Survery Viewer</a>
+  </mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto white-text">
+      <li>
+        {{user?.CUSTOMER_NAME}}
+      </li>
+    </ul>
+    <span class="navbar-text white-text">
+      <a href="javascript:" (click)="onLogout()">Sign Out</a>
+    </span>
+  </links>
+</mdb-navbar>

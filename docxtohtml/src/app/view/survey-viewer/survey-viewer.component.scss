@@ -1,0 +1,45 @@
+h4,
+h6 {
+  text-decoration: underline;
+  margin-top     : 10px;
+}
+
+
+div>div>div:first-child {
+  display   : inline-block;
+  width     : 150px;
+  text-align: right;
+}
+
+div>div>div:last-child {
+  display    : inline-block;
+  text-align : left;
+  margin-left: 10px;
+  width      : 680px;
+}
+
+div>div>p:first-child {
+  display: inline-block;
+  width  : 580px;
+}
+
+div>div>p:last-child {
+  display    : inline-block;
+  text-align : left;
+  margin-left: 10px;
+  width      : 300px;
+}
+
+div>.heritage2>p:first-child {
+  margin-left: 100px;
+  display: inline-block;
+  width  : 140px;
+}
+div>.heritage2>p:last-child {
+  display    : inline-block;
+  text-align : left;
+  margin-left: 10px;
+  text-decoration: underline;
+  width      : 550px;
+}
+

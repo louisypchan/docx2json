@@ -1,0 +1,1034 @@
+<div *ngIf="data">
+  <!-- start -->
+  <h4>General Site Information</h4>
+  <h6>Property Info</h6>
+  <div>
+    <div>Property Name:</div>
+    <div>{{data?.gsi?.pi?.pn}}</div>
+  </div>
+  <div>
+    <div>Address:</div>
+    <div> {{data?.gsi?.pi?.addr}}</div>
+  </div>
+  <div>
+    <div>City:</div>
+    <div>{{data?.gsi?.pi?.city}}</div>
+  </div>
+  <div>
+    <div>Prov/State:</div>
+    <div>{{data?.gsi?.pi?.prov}}</div>
+  </div>
+  <div>
+    <div>Postal/Zip:</div>
+    <div>{{data?.gsi?.pi?.zip}}</div>
+  </div>
+  <div>
+    <div>Legal Description:</div>
+    <div>{{data?.gsi?.pi?.ld}}</div>
+  </div>
+  <div>
+    <div>Parcel ID:</div>
+    <div>{{data?.gsi?.pi?.parcel}}</div>
+  </div>
+  <div>
+    <div>Mailing Address:</div>
+    <div>{{data?.gsi?.pi?.mailAddr}}</div>
+  </div>
+  <div>
+    <div>On-site Contact Name:</div>
+    <div>{{data?.gsi?.pi?.ocn}}</div>
+  </div>
+  <div>
+    <div>On-site Contact No:</div>
+    <div>{{data?.gsi?.pi?.ocnum}}</div>
+  </div>
+  <div>
+    <div>Persons Interviewed:</div>
+    <div>{{data?.gsi?.pi?.pi}}</div>
+  </div>
+  <div>
+    <div>Persons Interviewed Contact Info:</div>
+    <div>{{data?.gsi?.pi?.pici}}</div>
+  </div>
+  <div>
+    <div>Date of Site Visit:</div>
+    <div>{{data?.gsi?.pi?.dosv}}</div>
+  </div>
+
+  <h6>Property Owner</h6>
+
+  <div>
+    <div>Property Owner Name:</div>
+    <div>{{data?.gsi?.po?.pon}}</div>
+  </div>
+  <div>
+    <div>Address:</div>
+    <div>{{data?.gsi?.po?.addr}}</div>
+  </div>
+  <div>
+    <div>Phone:</div>
+    <div>{{data?.gsi?.po?.phone}}</div>
+  </div>
+  <div>
+    <div>Email:</div>
+    <div>{{data?.gsi?.po?.email}}</div>
+  </div>
+
+  <h6>Land use</h6>
+
+  <div>
+    <div>Land use:</div>
+    <div>
+      <app-survey-option-item [options]="landUseOptions" [selected]="data?.gsi?.lu?.lu"></app-survey-option-item>
+    </div>
+  </div>
+  <div>
+    <div>Previous Land use:</div>
+    <div>
+      <app-survey-option-item [options]="landUseOptions" [selected]="data?.gsi?.lu?.plu"></app-survey-option-item>
+    </div>
+  </div>
+  <div>
+    <div>Zoning:</div>
+    <div>
+      <app-survey-option-item [options]="landUseOptions" [selected]="data?.gsi?.lu?.zoning"></app-survey-option-item>
+    </div>
+  </div>
+
+  <h6>Adjacent Properties</h6>
+  <div>
+    <div>Location:</div>
+    <div>
+      <app-survey-check-item [options]="['North','South','East','West']" [colNumber]="4"
+        [selected]="data?.gsi?.ap[0]?.location">
+      </app-survey-check-item>
+    </div>
+  </div>
+  <div>
+    <div>Name of occupant:</div>
+    <div>{{data?.gsi?.ap[0]?.noo}}</div>
+  </div>
+  <div>
+    <div>Details:</div>
+    <div>{{data?.gsi?.ap[0]?.details}}</div>
+  </div>
+  <h6>Heritage</h6>
+  <div class="heritage">
+    <p>Are there any buildings on the property that have received a historical designation?</p>
+    <p>
+      <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="2" [selected]="data?.gsi?.heritage.q1">
+      </app-survey-check-item>
+    </p>
+  </div>
+  <div class="heritage">
+    <p>Is there visible evidence of a heritage resource on or adjacent to the property?</p>
+    <p>
+      <app-survey-check-item [options]="['Yes','No']" [colNumber]="2" [selected]="data?.gsi?.heritage.q2">
+      </app-survey-check-item>
+    </p>
+  </div>
+  <div class="heritage2" *ngIf="data?.gsi?.heritage.q2==='Yes'">
+    <p>If yes, please describe:</p>
+    <p>{{data?.gsi?.heritage?.q2_desc}}</p>
+  </div>
+  <!-- start -->
+
+  <h4>Natural Site Characteristics</h4>
+  <h6>Topography</h6>
+  <div>
+    <div>Topography:</div>
+    <div>
+      <app-survey-option-item [options]="['Lowland', 'Hill', 'Flat', 'Slope']" [colNumber]="4"
+        [selected]="data?.nsc?.topography">
+      </app-survey-option-item>
+    </div>
+  </div>
+  <div>
+    <div>Surface Water/Drainage:</div>
+    <div>
+      <app-survey-option-item [options]="['Wetlands', 'Ditches', 'Ponds', 'Rivers/Streams', 'Creeks', 'Other']"
+        [colNumber]="4" [selected]="data?.nsc?.drainage">
+      </app-survey-option-item>
+    </div>
+  </div>
+
+  <div>
+    <div>Visible Signs of contamination on or near water sources:</div>
+    <div>
+      <app-survey-option-item [options]="['Oily Films', 'Sheen', 'Staining/Discoloration', 'Odours']" [colNumber]="4"
+        [selected]="data?.nsc?.visibleSigns">
+      </app-survey-option-item>
+    </div>
+  </div>
+
+  <h6>Vegetation</h6>
+  <div>
+    <div>Vegetation on the site:</div>
+    <div>
+      <app-survey-option-item [options]="['Crops', 'Grass', 'Landscaping', 'Tress', 'Shrubs']" [colNumber]="4"
+        [selected]="data?.nsc?.vegetation">
+      </app-survey-option-item>
+    </div>
+  </div>
+  <div>
+    <div>Sign of stressed vegetation:</div>
+    <div>
+      {{data?.nsc?.vegetation}}
+    </div>
+  </div>
+
+
+  <h6>Soils/Geology</h6>
+  <div>
+    <div>Soils/Geology:</div>
+    <div>
+      <app-survey-option-item
+        [options]="['Fill', 'Clay', 'Rocky outcrops', 'Sand', 'Gravel', 'Other', 'Not Known', 'Silt']" [colNumber]="4"
+        [selected]="data?.nsc?.geology">
+      </app-survey-option-item>
+    </div>
+  </div>
+  <div>
+    <div>Sign of contamination on the ground:</div>
+    <div>
+      <app-survey-option-item [options]="['Staining/Discoloration', 'Odors', 'Oily Films']" [colNumber]="4"
+        [selected]="data?.nsc?.socotgs">
+      </app-survey-option-item>
+    </div>
+  </div>
+  <!-- start -->
+
+  <h4>Structures on the Property</h4>
+  <h6>Building Inventory</h6>
+  <div>
+    <div>Number of Buildings:</div>
+    <div>{{data?.sotp?.bi?.nob}}</div>
+  </div>
+  <div>
+    <div>Type of Construction:</div>
+    <div>{{data?.sotp?.bi?.toc}}</div>
+  </div>
+  <div>
+    <div>Date of Construction:</div>
+    <div>{{data?.sotp?.bi?.doc}}</div>
+  </div>
+  <div>
+    <div>Uses:</div>
+    <div>{{data?.sotp?.bi?.uses}}</div>
+  </div>
+  <div>
+    <div>Size:</div>
+    <div>{{data?.sotp?.bi?.size}}</div>
+  </div>
+  <div>
+    <div>Number of Floors:</div>
+    <div>{{data?.sotp?.bi?.nof}}</div>
+  </div>
+
+  <div>
+    <div>Basement:</div>
+    <div>{{data?.sotp?.bi?.basement?'Yes':'No'}}</div>
+  </div>
+
+  <div>
+    <div>Additions/Renovations:</div>
+    <div>{{data?.sotp?.bi?.renovations?'Yes':'No'}}</div>
+  </div>
+  <div *ngIf="data?.sotp?.bi?.renovations">
+    <div>If yes, please describe:</div>
+    <div>{{data?.sotp?.bi?.renovations_desc}}</div>
+  </div>
+
+  <div>
+    <p>Is there any staining on any of the floors, walls, ceilings, sumps or drains of any of the buildings?</p>
+    <p>{{data?.sotp?.bi?.staining?'Yes':'No'}}</p>
+  </div>
+
+  <div>
+    <div>Is there heating?</div>
+    <div>{{data?.sotp?.bi?.heating?'Yes':'No'}}</div>
+  </div>
+
+  <div *ngIf="data?.sotp?.bi?.heating">
+    <div>If yes, check the type:</div>
+    <div>
+      <app-survey-option-item
+        [options]="['Natural Gas', 'Oil', 'Steam', 'Propane', 'Electric', 'Not Known', 'Wood', 'Coal']" [colNumber]="4"
+        [selected]="data?.sotp.bi?.heatingTypes">
+      </app-survey-option-item>
+    </div>
+  </div>
+
+  <div>
+    <div>Is there a cooling system?</div>
+    <div>{{data?.sotp?.bi?.heating?'Yes':'No'}}</div>
+  </div>
+
+  <h6>Asbestos</h6>
+  <div>
+    <div>Is there asbestos on the property</div>
+    <div>
+      <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+        [selected]="data?.sotp?.asbestos?.hasAsbestos">
+      </app-survey-check-item>
+    </div>
+  </div>
+
+  <div *ngIf="data?.sotp?.asbestos?.hasAsbestos==='Yes'">
+    <div>If yes, check those that apply:</div>
+    <div>
+      <app-survey-option-item [options]="['Sprayed-on fire proofing (walls, ceiling)', 'Acoustical plaster', 'Insulation on furnace or boiler',
+      'Roof shingles', 'Pipe insulation (other than pink fiberglass)', 'Vinyl floor tiles', 'Acoustic ceiling tiles',
+        'Sheeting (interior or exterior)', 'Other']" [colNumber]="4" [selected]="data?.sotp?.asbestos?.properties">
+      </app-survey-option-item>
+    </div>
+  </div>
+
+  <h6>Urea Formaldehyde Foam Insulation (UFFI)</h6>
+  <div>
+    <div>Is there UFFI in any of the buildings?</div>
+    <div>
+      <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+        [selected]="data?.sotp?.asbestos?.uffi">
+      </app-survey-check-item>
+    </div>
+  </div>
+
+  <h6>Lead</h6>
+  <div>
+    <div>Has lead paint been used on inside or outside building surfaces?</div>
+    <div>
+      <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+        [selected]="data?.sotp?.lead?.hasLeadPaint">
+      </app-survey-check-item>
+    </div>
+  </div>
+
+  <div *ngIf="data?.sotp?.lead?.hasLeadPaint==='Yes'">
+    <div>If yes, please describe:</div>
+    <div>
+      {{data?.sotp?.lead?.desc}}
+    </div>
+  </div>
+
+  <h6>PCBs</h6>
+  <div>
+    <div>Are PCBs present on the property?</div>
+    <div>
+      <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4" [selected]="data?.sotp?.pcb?.pcbs">
+      </app-survey-check-item>
+    </div>
+  </div>
+  <ng-container *ngIf="data?.sotp?.pcb?.pcbs==='Yes'">
+    <div>
+      <div>If yes, not the presence of the following:</div>
+    </div>
+    <div>
+      <div>Transformers?</div>
+      <div>
+        {{data?.sotp?.pcb?.transforms?'Yes':'No'}}
+      </div>
+    </div>
+    <div *ngIf="data?.sotp?.pcb?.transforms">
+      <div>If yes, which type:</div>
+      <div>
+        <app-survey-check-item [options]="['Pole top','Ground','Wall-mounted','Other']" [colNumber]="4"
+          [selected]="data?.sotp?.pcb?.transformType">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.sotp?.pcb?.transformType==='Other'">
+      <div>If Other, please describe:</div>
+      <div>
+        {{data?.sotp?.pcb?.otherTransform}}
+      </div>
+    </div>
+
+    <div>
+      <div>Are there sampling results?</div>
+      <div>
+        {{data?.sotp?.pcb?.sampling?'Yes':'No'}}
+      </div>
+    </div>
+
+    <div>
+      <div>Fluorescent light fixtures(pre 1980)?</div>
+      <div>
+        {{data?.sotp?.pcb?.flf?'Yes':'No'}}
+      </div>
+    </div>
+    <div *ngIf="data?.sotp?.pcb?.flf">
+      <div> If yes, how many:</div>
+      <div>
+        <app-survey-check-item [options]="['1-10','More than 10']" [colNumber]="4"
+          [selected]="data?.sotp?.pcb?.flfAmount">
+        </app-survey-check-item>
+      </div>
+    </div>
+
+    <div>
+      <div>Other old electrical equipment?</div>
+      <div>
+        {{data?.sotp?.pcb?.ooee?'Yes':'No'}}
+      </div>
+    </div>
+    <div *ngIf="data?.sotp?.pcb?.ooee">
+      <div>If yes, please describe:</div>
+      <div>
+        {{data?.sotp?.pcb?.ooee_desc}}
+      </div>
+    </div>
+
+
+    <div>
+      <div>High intensity lamps</div>
+      <div>
+        {{data?.sotp?.pcb?.lamps?'Yes':'No'}}
+      </div>
+    </div>
+    <div *ngIf="data?.sotp?.pcb?.flf">
+      <div> If yes, how many:</div>
+      <div>
+        <app-survey-check-item [options]="['1-10','More than 10']" [colNumber]="4"
+          [selected]="data?.sotp?.pcb?.lampsAmount">
+        </app-survey-check-item>
+      </div>
+    </div>
+
+
+    <div>
+      <div>PCB storage sites</div>
+      <div>
+        {{data?.sotp?.pcb?.pss?'Yes':'No'}}
+      </div>
+    </div>
+    <div *ngIf="data?.sotp?.pcb?.pss">
+      <div>If yes, please describe:</div>
+      <div>
+        {{data?.sotp?.pcb?.pss_desc}}
+      </div>
+    </div>
+    <!-- start -->
+    <h4>Site Services</h4>
+    <h6>Public or Private Services</h6>
+    <div>
+      <div>Are any of the following on the site?</div>
+      <div>
+        <app-survey-option-item [options]="['Natural Gas', 'Electricity', 'Telephone', 'Cable', 'Storm Sewer', 'Pipelines', 'Roadways', 'Sanitary Sewer',
+      'Municipal Water', 'Entrances/Exits', 'Parking Lots', 'Rail Lines', 'Other']" [colNumber]="4"
+          [selected]="data?.ss.pps?.options">
+        </app-survey-option-item>
+      </div>
+    </div>
+    <div *ngIf="data?.ss?.pps?.options?.includes('Other')">
+      <div>If Other, please describe:</div>
+      <div>
+        {{data?.ss?.pps?.otherOption}}
+      </div>
+    </div>
+    <div>
+      <div>Are there water wells on or adjacent to the property?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4" [selected]="data?.ss?.well?.wwp">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div>
+      <div>Status:</div>
+      <div>
+        <app-survey-check-item [options]="['Active','Abandoned','Not Known']" [colNumber]="4"
+          [selected]="data?.ss?.well?.status">
+        </app-survey-check-item>
+      </div>
+    </div>
+
+    <div>
+      <div>Material:</div>
+      <div>
+        <app-survey-check-item [options]="['Concrete Tile','Steel Casing']" [colNumber]="4"
+          [selected]="data?.ss?.well?.material">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div>
+      <div>Have there been any problems with the well or water quality?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.ss?.well?.waterQuality">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.ss?.well?.material==='Yes'">
+      <div>If Other, please describe:</div>
+      <div>
+        {{data?.ss?.well?.waterQuality_desc}}
+      </div>
+    </div>
+
+    <h6>Septic System</h6>
+    <div>
+      <div>Is there a septic system?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.ss?.spetic?.spetic">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div>
+      <div>Have there been any problems with the septic system?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.ss?.spetic?.speticProblem">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.ss?.spetic?.speticProblem==='Yes'">
+      <div>If Other, please describe:</div>
+      <div>
+        {{data?.ss?.spetic?.speticProblem_desc}}
+      </div>
+    </div>
+
+    <div>
+      <div>Any visible indications of system failure?</div>
+      <div>
+        <app-survey-option-item [options]="['Odors', 'Soft Ground', 'Pooling', 'Seepage', 'Other (please specify)']"
+          [colNumber]="4" [selected]="data?.ss.spetic?.iosf">
+        </app-survey-option-item>
+      </div>
+    </div>
+    <div *ngIf="data?.ss?.spetic?.iosf?.includes('Other (please specify)')">
+      <div>If Other, please describe:</div>
+      <div>
+        {{data?.ss?.spetic?.otherIOSF}}
+      </div>
+    </div>
+
+    <!-- start -->
+    <h4>Materials Used and Stored</h4>
+    <h6>Tanks</h6>
+    <div>
+      <div>Underground Storage Tanks on or near the property?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.muas?.tank?.utank">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.muas?.tank?.utank==='Yes'">
+      <div>If Other, how many?</div>
+      <div>
+        {{data?.muas?.tank?.utankAmount}}
+      </div>
+    </div>
+    <div>
+      <div>Is there evidence of the following:</div>
+      <div>
+        <app-survey-option-item [options]="['Vent Pipe', 'Staining', 'Fill Pipe', 'Depression', 'Mound']"
+          [colNumber]="4" [selected]="data?.muas?.tank?.evidence">
+        </app-survey-option-item>
+      </div>
+    </div>
+    <div>
+      <div>Are the tanks in use?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.muas?.tank?.tankInUse">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.muas?.tank?.utank==='Yes'">
+      <div>If tanks are not in use, how long have they been out of service?</div>
+      <div>
+        {{data?.muas?.tank?.ageOfTankOutOfService}}
+      </div>
+    </div>
+
+    <div>
+      <div>Were the tank(s) emptied when taken out of service?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.muas?.tank?.emptied">
+        </app-survey-check-item>
+      </div>
+    </div>
+
+    <div>
+      <div>Aboveground tanks on or near the property?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.muas?.tank?.atank">
+        </app-survey-check-item>
+      </div>
+    </div>
+
+    <div *ngIf="data?.muas?.tank?.atank==='Yes'">
+      <div>If yes, how many?</div>
+      <div>
+        {{data?.muas?.tank?.atankAmount}}
+      </div>
+    </div>
+
+    <div>
+      <div>Note conditions of tank:</div>
+      <div>
+        <app-survey-option-item [options]="['Dented', 'New', 'Old', 'Rusty']" [colNumber]="4"
+          [selected]="data?.muas?.tank?.tankConditions">
+        </app-survey-option-item>
+      </div>
+    </div>
+
+    <div>
+      <div>Is there spill containment?</div>
+      <div>
+        {{data?.muas?.tank?.spill?'Yes':'No'}}
+      </div>
+    </div>
+    <div *ngIf="data?.muas?.tank?.spill">
+      <div>Provide details:</div>
+      <div>
+        {{data?.muas?.tank?.spillDetail}}
+      </div>
+    </div>
+
+    <div>
+      <div>Have there been any spills?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.muas?.tank?.spills">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.muas?.tank?.spills==='Yes'">
+      <div>If yes, describe</div>
+      <div>
+        {{data?.muas?.tank?.spills_desc}}
+      </div>
+    </div>
+
+
+    <h6>Other Storage Areas</h6>
+    <div>
+      <div>Are there materials stockpiled on property?</div>
+      <div>
+        {{data?.muas?.osa?.msop?'Yes':'No'}}
+      </div>
+    </div>
+    <div>
+      <div>Are there materials stockpiled on the adjacent property?</div>
+      <div>
+        {{data?.muas?.osa?.msap?'Yes':'No'}}
+      </div>
+    </div>
+    <div *ngIf="data?.muas?.osa?.msap">
+      <div>Note conditions of tank:</div>
+      <div>
+        <app-survey-option-item [options]="['Solvents', 'Fuels', 'Paints', 'Paint thinners', 'Antifreeze', 'Oils', 'Glues', 'Batteries', 'Compressed Gas',
+        'Pesticides', 'Herbicides', 'Radioactive Materials', 'Other']" [colNumber]="4"
+          [selected]="data?.muas?.osa?.msapOps">
+        </app-survey-option-item>
+      </div>
+    </div>
+    <div *ngIf="data?.muas?.osa?.msapOps?.includes('Other')">
+      <div>If Other, please describe:</div>
+      <div>
+        {{data?.muas?.osa?.otherMsap}}
+      </div>
+    </div>
+
+    <div *ngIf="data?.muas?.osa?.msap">
+      <div>How are these materials stored:</div>
+      <div>
+        <app-survey-option-item
+          [options]="['In sealed containers', 'Properly labelled', 'Evidence of leaking or rusty containers',
+        'Close to drains, sumps or waterways', 'In secure storage areas', 'No labels', 'Containers outside, in the open', 'Other']"
+          [colNumber]="4" [selected]="data?.muas?.osa?.waysToStore">
+        </app-survey-option-item>
+      </div>
+    </div>
+    <div *ngIf="data?.muas?.osa?.waysToStore?.includes('Other')">
+      <div>If Other, please describe:</div>
+      <div>
+        {{data?.muas?.osa?.otherWayToStore}}
+      </div>
+    </div>
+    <div>
+      Estimate the quantity of materials observed:
+    </div>
+    <div>
+      <div>Containers smaller than 20 L</div>
+      <div>
+        <app-survey-check-item [options]="['1-5','6-10','More than 10']" [colNumber]="4"
+          [selected]="data?.muas?.osa?.cst2">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div>
+      <div>Containers 20 L or larger</div>
+      <div>
+        <app-survey-check-item [options]="['1-5','6-10','More than 10']" [colNumber]="4"
+          [selected]="data?.muas?.osa?.c2l">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div>
+      <div>Drums</div>
+      <div>
+        <app-survey-check-item [options]="['1-5','6-10','More than 10']" [colNumber]="4"
+          [selected]="data?.muas?.osa?.drums">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div>
+      <div>Tanks</div>
+      <div>
+        <app-survey-check-item [options]="['1-5','6-10','More than 10']" [colNumber]="4"
+          [selected]="data?.muas?.osa?.tanks">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div>
+      <div>Select the following materials stockpiled on or adjacent to the property:</div>
+      <div>
+        <app-survey-option-item
+          [options]="['Tires', 'Metal', 'Wood', 'Paper', 'Glass', 'Cardboard', 'Plastic', 'Other']" [colNumber]="4"
+          [selected]="data?.muas?.osa?.stockpiled">
+        </app-survey-option-item>
+      </div>
+    </div>
+    <div *ngIf="data?.muas?.osa?.stockpiled?.includes('Other')">
+      <div>If Other, please describe:</div>
+      <div>
+        {{data?.muas?.osa?.otherMaterial}}
+      </div>
+    </div>
+    <div>
+      <div>Are these materials securely stored?</div>
+      <div>
+        {{data?.muas?.osa?.secure?'Yes':'No'}}
+      </div>
+    </div>
+    <div *ngIf="!data?.muas?.osa?.secure">
+      <div>If no, please describe:</div>
+      <div>
+        {{data?.muas?.osa?.insecure_desc}}
+      </div>
+    </div>
+    <div>
+      <div>Is there evidence of spillage or staining in storage areas?</div>
+      <div>
+        {{data?.muas?.osa?.ssa?'Yes':'No'}}
+      </div>
+    </div>
+    <div *ngIf="!data?.muas?.osa?.ssa">
+      <div>If no, please describe:</div>
+      <div>
+        {{data?.muas?.osa?.ssa_desc}}
+      </div>
+    </div>
+    <div>
+      <div>Does the owner keep records of handling practices?</div>
+      <div>
+        {{data?.muas?.osa?.krhp?'Yes':'No'}}
+      </div>
+    </div>
+    <div>
+      <div>Provide details:</div>
+      <div>
+        {{data?.muas?.osa?.krhpDetail}}
+      </div>
+    </div>
+
+    <!-- start -->
+    <h4>Wastes</h4>
+    <div>
+      <div>Are wastes generated at this site</div>
+      <div>
+        {{data?.waste?.generate ? 'Yes':'No'}}
+      </div>
+    </div>
+    <ng-container *ngIf="data?.waste?.generate">
+      <h6>Air Emissions</h6>
+      <div>
+        <div>Are there any air emissions from the property?</div>
+        <div>
+          <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+            [selected]="data?.waste?.emission?.airEmission">
+          </app-survey-check-item>
+        </div>
+      </div>
+      <div *ngIf="data?.waste?.emission?.airEmission==='Yes'">
+        <div>If yes, check all that apply:</div>
+        <div>
+          <app-survey-option-item
+            [options]="['Odors', 'Vent stacks (on roof)', 'Wall Vents', 'Visible Particles', 'Build-up dusts', 'Soot']"
+            [colNumber]="4" [selected]="data?.waste?.emission?.airEmissionTypes">
+          </app-survey-option-item>
+        </div>
+      </div>
+
+      <div>
+        <div>Has any monitoring or sampling been done of air emissions?</div>
+        <div>
+          <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+            [selected]="data?.waste?.emission?.monitoring">
+          </app-survey-check-item>
+        </div>
+      </div>
+      <div>
+        <p>Is there any treatment of air emissions prior to discharge?</p>
+        <p>
+          {{data?.waste?.emission?.treatment?'Yes':'No'}}
+        </p>
+      </div>
+      <div *ngIf="data?.waste?.emission?.treatment">
+        <div>If yes, describe</div>
+        <div>
+          {{data?.waste?.emission?.treatment_desc}}
+        </div>
+      </div>
+      <div>
+        <p>Is there a Certificate of Approval for air emissions?</p>
+        <p>
+          {{data?.waste?.emission?.treatment?'Yes':'No'}}
+        </p>
+      </div>
+      <div>
+        <p>Are there any indications of air emissions from adjacent properties</p>
+        <p>
+          {{data?.waste?.emission?.treatment?'Yes':'No'}}
+        </p>
+      </div>
+
+      <h6>Liquid Discharges</h6>
+      <div>
+        <p>Are liquid wastes other than domestic sewage generated at this site?</p>
+        <p>
+          {{data?.waste?.liquid?.wotds?'Yes':'No'}}
+        </p>
+      </div>
+      <ng-container *ngIf="data?.waste?.liquid?.wotds">
+        <div>
+          <div>If yes, where is the waste treated:</div>
+          <div>
+            <app-survey-check-item [options]="['Onsite','Offsite','Both']" [colNumber]="4"
+              [selected]="data?.waste?.liquid?.whereToTreat">
+            </app-survey-check-item>
+          </div>
+        </div>
+        <div>
+          <div>Check all that apply:</div>
+          <div>
+            <app-survey-option-item
+              [options]="['Collection Pond', 'Sludge Lagoon', 'Drains', 'Sumps', 'Oil interceptor', 'Treatment System']"
+              [colNumber]="4" [selected]="data?.waste?.liquid?.treatTypes">
+            </app-survey-option-item>
+          </div>
+        </div>
+        <div>
+          <div>Describe on-site treatment system</div>
+          <div>
+            {{data?.waste?.liquid?.treatment_desc}}
+          </div>
+        </div>
+      </ng-container>
+
+      <h6>Solid Waste</h6>
+      <div>
+        <div>Are there waste dumps or landfills on or near the property?</div>
+        <div>
+          <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+            [selected]="data?.waste?.solid?.landfills">
+          </app-survey-check-item>
+        </div>
+      </div>
+
+      <div>
+        <div>Nature of solid waste materials generated:</div>
+        <div>
+          <app-survey-option-item
+            [options]="['Metal', 'Paper', 'Cardboard', 'Wood', 'Batteries', 'Glass', 'Plastic', 'Tires', 'Other']"
+            [colNumber]="4" [selected]="data?.waste?.solid?.materials">
+          </app-survey-option-item>
+        </div>
+      </div>
+      <div *ngIf="data?.waste?.solid?.materials?.includes('Other')">
+        <div>If Other, please describe:</div>
+        <div>
+          {{data?.waste?.solid?.otherMaterial}}
+        </div>
+      </div>
+
+      <div>
+        <div>Are any solid wastes recycled:</div>
+        <div>
+          <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+            [selected]="data?.waste?.solid?.recycled">
+          </app-survey-check-item>
+        </div>
+      </div>
+
+      <div *ngIf="data?.waste?.solid?.recycled==='Yes'">
+        <div>If yes, describe</div>
+        <div>
+          {{data?.waste?.solid?.recycled_desc}}
+        </div>
+      </div>
+
+      <div>
+        <div>Where are solid wastes disposed of</div>
+        <div>
+          {{data?.waste?.solid?.disposed}}
+        </div>
+      </div>
+
+      <div>
+        <div>Is there evidence of uncontrolled dumping on or near the property?</div>
+        <div>
+          {{data?.waste?.solid?.uncontrolled}}
+        </div>
+      </div>
+      <div *ngIf="data?.waste?.solid?.uncontrolled">
+        <div>If yes, describe</div>
+        <div>
+          {{data?.waste?.solid?.uncontrolled_desc}}
+        </div>
+      </div>
+
+      <h6>Chemical and Hazardous Wastes</h6>
+      <div>
+        <p>Are fuel or chemical wastes generated at this site?</p>
+        <p>
+          {{data?.waste?.chemical?.fuel}}
+        </p>
+      </div>
+      <div>
+        <div>Nature of the wastes generated?</div>
+        <div>
+          <app-survey-option-item [options]="['Solvents', 'Fuels', 'Antifreeze', 'Paints', 'Oil Lubricants', 'Chlorofluorocarbons', 'Thinners',
+          'Radioactive Wastes', 'Pesticides/Herbicides', 'Other']" [colNumber]="4"
+            [selected]="data?.waste?.chemical?.natureWastes">
+          </app-survey-option-item>
+        </div>
+      </div>
+      <div *ngIf="data?.waste?.chemical?.natureWastes?.includes('Other')">
+        <div>If Other, please describe:</div>
+        <div>
+          {{data?.waste?.chemical?.otherNatureWaste}}
+        </div>
+      </div>
+
+      <div>
+        <div>Is there documentation regarding the management of these wastes?</div>
+        <div>
+          <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+            [selected]="data?.waste?.chemical?.management">
+          </app-survey-check-item>
+        </div>
+      </div>
+      <div *ngIf="data?.waste?.chemical?.management==='Yes'">
+        <div>If yes, describe</div>
+        <div>
+          {{data?.waste?.chemical?.management_desc}}
+        </div>
+      </div>
+
+      <div>
+        <div>How are these wastes disposed of</div>
+        <div>
+          {{data?.waste?.chemical?.disposed}}
+        </div>
+      </div>
+
+      <div>
+        <div>Are chemical/Fuels wastes stored on-site?</div>
+        <div>
+          <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+            [selected]="data?.waste?.chemical?.fuelOnSite">
+          </app-survey-check-item>
+        </div>
+      </div>
+      <div *ngIf="data?.waste?.chemical?.fuelOnSite==='Yes'">
+        <div>If yes, describe</div>
+        <div>
+          {{data?.waste?.chemical?.fuelOnSite_desc}}
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- start -->
+    <h4>Other On-site Activities</h4>
+    <h6>Mines, Pits, Quarries</h6>
+    <div>
+      <div>Mining activity currently on the site?</div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.oosa?.mine?.activity">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.oosa?.mine?.activity==='Yes'">
+      <div>If yes, describe</div>
+      <div>
+        {{data?.oosa?.mine?.activity_desc}}
+      </div>
+    </div>
+
+    <div>
+      Do you know of any previous mining activity (i.e. drill holes, abandoned shafts, etc.) on the property?
+    </div>
+    <div>
+      <div></div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.oosa?.mine?.abandonedActivity">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.oosa?.mine?.abandonedActivity==='Yes'">
+      <div>If yes, describe</div>
+      <div>
+        {{data?.oosa?.mine?.abandonedActivity_desc}}
+      </div>
+    </div>
+
+    <h4>Oil and Gas Wells</h4>
+    <div>
+      Are there active or abandoned oil or gas wells on the property?
+    </div>
+    <div>
+      <div></div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.oosa?.gas?.oil">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.oosa?.gas?.oil==='Yes'">
+      <div>If yes, describe</div>
+      <div>
+        {{data?.oosa?.gas?.oil_desc}}
+      </div>
+    </div>
+
+
+    <div>
+      Are there pipelines on or near the property?
+    </div>
+    <div>
+      <div></div>
+      <div>
+        <app-survey-check-item [options]="['Yes','No','Not Known']" [colNumber]="4"
+          [selected]="data?.oosa?.gas?.pipelines">
+        </app-survey-check-item>
+      </div>
+    </div>
+    <div *ngIf="data?.oosa?.gas?.pipelines==='Yes'">
+      <div>If yes, describe</div>
+      <div>
+        {{data?.oosa?.gas?.pipelines_desc}}
+      </div>
+    </div>
+
+  </ng-container>
+</div>

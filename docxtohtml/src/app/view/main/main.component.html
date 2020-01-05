@@ -1,0 +1,12 @@
+<header>
+  <app-header [user]="http.auth"
+    (logout)="onLogout()"></app-header>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="app-footer" [ngClass]="{'footer-absolute': true}">
+  <app-footer></app-footer>
+</footer>

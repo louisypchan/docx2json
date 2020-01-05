@@ -1,0 +1,21 @@
+<div class="table-responsive" mdbTableScroll scrollY="true" bordered="true">
+  <table class="table">
+    <thead class="black white-text">
+      <tr>
+        <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr [ngClass]="{'table-info': i % 2 ===1}" *ngFor="let el of checkinOrderList; let i=index">
+        <th scope="row">
+          <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" (click)="viewPdf(el)"
+            class="m-0">View</button>
+        </th>
+        <td>{{el.FULL_ADDRESS}}</td>
+        <td>{{el.SITE_NAME}}</td>
+        <td>{{el.ORDER_NUM}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-survey-item></app-survey-item>
